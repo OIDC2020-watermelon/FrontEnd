@@ -16,5 +16,28 @@
 ### 파일 계층
 
 > 최상위 -> 최하위
+
 > index -> App -> src/pages -> src/containers -> src/components
 
+
+Get Started
+============================
+
+> npm start
+
+lib 함수 사용법
+============================
+
+### style(font, palette)
+```typescript
+import styled from 'styled-components';
+import font from './font';
+import palette from './palette';
+
+const S : any = {}
+
+S.StyledContainer = styled.div`
+    background : ${palette.gray0}       // 배경화면은 회색0
+    ${font.blodFont}                    // 굵은 폰트 사용
+`;
+```
