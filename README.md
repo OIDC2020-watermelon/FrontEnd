@@ -19,11 +19,14 @@
 
 > index -> App -> src/pages -> src/containers -> src/components
 
+---
 
 Get Started
 ============================
 
 > npm start
+
+---
 
 lib 함수 사용법
 ============================
@@ -41,3 +44,5 @@ S.StyledContainer = styled.div`
     ${font.blodFont}                    // 굵은 폰트 사용
 `;
 ```
+
+---
