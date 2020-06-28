@@ -1,7 +1,7 @@
 파일 구조
 ============================
 
-> Folder structure options and naming conventions for software projects
+> 기본적인 폴더 구조 및 설명
 
 ### Src 폴더 구조
     .
