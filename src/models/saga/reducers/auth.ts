@@ -48,7 +48,6 @@ export type TAuthState = {
 //6. 리듀서의 값을 정의합니다.
 const initialState: TAuthState = {
   auth: {
-    loading: false,
     data: null,
     error: null,
   },
