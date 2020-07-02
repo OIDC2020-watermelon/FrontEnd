@@ -1,5 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import SearchBar from './header/SearchBar';
+import BreadScrum from './header/BreadScrum';
+import HeaderLinkList from './header/HeaderLinkList';
+import NavBar from './header/NavBar';
+import LogoComponent from './header/LogoComponent';
+import AdComponent from './header/AdComponent';
 
 interface AppFooterProps {}
 
@@ -9,8 +15,16 @@ const AppHeader = () => {
       <S.HeaderContainer>
         {/* Footer */}
         <header>
-          <h6>Header</h6>
-          <p>Something here to give the header a purpose!</p>
+          <S.Container>
+            <BreadScrum />
+            <HeaderLinkList />
+          </S.Container>
+          <S.SearchWrap>
+            <LogoComponent />
+            <SearchBar />
+            <AdComponent />
+          </S.SearchWrap>
+          <NavBar />
         </header>
         {/* End footer */}
       </S.HeaderContainer>
@@ -24,6 +38,18 @@ S.HeaderContainer = styled.div`
   text-align: center;
   height: 20rem;
   width: 100%;
+  padding: 2rem 2rem 0 2rem;
 `;
 
+S.Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+`;
+
+S.SearchWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+`;
 export default AppHeader;

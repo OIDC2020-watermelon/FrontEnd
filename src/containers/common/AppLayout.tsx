@@ -4,6 +4,7 @@ import AppFooter from '../../components/common/layout/AppFooter';
 import { useDispatch } from 'react-redux';
 import { getCurrentUser } from '../../models/saga/reducers/auth';
 import WithAuth from '../../models/hook/providers/WithAuth';
+import styled from 'styled-components';
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,25 +12,35 @@ interface LayoutProps {
 
 const AppLayout = ({ children }: LayoutProps) => {
   const dispatch = useDispatch();
-  
-  useEffect(()=> {
+
+  useEffect(() => {
     dispatch(getCurrentUser.request({}));
-  },[dispatch])
-  
+  }, [dispatch]);
+
   return (
     <>
-    {/* 로그아웃, 로그인에 관한 Higher order component */}
+      {/* 로그아웃, 로그인에 관한 Higher order component */}
       <WithAuth>
-        <section>
+        <S.StyledSection>
           <AppHeader />
-          <article>
-            {children}
-          </article>
+          <S.StyledArticle>{children}</S.StyledArticle>
           <AppFooter />
-        </section>
+        </S.StyledSection>
       </WithAuth>
     </>
   );
 };
+
+const S: any = {};
+
+S.StyledSection = styled.section`
+  min-width: 865px;
+  max-width: 1600px;
+  margin: 0 auto;
+`;
+
+S.StyledArticle = styled.article`
+  padding: 2rem;
+`;
 
 export default AppLayout;

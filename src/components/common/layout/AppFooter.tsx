@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Copyright from './Copyright';
+import Copyright from './footer/Copyright';
+import Footer from './footer/Footer';
 
 interface AppFooterProps {}
 
@@ -10,9 +11,7 @@ const AppFooter = () => {
       <S.FooterContainer>
         {/* Footer */}
         <footer>
-          <h6>Footer</h6>
-          <p>Something here to give the footer a purpose!</p>
-          <Copyright />
+          <Footer />
         </footer>
         {/* End footer */}
       </S.FooterContainer>
@@ -23,8 +22,9 @@ const AppFooter = () => {
 const S: any = {};
 
 S.FooterContainer = styled.div`
+  padding: 0 2rem;
   text-align: center;
-  height: 20rem;
+  max-height: 20rem;
   width: 100%;
 `;
 

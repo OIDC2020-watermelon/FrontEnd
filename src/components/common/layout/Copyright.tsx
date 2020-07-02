@@ -4,7 +4,7 @@ const Copyright = () => {
   return (
     <h6>
       {'Copyright © '}
-        Your Website
+      Your Website
       {new Date().getFullYear()}
       {'.'}
     </h6>

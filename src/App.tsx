@@ -1,8 +1,10 @@
-import React from "react";
-import { Switch, BrowserRouter, Route } from "react-router-dom";
-import { Helmet } from "react-helmet";
-import MainPage from "./pages";
-import NotFoundPage from "./pages/NotFoundPage";
+import React from 'react';
+import { Switch, BrowserRouter, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import MainPage from './pages';
+import NotFoundPage from './pages/NotFoundPage';
+import AppLayout from './containers/common/AppLayout';
+import 'antd/dist/antd.css';
 
 function App() {
   return (
@@ -18,10 +20,12 @@ function App() {
         />
       </Helmet>
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={MainPage} />
-          <Route component={NotFoundPage} />
-        </Switch>
+        <AppLayout>
+          <Switch>
+            <Route exact path="/" component={MainPage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </AppLayout>
       </BrowserRouter>
     </>
   );

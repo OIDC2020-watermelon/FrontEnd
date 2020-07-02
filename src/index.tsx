@@ -6,15 +6,12 @@ import App from './App';
 import './FontAwesome';
 import * as serviceWorker from './serviceWorker';
 import { GlobalStyle } from './lib/style/GlobalStyle';
-import AppLayout from './containers/common/AppLayout';
 
 ReactDOM.render(
   <Provider store={store}>
     {/* styled-component 글로벌 속성 */}
     <GlobalStyle />
-    <AppLayout>
-      <App />
-    </AppLayout>
+    <App />
   </Provider>,
   document.getElementById('root'),
 );
