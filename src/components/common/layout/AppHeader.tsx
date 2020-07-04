@@ -36,7 +36,6 @@ const S: any = {};
 
 S.HeaderContainer = styled.div`
   text-align: center;
-  height: 20rem;
   width: 100%;
   padding: 2rem 2rem 0 2rem;
 `;

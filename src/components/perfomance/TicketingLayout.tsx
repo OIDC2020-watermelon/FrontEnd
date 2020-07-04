@@ -8,7 +8,7 @@ export default function TicketingLayout() {
   const date = Date.now();
   return (
     <>
-      <Divider orientation="center">중단</Divider>
+      <Divider orientation="center">예매하기</Divider>
       <S.CenterContainer>
         <S.DatePickerWrap span={10}>
           <DatePicker />
@@ -26,9 +26,9 @@ export default function TicketingLayout() {
 
           <Row>
             <Col span={24}>
-              <Button type="primary" block>
+              <S.AntdButton type="primary" block>
                 예약하기
-              </Button>
+              </S.AntdButton>
             </Col>
           </Row>
         </Col>
@@ -36,13 +36,16 @@ export default function TicketingLayout() {
     </>
   );
 }
+
 const S: any = {};
+
 S.CenterContainer = styled(Row)`
   padding: 1rem 5rem;
   @media screen and (max-width: 950px) {
     padding: 1rem 1rem;
   }
 `;
+
 S.DatePickerWrap = styled(Col)`
   padding-right: 4rem;
 `;
@@ -51,4 +54,8 @@ S.DateOpsContainer = styled(Row)`
   display: flex;
   justify-content: space-between;
   margin-bottom: 2.5rem;
+`;
+
+S.AntdButton = styled(Button)`
+  border-radius: 5px;
 `;

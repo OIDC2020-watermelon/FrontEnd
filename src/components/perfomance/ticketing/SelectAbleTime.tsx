@@ -26,6 +26,8 @@ const S: any = {};
 S.AntdList = styled(List)`
   height: 18rem;
   overflow: scroll;
+
+  border-radius: 5px;
 `;
 
 S.AntdListItem = styled(List.Item)``;

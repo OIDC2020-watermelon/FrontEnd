@@ -19,6 +19,10 @@ function App() {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Bebas+Neue&family=Cedarville+Cursive&family=IBM+Plex+Sans:wght@500&display=swap"
+          rel="stylesheet"
+        ></link>
       </Helmet>
       <BrowserRouter>
         <AppLayout>

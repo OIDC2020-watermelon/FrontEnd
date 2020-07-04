@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import font from './font';
 
 export const GlobalStyle = createGlobalStyle`
     @import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
@@ -14,6 +15,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     * {
         box-sizing : inherit;
+        ${font.normalFont}
     }
     a {
         text-decoration : inherit;
