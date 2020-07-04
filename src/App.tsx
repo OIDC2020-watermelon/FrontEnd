@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import MainPage from './pages';
+import Login from './pages/Login';
 import NotFoundPage from './pages/NotFoundPage';
 import AppLayout from './containers/common/AppLayout';
 import 'antd/dist/antd.css';
@@ -23,6 +24,7 @@ function App() {
         <AppLayout>
           <Switch>
             <Route exact path="/" component={MainPage} />
+            <Route path="/login" component={Login} />
             <Route component={NotFoundPage} />
           </Switch>
         </AppLayout>

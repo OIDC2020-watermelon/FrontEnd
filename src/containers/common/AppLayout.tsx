@@ -35,7 +35,7 @@ const S: any = {};
 
 S.StyledSection = styled.section`
   min-width: 865px;
-  max-width: 1600px;
+  max-width: 1300px;
   margin: 0 auto;
 `;
 
