@@ -5,14 +5,18 @@ import { DatePicker, SelectAbleTime, SelectAbleSeat } from './ticketing';
 import SelectFilter from './preview/SelectFilter';
 import useInput from '../../lib/utils/hooks';
 import { TFilter } from '../../types/common/commonType';
-import MainInfo from './preview/main/MainInfo';
-import CostInfo from './preview/main/CostInfo';
+import {
+  MainInfo,
+  CostInfo,
+  ArtistInfo,
+  PerformanceInfo,
+} from './preview/main';
 
 const { Title } = Typography;
 
 export default function PreviewLayout() {
   const date = Date.now();
-  const [filter, changeFilter, setFilter] = useInput<TFilter>('main');
+  const [filter, changeFilter, _] = useInput<TFilter>('main');
 
   const ShowSelectedPreview = useCallback(
     (filter: TFilter) => {
@@ -22,9 +26,9 @@ export default function PreviewLayout() {
         case 'cost':
           return <CostInfo />;
         case 'artist':
-          return;
+          return <ArtistInfo />;
         case 'performance':
-          return;
+          return <PerformanceInfo />;
         default:
           return;
       }
@@ -33,7 +37,7 @@ export default function PreviewLayout() {
   );
   return (
     <>
-      <Divider orientation="center">미리보기</Divider>
+      <Divider></Divider>
 
       <S.HeadInfoContainer>
         <S.HeadMainInfoWrap>

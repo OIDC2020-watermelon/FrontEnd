@@ -1,45 +1,39 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Row, Col, Divider } from 'antd';
+import { Row, Col } from 'antd';
 import palette from '../../../../lib/style/palette';
 import { Link } from 'react-router-dom';
-import { performanceCost } from '../../../../assets/dummy/dummyData';
+import { performanceStory } from '../../../../assets/dummy/dummyData';
 
-export default function CostInfo() {
-  const date = Date.now();
+export default function PerformanceInfo() {
   return (
     <>
-      <S.CostInfoContainer>
+      <S.PerformanceInfoContainer>
         <S.CostInfoHeadWrap justify="space-between">
           <Col span={5} className="main_info_title">
-            가격정보
+            줄거리
           </Col>
-          <Col span={3}>
+          <Col span={2}>
             <S.StyledLink to="/">더보기</S.StyledLink>
           </Col>
         </S.CostInfoHeadWrap>
-        <S.CostInfoBodyWrap>
-          {performanceCost.map((cost) => (
-            <>
-              <Col span={5}>{cost.type}석</Col>
-              <Col span={19}>{cost.cost}원</Col>
-            </>
-          ))}
-        </S.CostInfoBodyWrap>
-      </S.CostInfoContainer>
+        <S.CostInfoBodyWrap>{performanceStory}</S.CostInfoBodyWrap>
+      </S.PerformanceInfoContainer>
     </>
   );
 }
 
 const S: any = {};
 
-S.CostInfoContainer = styled.div`
+S.PerformanceInfoContainer = styled.div`
   border: 1px solid ${palette.gray5};
+  border-radius: 5px;
   height: 100%;
   width: 100%;
-  padding: 4rem 5rem;
-  border-radius: 5px;
+  padding: 2rem 2rem 2rem 3rem;
 `;
+
+S.PerformArtistCardWrap = styled(Col)``;
 
 S.StyledLink = styled(Link)`
   color: blue;

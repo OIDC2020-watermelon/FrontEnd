@@ -1,9 +1,9 @@
 import React from 'react';
-import Main from '../components/common/layout/Main';
+import Login from '../components/common/layout/Login';
 export default function MainPage() {
   return (
     <>
-      <Main />
+      <Login />
     </>
   );
 }

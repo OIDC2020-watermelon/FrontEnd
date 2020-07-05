@@ -36,6 +36,10 @@ const S: any = {};
 
 S.HeaderContainer = styled.div`
   text-align: center;
+<<<<<<< HEAD
+=======
+  height: 100%;
+>>>>>>> 607813de8aa2ff59dc774b75597f38fe4ee1ba1c
   width: 100%;
   padding: 2rem 2rem 0 2rem;
 `;
