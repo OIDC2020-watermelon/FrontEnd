@@ -10,7 +10,7 @@ export default function ArtistInfo() {
   const date = Date.now();
   return (
     <>
-      <S.ArtistInfoContainer>
+      <S.ArtistInfoContainer className="scroll">
         {perFormArtistInfo.map((artist) => (
           <S.PerformArtistCardWrap xs={12} sm={12} md={12} xl={8} xxl={6}>
             <PerformArtistCard artist={artist}></PerformArtistCard>
@@ -28,7 +28,7 @@ S.ArtistInfoContainer = styled(Row)`
   height: 100%;
   width: 100%;
   padding: 2rem 2rem 2rem 3rem;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 S.PerformArtistCardWrap = styled(Col)``;

@@ -15,6 +15,7 @@ export const performanceCost: Array<TPerformanceCost> = [
   { type: 'A', number: 100, cost: 10000 },
   { type: 'B', number: 100, cost: 10000 },
   { type: 'C', number: 100, cost: 10000 },
+  { type: 'D', number: 100, cost: 10000 },
 ];
 
 export const perFormArtistInfo: Array<TArtist> = [
