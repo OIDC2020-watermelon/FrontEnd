@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import font from './font';
+import palette from './palette';
 
 export const GlobalStyle = createGlobalStyle`
     @import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
@@ -20,5 +21,17 @@ export const GlobalStyle = createGlobalStyle`
     a {
         text-decoration : inherit;
         color: inherit
+    }
+    .scroll::-webkit-scrollbar {
+        width: 10px;
+    }
+    .scroll::-webkit-scrollbar-thumb {
+        background-color: ${palette.gray5};
+        border-radius: 10px;
+        background-clip: padding-box;
+        border: 2px solid transparent;
+    }
+    .scroll::-webkit-scrollbar-track {
+        display : none;
     }
 `;

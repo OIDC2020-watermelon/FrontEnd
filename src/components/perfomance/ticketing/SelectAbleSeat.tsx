@@ -10,6 +10,7 @@ export default function SelectAbleSeat() {
         header={<div>좌석 유형을 선택해주세요</div>}
         bordered
         dataSource={performanceCost}
+        className="scroll"
         renderItem={(item: any) => (
           <S.AntdListItem>
             <Typography.Text mark>{`[${item.type}좌석]`}</Typography.Text>
@@ -25,8 +26,7 @@ const S: any = {};
 
 S.AntdList = styled(List)`
   height: 18rem;
-  overflow: scroll;
-
+  overflow: auto;
   border-radius: 5px;
 `;
 
