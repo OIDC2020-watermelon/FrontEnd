@@ -76,6 +76,6 @@ S.StyledContainer = styled.div`
 ```
 # CICD
 
-:sparkles: git push ( to master branch ) -> jenkins_server ( CI ) -> slack notification -> front_server ( CD )
+:sparkles: git push (master branch) -> jenkins_server ( CI ) -> slack notification -> front_server ( CD )
 
 ---
