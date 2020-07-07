@@ -78,4 +78,5 @@ S.StyledContainer = styled.div`
 
 :sparkles: git push -> jenkins_server ( CI ) -> slack notification -> front_server ( CD )
 
+* Link: [Chrome][http://101.101.211.48/]
 ---
