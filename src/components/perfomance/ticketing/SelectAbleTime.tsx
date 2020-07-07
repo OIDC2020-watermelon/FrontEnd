@@ -34,6 +34,10 @@ const S: any = {};
 S.AntdList = styled(List)`
   height: 18rem;
   overflow: auto;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8285e78e868e6c15f983ad4f38363756871c600b
   border-radius: 5px;
 `;
 

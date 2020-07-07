@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  linking-server:
+    image: linking-server-docker-image
+    volumes:
+      - ./deploy:/deploy/linking
+    ports:
+      - '1024:3000'
