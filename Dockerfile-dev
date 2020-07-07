@@ -12,5 +12,5 @@ RUN npm install react-scripts@3.4.1 -g --silent
 COPY . /app/
 CMD ["npm", "start"]
 
-# docker build -f Dockerfile-dev -t mydev .
-# docker run -it -p 1024:3000 mydev
+# docker build -f Dockerfile-dev -t linking-server-docker-image .
+# docker run -it -p 80:3000 linking-server-docker-image

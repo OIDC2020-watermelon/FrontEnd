@@ -74,5 +74,8 @@ S.StyledContainer = styled.div`
     ${font.blodFont}                    // 굵은 폰트 사용
 `;
 ```
+# CICD
+
+:sparkles: git push -> jenkins_server ( CI ) -> slack notification -> front_server ( CD )
 
 ---
