@@ -65,9 +65,9 @@ const index = ({ types }: { types: string }) => {
           {CardList.list.map((list, key) => {
             if (key === 4) {
               return (
-                <Link to={`/performance/${key}`}>
+                <Link to={`/performance/${key}`} style={{ width: '20%' }}>
                   <OverCard
-                    style={{ width: 230, marginRight: 0 }}
+                    style={{ marginRight: 0 }}
                     cover={
                       <img
                         alt="example"
@@ -93,9 +93,8 @@ const index = ({ types }: { types: string }) => {
               );
             } else {
               return (
-                <Link to={`/performance/${key}`}>
+                <Link to={`/performance/${key}`} style={{ width: '20%' }}>
                   <OverCard
-                    style={{ width: 230 }}
                     cover={
                       <img
                         alt="example"

@@ -1,13 +1,17 @@
 import React from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import 'antd/dist/antd.css';
+
 import MainPage from './pages';
 import Login from './pages/Login';
 import NotFoundPage from './pages/NotFoundPage';
 import AppLayout from './containers/common/AppLayout';
-import 'antd/dist/antd.css';
 import PerformancePage from './pages/PerformancePage';
 import ManagePage from './pages/Manage';
+
+import Mypage from './pages/Mypage';
+import Leave from './pages/Leave';
 
 function App() {
   return (
@@ -32,6 +36,12 @@ function App() {
             <Route exact path="/" component={MainPage} />
             <Route exact path="/performance/:id?" component={PerformancePage} />
             <Route path="/login" component={Login} />
+            <Route path="/booking" component={Mypage} />
+
+            <Route path="/mypage" component={Mypage} />
+            <Route path="/leave" component={Leave} />
+
+            <Route path="/book_Manage" component={Mypage} />
             <Route path="/manage" component={ManagePage} />
             <Route component={NotFoundPage} />
           </Switch>
