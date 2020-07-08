@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import NotFoundPage from './pages/NotFoundPage';
 import AppLayout from './containers/common/AppLayout';
 import PerformancePage from './pages/PerformancePage';
+import ManagePage from './pages/Manage';
 
 import Mypage from './pages/Mypage';
 import Leave from './pages/Leave';
@@ -41,6 +42,7 @@ function App() {
             <Route path="/leave" component={Leave} />
 
             <Route path="/book_Manage" component={Mypage} />
+            <Route path="/manage" component={ManagePage} />
             <Route component={NotFoundPage} />
           </Switch>
         </AppLayout>
