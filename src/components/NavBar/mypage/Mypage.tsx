@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Menu, Button, Input, Radio } from 'antd';
 import moment, { Moment } from 'moment';
 import Title from './Title';
-const phoneNumberRegExp = /^\d{3}-\d{3,4}-\d{4}$/;
+// const phoneNumberRegExp = /^\d{3}-\d{3,4}-\d{4}$/;
 
 interface UserInfo {
   id: string;

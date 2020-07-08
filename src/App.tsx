@@ -41,7 +41,7 @@ function App() {
             <Route path="/mypage" component={Mypage} />
             <Route path="/leave" component={Leave} />
 
-            <Route path="/book_Manage" component={Mypage} />
+            <Route path="/book_manage" component={Mypage} />
             <Route path="/manage" component={ManagePage} />
             <Route component={NotFoundPage} />
           </Switch>
