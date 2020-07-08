@@ -76,7 +76,7 @@ S.StyledContainer = styled.div`
 ```
 # CICD
 
-:sparkles: git push -> jenkins_server ( CI ) -> slack notification -> front_server ( CD )
+:sparkles: git push -> jenkins_server ( CI ) -> slack notification -> front_server ( CD ) :fire:
 
 * Link: [Chrome][http://101.101.211.48/]
 ---

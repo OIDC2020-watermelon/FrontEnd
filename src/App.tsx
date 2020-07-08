@@ -7,6 +7,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import AppLayout from './containers/common/AppLayout';
 import 'antd/dist/antd.css';
 import PerformancePage from './pages/PerformancePage';
+import ManagePage from './pages/Manage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route exact path="/" component={MainPage} />
             <Route exact path="/performance/:id?" component={PerformancePage} />
             <Route path="/login" component={Login} />
+            <Route path="/manage" component={ManagePage} />
             <Route component={NotFoundPage} />
           </Switch>
         </AppLayout>
