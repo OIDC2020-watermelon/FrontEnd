@@ -9,7 +9,7 @@ export default function HeaderLinkList() {
         <Link to="/">
           <S.LinkItem>메인</S.LinkItem>
         </Link>
-        <Link to="/">
+        <Link to="/login">
           <S.LinkItem>로그인</S.LinkItem>
         </Link>
         <Link to="/">
