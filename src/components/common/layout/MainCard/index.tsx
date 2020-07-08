@@ -65,7 +65,11 @@ const index = ({ types }: { types: string }) => {
           {CardList.list.map((list, key) => {
             if (key === 4) {
               return (
-                <Link to={`/performance/${key}`} style={{ width: '20%' }}>
+                <Link
+                  key={key}
+                  to={`/performance/${key}`}
+                  style={{ width: '20%' }}
+                >
                   <OverCard
                     style={{ marginRight: 0 }}
                     cover={
@@ -81,11 +85,11 @@ const index = ({ types }: { types: string }) => {
                     <p>장소명 : {list.place}</p>
                     {list.artist.map((art, idx) => {
                       if (idx === 0) {
-                        return <span>아티스트 : {art}, </span>;
+                        return <span key={idx}>아티스트 : {art}, </span>;
                       } else if (idx + 1 === list.artist.length) {
-                        return <span>{art}</span>;
+                        return <span key={idx}>{art}</span>;
                       } else {
-                        return <span>{art}, </span>;
+                        return <span key={idx}>{art}, </span>;
                       }
                     })}
                   </OverCard>
@@ -93,7 +97,11 @@ const index = ({ types }: { types: string }) => {
               );
             } else {
               return (
-                <Link to={`/performance/${key}`} style={{ width: '20%' }}>
+                <Link
+                  key={key}
+                  to={`/performance/${key}`}
+                  style={{ width: '20%' }}
+                >
                   <OverCard
                     cover={
                       <img
@@ -108,11 +116,11 @@ const index = ({ types }: { types: string }) => {
                     <p>장소명 : {list.place}</p>
                     {list.artist.map((art, idx) => {
                       if (idx === 0) {
-                        return <span>아티스트 : {art}, </span>;
+                        return <span key={idx}>아티스트 : {art}, </span>;
                       } else if (idx + 1 === list.artist.length) {
-                        return <span>{art}</span>;
+                        return <span key={idx}>{art}</span>;
                       } else {
-                        return <span>{art}, </span>;
+                        return <span key={idx}>{art}, </span>;
                       }
                     })}
                   </OverCard>

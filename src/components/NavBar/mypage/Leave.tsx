@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Checkbox } from 'antd';
+import { Checkbox, Button } from 'antd';
 import Title from './Title';
-const phoneNumberRegExp = /^\d{3}-\d{3,4}-\d{4}$/;
 
 const Leave = () => {
+  const [deleteFlag, setDeleteFlag] = useState<boolean>(false);
+
   const onCheck = (e: any) => {
     console.log('e : ', e.target.checked);
+
+    if (e.target.checked) {
+      setDeleteFlag(true);
+    } else {
+      setDeleteFlag(false);
+    }
   };
 
+  const onClick = (e: any) => {
+    console.log(e.target);
+  };
   return (
     <>
       <S.MypageLayout>
@@ -54,6 +64,30 @@ const Leave = () => {
                 <Checkbox onChange={onCheck}>
                   상기 사항을 모두 확인하였습니다.
                 </Checkbox>
+              </S.Infocontent>
+
+              <S.Infocontent style={{ display: 'flex', marginTop: 30 }}>
+                <div style={{ flex: 1, textAlign: 'right' }}>
+                  <S.InfoButton
+                    onClick={() => {
+                      window.location.assign('/');
+                    }}
+                  >
+                    취소
+                  </S.InfoButton>
+                </div>
+
+                <div style={{ flex: 1 }} />
+
+                <div style={{ flex: 1, textAlign: 'left' }}>
+                  {deleteFlag ? (
+                    <S.InfoButton onClick={onClick}>확인</S.InfoButton>
+                  ) : (
+                    <S.InfoButton style={{ opacity: 0.3, cursor: 'auto' }}>
+                      확인
+                    </S.InfoButton>
+                  )}
+                </div>
               </S.Infocontent>
             </S.InfoLayout>
           </S.MypageContent>
@@ -101,3 +135,5 @@ S.InfoTitle = styled.div`
 `;
 
 S.Infocontent = styled.div``;
+
+S.InfoButton = styled(Button)``;

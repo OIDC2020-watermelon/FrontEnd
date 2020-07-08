@@ -24,6 +24,7 @@ const AppHeader = () => {
             <SearchBar />
             <AdComponent />
           </S.SearchWrap>
+
           <NavBar />
         </header>
         {/* End footer */}

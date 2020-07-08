@@ -26,7 +26,7 @@ const MainCategory = () => {
     <>
       <CardLayout>
         {CategoryList.map((list, key) => {
-          return <Tag>{list.title}</Tag>;
+          return <Tag key={key}>{list.title}</Tag>;
         })}
       </CardLayout>
     </>

@@ -79,7 +79,7 @@ const FooterHead = styled.div`
   padding-bottom: 1rem;
   border-bottom: 1px solid ${palette.gray5};
 `;
-const FooterMenu = styled.a`
+const FooterMenu = styled.div`
   display: flex;
   justify-content: center;
   border-right: 2px solid ${palette.gray5};

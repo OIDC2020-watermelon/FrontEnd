@@ -4,9 +4,20 @@ import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
 export default function NavBar() {
+  const urlLocation = window.location.pathname;
+  let urlTypes: string;
+  if (urlLocation === '/') {
+    urlTypes = '1';
+  } else if (urlLocation === '/booking') {
+    urlTypes = '2';
+  } else if (urlLocation === '/mypage' || urlLocation === '/leave') {
+    urlTypes = '3';
+  } else {
+    urlTypes = '4';
+  }
   return (
     <>
-      <S.StyledMenu defaultSelectedKeys={['1']} mode="inline" theme="dark">
+      <S.StyledMenu defaultSelectedKeys={[urlTypes]} mode="inline" theme="dark">
         <Menu.Item key="1">
           <Link to="/">공연정보</Link>
         </Menu.Item>
@@ -20,7 +31,7 @@ export default function NavBar() {
         </Menu.Item>
 
         <Menu.Item key="4">
-          <Link to="/book_Manage">예매관리</Link>
+          <Link to="/book_manage">예매관리</Link>
         </Menu.Item>
       </S.StyledMenu>
     </>
