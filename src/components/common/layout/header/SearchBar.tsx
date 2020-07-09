@@ -13,7 +13,7 @@ export default function SearchBar() {
   const onSaerch = useCallback(() => {
     history.push(`/`);
     setSearchWord('');
-  }, [searchWord, history]);
+  }, [setSearchWord, history]);
 
   return (
     <>

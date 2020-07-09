@@ -1,12 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Row, Col, Divider } from 'antd';
+import { Row, Col } from 'antd';
 import palette from '../../../../lib/style/palette';
 import { Link } from 'react-router-dom';
 import { performanceCost } from '../../../../assets/dummy/dummyData';
 
 export default function CostInfo() {
-  const date = Date.now();
   return (
     <>
       <S.CostInfoContainer>

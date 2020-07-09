@@ -1,11 +1,9 @@
 import React from 'react';
-import { Divider, Button, Row, Col, Layout } from 'antd';
+import { Divider, Button, Row, Col } from 'antd';
 import styled from 'styled-components';
 import { DatePicker, SelectAbleTime, SelectAbleSeat } from './ticketing';
 
-const { Header, Footer, Sider, Content } = Layout;
 export default function TicketingLayout() {
-  const date = Date.now();
   return (
     <>
       <Divider orientation="center">예매하기</Divider>
