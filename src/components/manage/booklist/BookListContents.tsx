@@ -8,7 +8,7 @@ export default function BookListContents() {
       title: '예메일',
       dataIndex: 'bookDate',
       key: 'bookDate',
-      render: (text: any) => <a>{text}</a>,
+      render: (text: any) => <a href="/">{text}</a>,
     },
     {
       title: '예약번호',
@@ -45,8 +45,8 @@ export default function BookListContents() {
       key: 'action',
       render: (text: any, record: any) => (
         <Space size="middle">
-          <a>{record.bookDate}</a>
-          <a>취소</a>
+          <a href="/">{record.bookDate}</a>
+          <a href="/">취소</a>
         </Space>
       ),
     },
