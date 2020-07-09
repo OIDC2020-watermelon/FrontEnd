@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Copyright from './footer/Copyright';
 import Footer from './footer/Footer';
 
 interface AppFooterProps {}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Radio } from 'antd';
-import useInput from '../../../lib/utils/hooks';
 import { TFilter } from '../../../types/common/commonType';
 
 interface SelectFilterProps {

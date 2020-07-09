@@ -7,7 +7,6 @@ import { perFormArtistInfo } from '../../../../assets/dummy/dummyData';
 import PerformArtistCard from './PerformArtistCard';
 
 export default function ArtistInfo() {
-  const date = Date.now();
   return (
     <>
       <S.ArtistInfoContainer className="scroll">
