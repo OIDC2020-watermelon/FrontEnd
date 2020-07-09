@@ -10,7 +10,6 @@ RUN npm install react-scripts@3.4.1 -g --silent
 
 # 소스를 작업폴더로 복사
 COPY . /app/
-CMD ["npm", "start"]
 
 # docker build -f Dockerfile-dev -t linking-server-docker-image .
 # docker run -it -p 80:3000 linking-server-docker-image
