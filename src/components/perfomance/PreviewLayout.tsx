@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
-import { Divider, Button, Row, Col, Layout, Typography } from 'antd';
+import { Divider, Button, Row, Col, Typography } from 'antd';
 import styled from 'styled-components';
-import { DatePicker, SelectAbleTime, SelectAbleSeat } from './ticketing';
 import SelectFilter from './preview/SelectFilter';
 import useInput from '../../lib/utils/hooks';
 import { TFilter } from '../../types/common/commonType';
@@ -15,26 +14,22 @@ import {
 const { Title } = Typography;
 
 export default function PreviewLayout() {
-  const date = Date.now();
-  const [filter, changeFilter, _] = useInput<TFilter>('main');
+  const [filter, changeFilter] = useInput<TFilter>('main');
 
-  const ShowSelectedPreview = useCallback(
-    (filter: TFilter) => {
-      switch (filter) {
-        case 'main':
-          return <MainInfo />;
-        case 'cost':
-          return <CostInfo />;
-        case 'artist':
-          return <ArtistInfo />;
-        case 'performance':
-          return <PerformanceInfo />;
-        default:
-          return;
-      }
-    },
-    [filter],
-  );
+  const ShowSelectedPreview = useCallback((filter: TFilter) => {
+    switch (filter) {
+      case 'main':
+        return <MainInfo />;
+      case 'cost':
+        return <CostInfo />;
+      case 'artist':
+        return <ArtistInfo />;
+      case 'performance':
+        return <PerformanceInfo />;
+      default:
+        return;
+    }
+  }, []);
   return (
     <>
       <Divider></Divider>
