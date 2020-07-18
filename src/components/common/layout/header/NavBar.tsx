@@ -31,7 +31,7 @@ export default function NavBar() {
         </Menu.Item>
 
         <Menu.Item key="4">
-          <Link to="/book_manage">예매관리</Link>
+          <Link to="/manage">예매관리</Link>
         </Menu.Item>
       </S.StyledMenu>
     </>
