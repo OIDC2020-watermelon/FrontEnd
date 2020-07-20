@@ -16,7 +16,12 @@ const AppLayout = ({ children }: LayoutProps) => {
   useEffect(() => {
     dispatch(getCurrentUser.request({}));
   }, [dispatch]);
-
+  console.log('hi', window.location.pathname);
+  if (window.location.pathname.includes('search')) {
+    console.log('here');
+  } else {
+    console.log('hee');
+  }
   return (
     <>
       {/* 로그아웃, 로그인에 관한 Higher order component */}
