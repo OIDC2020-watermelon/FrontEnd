@@ -25,7 +25,7 @@ const AppHeader = () => {
             <AdComponent />
           </S.SearchWrap>
 
-          <NavBar />
+          {window.location.pathname.includes('search') ? '' : <NavBar />}
         </header>
         {/* End footer */}
       </S.HeaderContainer>

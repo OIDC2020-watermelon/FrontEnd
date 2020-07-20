@@ -112,7 +112,7 @@ const Header = ({ BookingList }: { BookingList: BookingList }) => {
 
         {bookingList.list.slice(arraySlice, arraySlice + 4).map((list, key) => {
           return (
-            <>
+            <div key={key}>
               {key ===
               bookingList.list.slice(arraySlice, arraySlice + 4).length - 1 ? (
                 <S.TitleContainer style={{ borderBottom: '1px solid' }}>
@@ -205,7 +205,7 @@ const Header = ({ BookingList }: { BookingList: BookingList }) => {
                   </S.TitleContent>
                 </S.TitleContainer>
               )}
-            </>
+            </div>
           );
         })}
 
