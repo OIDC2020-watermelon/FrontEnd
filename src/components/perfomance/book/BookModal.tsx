@@ -2,37 +2,37 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Modal, Button } from 'antd';
 import TicketSeatPicker from './TicketSeatPicker';
+import TicketPayment from './TicketPayment';
 
 export default function BookModal() {
   const [visible, setVisible] = useState(false);
   const [selectModal, setSelectModal] = useState('1');
 
+  const [selectedSeat, setSelectedSeat] = useState<Array<any>>([]);
+
   const showModalOne = () => {
     setVisible(true);
+    // 모달 초기화
     setSelectModal('1');
+    setSelectedSeat([]);
   };
   const showModalTwo = () => {
     setSelectModal('2');
   };
 
-  const handleOneOk = (e: any) => {
-    console.log(e);
-    if (selectModal === '1') {
-      showModalTwo();
-    } else if (selectModal === '2') {
-      setVisible(false);
-    }
-  };
-
   const handleTwoOk = (e: any) => {
     console.log(e);
-    setSelectModal('1');
     setVisible(false);
+  };
+
+  const handleOneOk = (e: any) => {
+    console.log(e);
+    showModalTwo();
   };
 
   const handleCancel = (e: any) => {
     console.log(e);
-    setVisible(true);
+    setVisible(false);
   };
 
   useEffect(() => {});
@@ -51,14 +51,29 @@ export default function BookModal() {
             : '오류'
         }
         visible={visible}
-        onOk={handleOneOk}
+        onOk={
+          selectModal === '1'
+            ? handleOneOk
+            : selectModal === '2'
+            ? handleTwoOk
+            : undefined
+        }
         onCancel={handleCancel}
         okText={
           selectModal === '1' ? '다음' : selectModal === '2' ? '결제' : '오류'
         }
         cancelText="취소"
       >
-        <TicketSeatPicker />
+        {selectModal === '1' ? (
+          <TicketSeatPicker
+            selectedSeat={selectedSeat}
+            setSelectedSeat={setSelectedSeat}
+          />
+        ) : selectModal === '2' ? (
+          <TicketPayment selectedSeat={selectedSeat} />
+        ) : (
+          '오류'
+        )}
       </Modal>
     </div>
   );

@@ -2,9 +2,15 @@ import React, { Component, useCallback, useState } from 'react';
 import SeatPicker from 'react-seat-picker';
 import styled from 'styled-components';
 
-export default function TicketSeatPicker() {
+interface TicketSeatPickerProps {
+  selectedSeat: any;
+  setSelectedSeat: any;
+}
+export default function TicketSeatPicker({
+  selectedSeat,
+  setSelectedSeat,
+}: TicketSeatPickerProps) {
   const [loading, setLoading] = useState(false);
-  const [selectedSeat, setSelectedSeat] = useState<Array<any>>([]);
   console.log(selectedSeat);
 
   const addSeat = useCallback(
@@ -23,7 +29,7 @@ export default function TicketSeatPicker() {
       setLoading(true);
       console.log(`Removed seat ${number}, row ${row}, id ${id}`);
       const newTooltip = ['A', 'B', 'C'].includes(row) ? null : '';
-      setSelectedSeat(selectedSeat.filter((seat) => seat.id !== id));
+      setSelectedSeat(selectedSeat.filter((seat: any) => seat.id !== id));
       removeCb(row, number, newTooltip);
       setLoading(false);
     },
