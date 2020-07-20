@@ -153,7 +153,9 @@ const Header = ({ BookingList }: { BookingList: BookingList }) => {
 
                   <S.TitleContent>{list.place}</S.TitleContent>
 
-                  <S.TitleContent style={{ textAlign: 'center' }}>
+                  <S.TitleContent
+                    style={{ textAlign: 'center', display: 'block' }}
+                  >
                     예매하기
                   </S.TitleContent>
                 </S.TitleContainer>
@@ -196,7 +198,9 @@ const Header = ({ BookingList }: { BookingList: BookingList }) => {
 
                   <S.TitleContent>{list.place}</S.TitleContent>
 
-                  <S.TitleContent style={{ textAlign: 'center' }}>
+                  <S.TitleContent
+                    style={{ textAlign: 'center', display: 'block' }}
+                  >
                     예매하기
                   </S.TitleContent>
                 </S.TitleContainer>
