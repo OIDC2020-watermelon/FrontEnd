@@ -45,11 +45,6 @@ const CardList: CardList = {
       place: '대학로 유니플렉스 2관',
       artist: ['아티스트'],
     },
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['박시원', '원종환'],
-    },
   ],
 };
 const index = ({ types }: { types: string }) => {
@@ -61,15 +56,11 @@ const index = ({ types }: { types: string }) => {
 
           <ShowMore>더보기</ShowMore>
         </ShowLayout>
-        <div style={{ clear: 'both', display: 'flex' }}>
+        <CardContainer style={{}}>
           {CardList.list.map((list, key) => {
-            if (key === 4) {
+            if (key === 3) {
               return (
-                <Link
-                  key={key}
-                  to={`/performance/${key}`}
-                  style={{ width: '20%' }}
-                >
+                <Link key={key} to={`/performance/${key}`}>
                   <OverCard
                     style={{ marginRight: 0 }}
                     cover={
@@ -97,11 +88,7 @@ const index = ({ types }: { types: string }) => {
               );
             } else {
               return (
-                <Link
-                  key={key}
-                  to={`/performance/${key}`}
-                  style={{ width: '20%' }}
-                >
+                <Link key={key} to={`/performance/${key}`}>
                   <OverCard
                     cover={
                       <img
@@ -128,7 +115,7 @@ const index = ({ types }: { types: string }) => {
               );
             }
           })}
-        </div>
+        </CardContainer>
       </CardLayout>
     </>
   );
@@ -157,6 +144,28 @@ const OverCard = styled(Card)`
   margin-right: 20px;
   .ant-card-body {
     padding: 12px;
+  }
+`;
+
+const CardContainer = styled.div`
+  backgroud: #fff;
+  display: grid;
+  grid-gap: 4vh;
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 export default index;
