@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PerformanceLayout from './performance';
 import PlaceLayout from './place';
 import ArtistLayout from './artist';
@@ -20,6 +20,29 @@ export interface Performance {
 
 export interface PerformanceList {
   list: Performance[];
+}
+
+export interface Place {
+  img: HTMLImageElement | string;
+  name: string;
+  addr: string;
+  number: string;
+  url: string;
+}
+
+export interface PlaceList {
+  list: Place[];
+}
+
+export interface Artist {
+  img: HTMLImageElement | string;
+  name: string;
+  year: Moment | string;
+  work: Array<string>;
+}
+
+export interface ArtistList {
+  list: Artist[];
 }
 
 const Index = () => {
@@ -236,6 +259,94 @@ const Index = () => {
       },
     ],
   });
+
+  const [PlaceDummyData] = useState<PlaceList>({
+    list: [
+      {
+        img: 'hi',
+        name: '블루 스퀘어',
+        addr: '서울시 용산구 이태원로 294 블루스퀘어',
+        number: '1544-1591',
+        url: 'www.bluesquare.com/asp',
+      },
+      {
+        img: 'hi',
+        name: '블루 스퀘어',
+        addr: '서울시 용산구 이태원로 294 블루스퀘어',
+        number: '1544-1591',
+        url: 'www.bluesquare.com/asp',
+      },
+      {
+        img: 'hi',
+        name: '블루 스퀘어',
+        addr: '서울시 용산구 이태원로 294 블루스퀘어',
+        number: '1544-1591',
+        url: 'www.bluesquare.com/asp',
+      },
+      {
+        img: 'hi',
+        name: '블루 스퀘어',
+        addr: '서울시 용산구 이태원로 294 블루스퀘어',
+        number: '1544-1591',
+        url: 'www.bluesquare.com/asp',
+      },
+      {
+        img: 'hi',
+        name: '블루 스퀘어',
+        addr: '서울시 용산구 이태원로 294 블루스퀘어',
+        number: '1544-1591',
+        url: 'www.bluesquare.com/asp',
+      },
+      {
+        img: 'hi',
+        name: '블루 스퀘어',
+        addr: '서울시 용산구 이태원로 294 블루스퀘어',
+        number: '1544-1591',
+        url: 'www.bluesquare.com/asp',
+      },
+    ],
+  });
+
+  const [ArtistDummyData] = useState<ArtistList>({
+    list: [
+      {
+        img: 'hi',
+        name: '아이유',
+        year: '2008',
+        work: ['아이유 콘서트(2019)', '아이유 콘서트 - 부산(2019)'],
+      },
+      {
+        img: 'hi',
+        name: '아이유',
+        year: '2008',
+        work: ['아이유 콘서트(2019)', '아이유 콘서트 - 부산(2019)'],
+      },
+      {
+        img: 'hi',
+        name: '아이유',
+        year: '2008',
+        work: ['아이유 콘서트(2019)', '아이유 콘서트 - 부산(2019)'],
+      },
+      {
+        img: 'hi',
+        name: '아이유',
+        year: '2008',
+        work: ['아이유 콘서트(2019)', '아이유 콘서트 - 부산(2019)'],
+      },
+      {
+        img: 'hi',
+        name: '아이유',
+        year: '2008',
+        work: ['아이유 콘서트(2019)', '아이유 콘서트 - 부산(2019)'],
+      },
+      {
+        img: 'hi',
+        name: '아이유',
+        year: '2008',
+        work: ['아이유 콘서트(2019)', '아이유 콘서트 - 부산(2019)'],
+      },
+    ],
+  });
   const urlLocation = window.location.pathname;
   let urlTypes: string;
   if (urlLocation === '/search/performance') {
@@ -249,7 +360,11 @@ const Index = () => {
 
   return (
     <>
-      <S.StyledMenu defaultSelectedKeys={[urlTypes]} mode="inline" theme="dark">
+      <S.StyledMenu
+        defaultSelectedKeys={[urlTypes]}
+        mode="inline"
+        theme="light"
+      >
         <Menu.Item key="1">
           <Link to="/search/performance">공연</Link>
         </Menu.Item>
@@ -266,9 +381,9 @@ const Index = () => {
       {urlTypes === '1' ? (
         <PerformanceLayout PerformanceList={DummyData} />
       ) : urlTypes === '2' ? (
-        <PlaceLayout />
+        <PlaceLayout PlaceList={PlaceDummyData} />
       ) : (
-        <ArtistLayout />
+        <ArtistLayout ArtistList={ArtistDummyData} />
       )}
     </>
   );
@@ -283,4 +398,8 @@ S.StyledMenu = styled(Menu)`
   display: flex;
   padding: 0;
   margin: 0;
+  text-align: center;
+  padding-top: 5px;
+  border: 1px solid;
+  border-color: lightgray;
 `;

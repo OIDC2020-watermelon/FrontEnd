@@ -92,7 +92,7 @@ const Performance = ({
         ) : (
           <S.TitleContainer style={{ padding: 20 }}>
             <S.TitleContentName style={{ flex: 4, textAlign: 'left' }}>
-              상품기본정보(총{performanceList.list.length}건)
+              공연 정보 (총{performanceList.list.length}건)
             </S.TitleContentName>
 
             <S.TitleContentName>일시</S.TitleContentName>
