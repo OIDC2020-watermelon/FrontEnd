@@ -67,8 +67,8 @@ const index = ({ types }: { types: string }) => {
                       <img
                         alt="example"
                         src="https://source.unsplash.com/random"
-                        width={230}
-                        height={230}
+                        width="100%"
+                        height="170px"
                       />
                     }
                   >
@@ -94,8 +94,8 @@ const index = ({ types }: { types: string }) => {
                       <img
                         alt="example"
                         src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                        width={230}
-                        height={230}
+                        width="100%"
+                        height="170px"
                       />
                     }
                   >
@@ -145,18 +145,17 @@ const OverCard = styled(Card)`
   .ant-card-body {
     padding: 12px;
   }
+  max-width: 300px;
+  max-height: 300px;
 `;
 
 const CardContainer = styled.div`
   backgroud: #fff;
   display: grid;
   grid-gap: 4vh;
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  /* Medium devices (landscape tablets, 768px and up) */
-  @media only screen and (min-width: 768px) {
+
+  /* Medium devices (landscape tablets, 0px and up) */
+  @media only screen and (min-width: 0px) {
     grid-template-columns: repeat(2, 1fr);
   }
   /* Large devices (laptops/desktops, 992px and up) */

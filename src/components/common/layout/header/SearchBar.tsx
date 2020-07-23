@@ -10,7 +10,7 @@ export default function SearchBar() {
   const [searchWord, changeSearchWord, setSearchWord] = useInput<string>('');
   const history = useHistory();
 
-  const onSaerch = useCallback(() => {
+  const onSearch = useCallback(() => {
     history.push(`/`);
     setSearchWord('');
   }, [setSearchWord, history]);
@@ -23,7 +23,7 @@ export default function SearchBar() {
         size="large"
         value={searchWord}
         onChange={changeSearchWord}
-        onSearch={onSaerch}
+        onSearch={onSearch}
       />
     </>
   );
