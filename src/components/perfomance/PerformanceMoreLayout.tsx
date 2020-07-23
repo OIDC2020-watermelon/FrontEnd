@@ -53,5 +53,9 @@ const S: any = {};
 S.PreviewContainer = styled(Row)`
   width: 100%;
   height: 30rem;
-  padding: 1rem 8rem;
+  padding: 1rem 6rem;
+
+  @media screen and (max-width: 1100px) {
+    padding: 1rem 0rem;
+  }
 `;

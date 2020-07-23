@@ -66,6 +66,7 @@ S.ArtistTextContainer = styled(Col)`
 `;
 
 S.StyledLink = styled(Link)`
+  font-size: 0.8rem;
   color: blue;
   text-decoration: underline;
 `;

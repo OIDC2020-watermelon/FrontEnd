@@ -116,15 +116,23 @@ export default function TicketSeatPicker({
         />
       </S.SeatPickerWrap>
       <S.SeatInfoContainer>
-        <S.SeatInfoWrap>
+        <S.SeatInfoWrap style={{ height: '7.6rem' }}>
           <S.SeatInfoTitle>
             <h4>좌석구역</h4>
             <h4>가격</h4>
           </S.SeatInfoTitle>
+          {['A', 'B', 'C', 'D', 'E'].map((seat: any, i: number) => (
+            <S.SeatInfoContents>
+              <span style={{ fontSize: '0.7rem' }}>{`${seat}`}</span>
+              <span style={{ fontSize: '0.7rem' }}>{`${
+                (i + 1) * 10000
+              }원`}</span>
+            </S.SeatInfoContents>
+          ))}
           <S.SeatInfoContents></S.SeatInfoContents>
         </S.SeatInfoWrap>
 
-        <S.SeatInfoWrap>
+        <S.SeatInfoWrap style={{ height: '7.5rem' }}>
           <S.SeatInfoTitle>
             <h4>선택좌석</h4>
             <h4>좌석번호</h4>
