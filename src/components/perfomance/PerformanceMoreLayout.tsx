@@ -9,6 +9,7 @@ import PerformanceMoreInfo from './more/PerformanceMoreInfo';
 import PerformanceExpectation from './more/PerformanceExpectation';
 import BookNotice from './more/BookNotice';
 import MoreInfoNav from './more/MoreInfoNav';
+import PerformancePlace from './more/PerformancePlace';
 
 const { Title } = Typography;
 
@@ -34,7 +35,7 @@ export default function PerformanceMoreLayout() {
         return <BookNotice />;
       //공연장정보
       case 'place':
-        return;
+        return <PerformancePlace />;
       default:
         return;
     }
@@ -53,5 +54,5 @@ const S: any = {};
 S.PreviewContainer = styled(Row)`
   width: 100%;
   height: 30rem;
-  padding: 1rem 8rem;
+  margin: auto 0;
 `;

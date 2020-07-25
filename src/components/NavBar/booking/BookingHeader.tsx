@@ -52,30 +52,23 @@ const Header = ({ BookingList }: { BookingList: BookingList }) => {
     <>
       <S.HeaderContainer>
         <S.SearchBar>
-          <S.SearchBarTitle>
-            <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-              공연명
-            </div>
-          </S.SearchBarTitle>
-
-          <S.AntComponent>
+          <S.SearchInputContainer>
+            <S.SearchBarTitle>
+              <div>공연명</div>
+            </S.SearchBarTitle>
             <S.SearchBarInput onChange={SearchBarChange} />
-          </S.AntComponent>
-
-          <S.SearchBarTitle style={{ flex: 1.5 }}>
-            <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-              카테고리별
-            </div>
-          </S.SearchBarTitle>
-
-          <S.AntComponent>
+          </S.SearchInputContainer>
+          <S.SearchInputContainer>
+            <S.SearchBarTitle>
+              <div>카테고리별</div>
+            </S.SearchBarTitle>
             <S.SearchBarSelect defaultValue="콘서트" onChange={SelectChange}>
               <Option value="콘서트">콘서트</Option>
               <Option value="연극">연극</Option>
               <Option value="클래식/무용">클래식/무용</Option>
               <Option value="전시/행사">전시/행사</Option>
             </S.SearchBarSelect>
-          </S.AntComponent>
+          </S.SearchInputContainer>
         </S.SearchBar>
       </S.HeaderContainer>
 
@@ -226,32 +219,36 @@ export default Header;
 const S: any = {};
 
 S.HeaderContainer = styled.div`
-  padding: 30px;
+  padding: 30px 40px;
   border: 1px solid;
-  margin: 0 5%;
   min-width: 570px;
+  margin: 1rem 0 3rem;
 `;
 
 S.SearchBar = styled.div`
   display: flex;
-  margin: 0 15%;
+  justify-content: space-between;
+`;
+S.SearchInputContainer = styled.div`
+  display: flex;
 `;
 
 S.SearchBarTitle = styled.div`
-  flex: 1;
-  display: table;
+  display: flex;
   height: 30px;
   margin-right: 5px;
+  & > div {
+    margin-right: 2rem;
+    align-self: center;
+  }
 `;
 
-S.AntComponent = styled.div`
-  flex: 3;
-`;
 S.SearchBarInput = styled(Input)`
-  width: 80%;
+  width: 25rem;
+  margin-right: 3rem;
 `;
 S.SearchBarSelect = styled(Select)`
-  width: 80%;
+  width: 25rem;
 `;
 
 S.HeaderButtonLayout = styled.div`
@@ -269,7 +266,6 @@ S.TitleContainer = styled.div`
   padding: 15px;
   border: 1px solid;
   border-bottom: none;
-  margin: 0 5%;
   display: flex;
 `;
 

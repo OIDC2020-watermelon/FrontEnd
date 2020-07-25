@@ -21,10 +21,10 @@ const AppFooter = () => {
 const S: any = {};
 
 S.FooterContainer = styled.div`
-  padding: 0 2rem;
   text-align: center;
   max-height: 20rem;
   width: 100%;
+  background: black;
 `;
 
 export default AppFooter;

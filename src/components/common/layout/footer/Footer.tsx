@@ -66,10 +66,12 @@ interface IconStyleProps {
 }
 
 const FooterWrap = styled.div`
+  max-width: 1130px;
   padding: 1.3rem 1rem;
   color: ${palette.gray5};
   height: 11rem;
   background: black;
+  margin: 0 auto;
 `;
 
 const FooterHead = styled.div`

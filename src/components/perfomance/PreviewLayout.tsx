@@ -53,9 +53,7 @@ export default function PreviewLayout() {
   );
 }
 const S: any = {};
-S.HeadInfoContainer = styled.div`
-  margin: 0 5rem;
-`;
+S.HeadInfoContainer = styled.div``;
 S.HeadMainInfoWrap = styled(Row)`
   display: flex;
   justify-content: space-between;
@@ -68,7 +66,7 @@ S.HeadSubInfoWrap = styled(Row)`
 S.PreviewContainer = styled(Row)`
   width: 100%;
   height: 30rem;
-  padding: 1rem 5rem;
+  padding: 1rem 0;
 `;
 S.DatePickerWrap = styled(Col)`
   padding-right: 4rem;
