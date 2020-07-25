@@ -24,11 +24,12 @@ const AppHeader = () => {
             <SearchBar />
             <AdComponent />
           </S.SearchWrap>
-
-          {window.location.pathname.includes('search') ? '' : <NavBar />}
         </header>
         {/* End footer */}
       </S.HeaderContainer>
+      <S.NavContainer>
+        {window.location.pathname.includes('search') ? '' : <NavBar />}
+      </S.NavContainer>
     </>
   );
 };
@@ -38,11 +39,12 @@ const S: any = {};
 S.HeaderContainer = styled.div`
   text-align: center;
   height: 100%;
-  width: 100%;
-  padding: 2rem 2rem 0 2rem;
+  max-width: 1130px;
+  margin: 0 auto;
 `;
 
 S.Container = styled.div`
+  max-width: 1130px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 3rem;
@@ -52,5 +54,10 @@ S.SearchWrap = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 3rem;
+`;
+
+S.NavContainer = styled.div`
+  width: 100%;
+  background: black;
 `;
 export default AppHeader;

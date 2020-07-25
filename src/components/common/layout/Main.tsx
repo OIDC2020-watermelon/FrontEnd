@@ -29,6 +29,8 @@ const Main = () => {
 const MainLayout = styled.div`
   text-align: center;
   margin-top: 15px;
+  max-width: 1130px;
+  margin: 0 auto;
 `;
 
 const OverCarousel = styled(Carousel)`
@@ -42,13 +44,12 @@ const OverCarousel = styled(Carousel)`
 `;
 
 const CarouselImg = styled.div`
-    height: 24rem;
-    width: 25rem;
-    border-radius: 5px;
-    background: url(https://source.unsplash.com/random);
-    background-position: 50% 50%;
-    background-size: cover;
-    }
+  height: 24rem;
+  width: 25rem;
+  border-radius: 5px;
+  background: url(https://source.unsplash.com/random);
+  background-position: 50% 50%;
+  background-size: cover;
 `;
 
 export default Main;

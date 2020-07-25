@@ -162,11 +162,11 @@ S.CommentNoticeWrap = styled.div`
 `;
 
 S.CommentInputContainer = styled.div`
-  padding: 0.5rem 3rem 0 3rem;
+  padding: 0.5rem 4rem 0;
   border: 1px solid black;
   border-radius: 5px;
-  width: 48rem;
-  margin: 0 auto 1.5rem;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 S.CommentNoticeMessage = styled.p`

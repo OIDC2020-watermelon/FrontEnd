@@ -41,8 +41,9 @@ export default function NavBar() {
 const S: any = {};
 
 S.StyledMenu = styled(Menu)`
+  max-width: 1130px;
   list-style: none;
   display: flex;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
 `;
