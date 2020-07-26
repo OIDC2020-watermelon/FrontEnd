@@ -18,17 +18,7 @@ const CardList: CardList = {
     {
       title: 'Cats',
       place: '대학로 유니플렉스 2관',
-      artist: [
-        '박시원',
-        '원종환',
-        '유성재',
-        '강정우',
-        '주민진',
-        '유제윤',
-        '김지은',
-        '홍승만',
-        '정대헌',
-      ],
+      artist: ['박시원', '원종환', '유성재', '강정우', '주민진', '유제윤'],
     },
     {
       title: 'Cats',
@@ -151,9 +141,10 @@ const OverCard = styled(Card)`
 
 const CardContainer = styled.div`
   backgroud: #fff;
-  display: grid;
-  grid-gap: 4vh;
-
+  display: inline-grid;
+  width: 80%;
+  justify-items: center;
+  align-items: center;
   /* Medium devices (landscape tablets, 0px and up) */
   @media only screen and (min-width: 0px) {
     grid-template-columns: repeat(2, 1fr);

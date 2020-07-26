@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Divider, Button, Row, Col, Typography } from 'antd';
+import { Divider, Row } from 'antd';
 import styled from 'styled-components';
 import useInput from '../../lib/utils/hooks';
 import { TMorePerformanceFilter } from '../../types/common/commonType';
@@ -10,8 +10,6 @@ import PerformanceExpectation from './more/PerformanceExpectation';
 import BookNotice from './more/BookNotice';
 import MoreInfoNav from './more/MoreInfoNav';
 import PerformancePlace from './more/PerformancePlace';
-
-const { Title } = Typography;
 
 export default function PerformanceMoreLayout() {
   const [filter, changeFilter] = useInput<TMorePerformanceFilter>('more');

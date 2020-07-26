@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Button, Row, Col } from 'antd';
+import { Divider, Row, Col } from 'antd';
 import styled from 'styled-components';
 import { DatePicker, SelectAbleTime, SelectAbleSeat } from './ticketing';
 import SelectSeatModal from './book/BookModal';
