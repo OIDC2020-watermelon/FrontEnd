@@ -16,6 +16,7 @@ import Booking from './pages/Booking';
 
 import Search from './pages/SearchPage';
 import PlacePage from './pages/PlacePage';
+import AdminPage from './pages/Admin';
 import ArtistPage from './pages/ArtistPage';
 function App() {
   return (
@@ -50,6 +51,8 @@ function App() {
 
             <Route path="/place/:id" component={PlacePage} />
             <Route path="/artist/:id" component={ArtistPage} />
+
+            <Route path="/admin" component={AdminPage} />
 
             <Route component={NotFoundPage} />
           </Switch>
