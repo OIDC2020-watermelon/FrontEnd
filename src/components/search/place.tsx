@@ -50,7 +50,7 @@ const Place = ({ PlaceList }: { PlaceList: PlaceList }) => {
                         alt="example"
                         src="https://source.unsplash.com/random"
                         width={100}
-                        height={100}
+                        height={130}
                       />
                     </S.TitleContentLeft>
 
@@ -103,7 +103,7 @@ const Place = ({ PlaceList }: { PlaceList: PlaceList }) => {
                         alt="example"
                         src="https://source.unsplash.com/random"
                         width={100}
-                        height={100}
+                        height={130}
                       />
                     </S.TitleContentLeft>
 

@@ -16,6 +16,7 @@ import Booking from './pages/Booking';
 
 import Search from './pages/SearchPage';
 import PlacePage from './pages/PlacePage';
+import ArtistPage from './pages/ArtistPage';
 function App() {
   return (
     <>
@@ -46,7 +47,10 @@ function App() {
             <Route exact path="/search/:type?" component={Search} />
             <Route path="/book_manage" component={Mypage} />
             <Route path="/manage" component={ManagePage} />
+
             <Route path="/place/:id" component={PlacePage} />
+            <Route path="/artist/:id" component={ArtistPage} />
+
             <Route component={NotFoundPage} />
           </Switch>
         </AppLayout>
