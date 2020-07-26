@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/style/palette';
 import CustomInput from '../common/input/CustomInput';
 import { Button, message } from 'antd';
 
 export default function IndexLayout() {
-  const [name, setName] = useState<boolean>(false);
-  const [date, setDate] = useState<boolean>(false);
-  const [place, setPlace] = useState<boolean>(false);
-  const [artist, setArtist] = useState<boolean>(false);
-  const [description, setDescription] = useState<boolean>(false);
+  const [name, setName] = useState<string>('');
+  const [date, setDate] = useState<string>('');
+  const [place, setPlace] = useState<string>('');
+  const [artist, setArtist] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
   const [deleteNum, setDeleteNum] = useState<number>(0);
 
   const addPerformance = () => {
@@ -18,11 +18,11 @@ export default function IndexLayout() {
     if (name && date && place && artist && description) {
       console.log('success');
     } else {
-      if (name === false) {
+      if (name === '') {
         validation += '공연명 ';
       }
 
-      if (date === false) {
+      if (date === '') {
         if (validation === '') {
           validation += '공연날짜 ';
         } else {
@@ -30,7 +30,7 @@ export default function IndexLayout() {
         }
       }
 
-      if (place === false) {
+      if (place === '') {
         if (validation === '') {
           validation += '공연장소 ';
         } else {
@@ -38,7 +38,7 @@ export default function IndexLayout() {
         }
       }
 
-      if (artist === false) {
+      if (artist === '') {
         if (validation === '') {
           validation += '출연진 ';
         } else {
@@ -46,7 +46,7 @@ export default function IndexLayout() {
         }
       }
 
-      if (description === false) {
+      if (description === '') {
         if (validation === '') {
           validation += '공연설명 ';
         } else {
@@ -62,6 +62,7 @@ export default function IndexLayout() {
   const deletePerformance = () => {
     console.log(deleteNum);
   };
+
   return (
     <>
       <S.Container>
