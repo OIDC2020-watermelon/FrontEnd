@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PlaceCard from '../components/place/PlaceCard';
 import PlaceLayout from '../components/place/PlaceLayout';
-import PlaceSeat from '../components/place/PlaceSeat';
 import palette from '../lib/style/palette';
 
 export default function PlacePage() {

@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Comment,
-  Avatar,
-  Form,
-  Button,
-  List,
-  Input,
-  Typography,
-  Divider,
-} from 'antd';
+import { Comment, Form, Button, Input, Typography } from 'antd';
 import moment from 'moment';
 import { formatDate } from '../../../lib/utils/dataFormat';
 import styled from 'styled-components';
