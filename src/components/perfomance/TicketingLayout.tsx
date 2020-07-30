@@ -1,7 +1,8 @@
 import React from 'react';
-import { Divider, Button, Row, Col } from 'antd';
+import { Divider, Row, Col } from 'antd';
 import styled from 'styled-components';
 import { DatePicker, SelectAbleTime, SelectAbleSeat } from './ticketing';
+import SelectSeatModal from './book/BookModal';
 
 export default function TicketingLayout() {
   return (
@@ -24,9 +25,7 @@ export default function TicketingLayout() {
 
           <Row>
             <Col span={24}>
-              <S.AntdButton type="primary" block>
-                예약하기
-              </S.AntdButton>
+              <SelectSeatModal />
             </Col>
           </Row>
         </Col>
@@ -52,8 +51,4 @@ S.DateOpsContainer = styled(Row)`
   display: flex;
   justify-content: space-between;
   margin-bottom: 2.5rem;
-`;
-
-S.AntdButton = styled(Button)`
-  border-radius: 5px;
 `;

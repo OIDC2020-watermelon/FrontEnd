@@ -1,23 +1,23 @@
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow';
 import format from 'date-fns/format';
-import enLocale from 'date-fns/locale/en-GB';
+import koLocale from 'date-fns/locale/ko';
 
-export default function formatDate(date: string | number) {
+export function formatDate(date: string | number) {
   const d = new Date(date);
   const now = Date.now();
   const diff = now - new Date(date).getTime();
   // less than 5 minutes
   if (diff < 1000 * 60 * 5) {
-    return 'just now';
+    return '지금';
   }
   if (diff < 1000 * 60 * 60 * 24) {
-    return distanceInWordsToNow(d, { addSuffix: true, locale: enLocale });
+    return distanceInWordsToNow(d, { addSuffix: true, locale: koLocale });
   }
   if (diff < 1000 * 60 * 60 * 36) {
-    return 'yesterday';
+    return '어제';
   }
   if (diff < 1000 * 60 * 60 * 24 * 7) {
-    return distanceInWordsToNow(d, { addSuffix: true, locale: enLocale });
+    return distanceInWordsToNow(d, { addSuffix: true, locale: koLocale });
   }
   return format(d, 'yyyy-M-d');
 }

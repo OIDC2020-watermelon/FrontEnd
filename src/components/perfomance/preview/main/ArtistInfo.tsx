@@ -24,6 +24,7 @@ const S: any = {};
 
 S.ArtistInfoContainer = styled(Row)`
   border: 1px solid ${palette.gray5};
+  border-radius: 5px;
   height: 100%;
   width: 100%;
   padding: 2rem 2rem 2rem 3rem;

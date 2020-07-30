@@ -12,7 +12,12 @@ import ManagePage from './pages/Manage';
 
 import Mypage from './pages/Mypage';
 import Leave from './pages/Leave';
+import Booking from './pages/Booking';
 
+import Search from './pages/SearchPage';
+import PlacePage from './pages/PlacePage';
+import AdminPage from './pages/Admin';
+import ArtistPage from './pages/ArtistPage';
 function App() {
   return (
     <>
@@ -36,13 +41,19 @@ function App() {
             <Route exact path="/" component={MainPage} />
             <Route exact path="/performance/:id?" component={PerformancePage} />
             <Route path="/login" component={Login} />
-            <Route path="/booking" component={Mypage} />
 
+            <Route path="/booking" component={Booking} />
             <Route path="/mypage" component={Mypage} />
             <Route path="/leave" component={Leave} />
-
+            <Route exact path="/search/:type?" component={Search} />
             <Route path="/book_manage" component={Mypage} />
             <Route path="/manage" component={ManagePage} />
+
+            <Route path="/place/:id" component={PlacePage} />
+            <Route path="/artist/:id" component={ArtistPage} />
+
+            <Route path="/admin" component={AdminPage} />
+
             <Route component={NotFoundPage} />
           </Switch>
         </AppLayout>

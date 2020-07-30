@@ -34,8 +34,7 @@ const AppLayout = ({ children }: LayoutProps) => {
 const S: any = {};
 
 S.StyledSection = styled.section`
-  min-width: 865px;
-  max-width: 1300px;
+  min-width: 1130px;
   margin: 0 auto;
 `;
 

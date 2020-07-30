@@ -18,17 +18,7 @@ const CardList: CardList = {
     {
       title: 'Cats',
       place: '대학로 유니플렉스 2관',
-      artist: [
-        '박시원',
-        '원종환',
-        '유성재',
-        '강정우',
-        '주민진',
-        '유제윤',
-        '김지은',
-        '홍승만',
-        '정대헌',
-      ],
+      artist: ['박시원', '원종환', '유성재', '강정우', '주민진', '유제윤'],
     },
     {
       title: 'Cats',
@@ -44,11 +34,6 @@ const CardList: CardList = {
       title: 'Cats',
       place: '대학로 유니플렉스 2관',
       artist: ['아티스트'],
-    },
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['박시원', '원종환'],
     },
   ],
 };
@@ -61,23 +46,19 @@ const index = ({ types }: { types: string }) => {
 
           <ShowMore>더보기</ShowMore>
         </ShowLayout>
-        <div style={{ clear: 'both', display: 'flex' }}>
+        <CardContainer style={{}}>
           {CardList.list.map((list, key) => {
-            if (key === 4) {
+            if (key === 3) {
               return (
-                <Link
-                  key={key}
-                  to={`/performance/${key}`}
-                  style={{ width: '20%' }}
-                >
+                <Link key={key} to={`/performance/${key}`}>
                   <OverCard
                     style={{ marginRight: 0 }}
                     cover={
                       <img
                         alt="example"
                         src="https://source.unsplash.com/random"
-                        width={230}
-                        height={230}
+                        width="100%"
+                        height="170px"
                       />
                     }
                   >
@@ -97,18 +78,14 @@ const index = ({ types }: { types: string }) => {
               );
             } else {
               return (
-                <Link
-                  key={key}
-                  to={`/performance/${key}`}
-                  style={{ width: '20%' }}
-                >
+                <Link key={key} to={`/performance/${key}`}>
                   <OverCard
                     cover={
                       <img
                         alt="example"
                         src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                        width={230}
-                        height={230}
+                        width="100%"
+                        height="170px"
                       />
                     }
                   >
@@ -128,7 +105,7 @@ const index = ({ types }: { types: string }) => {
               );
             }
           })}
-        </div>
+        </CardContainer>
       </CardLayout>
     </>
   );
@@ -157,6 +134,28 @@ const OverCard = styled(Card)`
   margin-right: 20px;
   .ant-card-body {
     padding: 12px;
+  }
+  max-width: 300px;
+  max-height: 300px;
+`;
+
+const CardContainer = styled.div`
+  backgroud: #fff;
+  display: inline-grid;
+  width: 80%;
+  justify-items: center;
+  align-items: center;
+  /* Medium devices (landscape tablets, 0px and up) */
+  @media only screen and (min-width: 0px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 export default index;
