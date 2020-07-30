@@ -9,9 +9,10 @@ import { GlobalStyle } from './lib/style/GlobalStyle';
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* styled-component 글로벌 속성 */}
-    <GlobalStyle />
     <App />
+    {/* styled-component 글로벌 속성 */}
+    {/* App 다음에 넣어야 styeld-compoenents가 제대로 작동한다.*/}
+    <GlobalStyle />
   </Provider>,
   document.getElementById('root'),
 );
