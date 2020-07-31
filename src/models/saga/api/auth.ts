@@ -11,13 +11,12 @@ import {
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 export const loginApi = ({
-  email,
-  password,
+  provider,
+  accessToken,
 }: ILoginRequest): Promise<ILoginSuccess> =>
-  client.post(`${SERVER_URL}/login`, {
-    email,
-    password,
-  });
+  client.post(
+    `${SERVER_URL}/auth/signin/${provider}?accessToken=${accessToken}`,
+  );
 
 // eslint-disable-next-line
 export const logoutApi = ({}: ILogoutRequest): Promise<ILogoutSuccess> =>
@@ -26,4 +25,4 @@ export const logoutApi = ({}: ILogoutRequest): Promise<ILogoutSuccess> =>
 // eslint-disable-next-line
 export const getCurrentUserApi = ({}: IGetCurrentUserRequest): Promise<
   IGetCurrentUserSuccess
-> => client.get(`${SERVER_URL}/user`);
+> => client.get(`${SERVER_URL}/auth/user`);

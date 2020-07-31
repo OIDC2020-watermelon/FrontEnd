@@ -9,6 +9,7 @@ import createAsyncSaga, {
 import * as TAuth from '../../../types/redux/entity/auth';
 import { TAsyncState } from '../../../types/redux/state/stateTypes';
 import { loginApi, logoutApi, getCurrentUserApi } from '../api/auth';
+import { saveTokenInCookies } from '../../hook/providers/helper';
 
 //1. 각 모듈별 함수 구분을 위한 prefix 각 모듈 파일명 + '/' 의 조합으로 구성합니다.
 const prefix: string = 'auth/';
@@ -58,6 +59,8 @@ export default createReducer<TAuthState>(initialState, {
   [LOG_IN.SUCCESS]: (state, action: ActionType<typeof login.success>) =>
     produce(state, (draft) => {
       draft.auth.data = action.payload.data;
+      saveTokenInCookies(action.payload.data.data);
+      window.location.reload();
     }),
   [LOG_IN.FAILURE]: (state, action: ActionType<typeof login.failure>) =>
     produce(state, (draft) => {
@@ -76,7 +79,7 @@ export default createReducer<TAuthState>(initialState, {
     action: ActionType<typeof getCurrentUser.success>,
   ) =>
     produce(state, (draft) => {
-      draft.auth.data = action.payload.data;
+      draft.auth.data = action.payload.data.data;
     }),
   [GET_CURRENT_USER.FAILURE]: (
     state,

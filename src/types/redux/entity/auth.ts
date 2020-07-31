@@ -5,12 +5,12 @@ export interface IUser {
 }
 
 export interface ILoginRequest {
-  email: string;
-  password: string;
+  provider: string;
+  accessToken: string;
 }
 
 export interface ILoginSuccess {
-  data: IUser;
+  data: any;
 }
 
 export interface ILoginFailure {}
@@ -24,7 +24,7 @@ export interface ILogoutFailure {}
 export interface IGetCurrentUserRequest {}
 
 export interface IGetCurrentUserSuccess {
-  data: IUser;
+  data: any;
 }
 
 export interface IGetCurrentUserFailure {}
