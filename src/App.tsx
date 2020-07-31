@@ -17,6 +17,7 @@ import Search from './pages/SearchPage';
 import PlacePage from './pages/PlacePage';
 import AdminPage from './pages/Admin';
 import ArtistPage from './pages/ArtistPage';
+import LoginPage from './pages/Login';
 function App() {
   return (
     <>
@@ -39,7 +40,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={MainPage} />
             <Route exact path="/performance/:id?" component={PerformancePage} />
-
+            <Route exact path="/login" component={LoginPage} />
             <Route path="/booking" component={Booking} />
             <Route path="/mypage" component={Mypage} />
             <Route path="/leave" component={Leave} />
