@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 import 'antd/dist/antd.css';
 
 import MainPage from './pages';
-import Login from './pages/Login';
 import NotFoundPage from './pages/NotFoundPage';
 import AppLayout from './containers/common/AppLayout';
 import PerformancePage from './pages/PerformancePage';
@@ -40,7 +39,6 @@ function App() {
           <Switch>
             <Route exact path="/" component={MainPage} />
             <Route exact path="/performance/:id?" component={PerformancePage} />
-            <Route path="/login" component={Login} />
 
             <Route path="/booking" component={Booking} />
             <Route path="/mypage" component={Mypage} />
