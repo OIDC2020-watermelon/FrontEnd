@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Modal from '../../modal/Modal';
 import Login from '../../layout/Login';
-import { useAuth } from '../../../../models/hook/providers/AuthProvider';
+import { useAuth } from '../../../../models/hook/providers/auth/AuthProvider';
 
 interface HeaderLinkListProps {
   login: boolean;
