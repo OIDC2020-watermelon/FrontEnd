@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import naver from '../../../../../src/assets/images/naver.png';
 import google from '../../../../../src/assets/images/google.png';
-import KakaoLoginButton from './KakaoLoginButton';
+import NaverLoginCallback from './NaverLoginCallback';
+
 const index = () => {
   return (
     <>
@@ -10,14 +10,7 @@ const index = () => {
         <LoginTitle>SNS 로그인</LoginTitle>
 
         <div>
-          <KakaoLoginButton />
-
-          <LoginModalButtonLayout>
-            <button style={NaverButtonStyled}>
-              <ImageStyled src={naver} />
-              네이버 계정으로 로그인
-            </button>
-          </LoginModalButtonLayout>
+          <NaverLoginCallback />
 
           <LoginModalButtonLayout>
             <button style={GoogleButtonStyled}>

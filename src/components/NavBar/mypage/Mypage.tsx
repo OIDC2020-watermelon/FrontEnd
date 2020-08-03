@@ -1,63 +1,80 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Menu, Button, Input, Radio } from 'antd';
-import moment, { Moment } from 'moment';
 import Title from './Title';
+import { updateUser } from '../../../models/saga/reducers/auth';
+import { useAuth } from '../../../models/hook/providers/auth/AuthProvider';
+import { useHistory } from 'react-router-dom';
+import useInput from '../../../lib/utils/hooks';
+import { useWrite } from '../../../models/hook/providers/write/WriteProvider';
+import { useDispatch } from 'react-redux';
 // const phoneNumberRegExp = /^\d{3}-\d{3,4}-\d{4}$/;
 
-interface UserInfo {
-  id: string;
-  name: string;
-  phone: string;
-  email: string;
-  birth: Moment | string;
-  gender: string;
-}
-
-const UserDummy: UserInfo = {
-  id: 'ziznaki',
-  name: '진리',
-  phone: '010-0000-0000',
-  email: 'ziznaki@gamil.com',
-  birth: moment(Date.now()).format('YYYY-MM-DD hh:mm:ss'),
-  gender: 'M',
-};
 const Mypage = () => {
-  const [editType, setEditType] = useState<string>('');
+  const [{ data: user }] = useAuth();
+  const { state, dispatch } = useWrite();
+
+  const asyncDispatch = useDispatch();
+
+  const [name, changeName, setName] = useInput(state?.name || user?.name || '');
+  const [phoneNo, changePhoneNo, setPhoneNo] = useInput(
+    state?.phoneNo || user?.phoneNo || '',
+  );
+  const [dateOfBirth, changeDateOfBirth, setDateOfBirth] = useInput(
+    state?.dateOfBirth || user?.dateOfBirth || '',
+  );
+  const [gender, setGender] = useState(state?.gender || user?.gender || '');
+  const [editType, setEditType] = useState('');
+
+  const history = useHistory();
+
+  if (!user) {
+    history.push('/');
+  }
 
   const editClick = (e: any, type: string) => {
-    console.log(e);
-    console.log(type);
-
     if (type === 'name') {
       setEditType('name');
-    } else if (type === 'phone') {
-      setEditType('phone');
-    } else if (type === 'email') {
-      setEditType('email');
-    } else if (type === 'birth') {
-      setEditType('birth');
+    } else if (type === 'phoneNo') {
+      setEditType('phoneNo');
+    } else if (type === 'dateOfBirth') {
+      setEditType('dateOfBirth');
     } else if (type === 'gender') {
       setEditType('gender');
     }
   };
 
-  const saveClick = (e: any, type: string) => {
-    console.log(e);
-    console.log(type);
-    setEditType('');
-    if (type === 'name') {
-    } else if (type === 'phone') {
-    } else if (type === 'email') {
-    } else if (type === 'birth') {
-    } else if (type === 'gender') {
-    }
-  };
+  const saveClick = useCallback(
+    (e: any, type: string) => {
+      console.log('saveClick');
+      setEditType('');
+      if (type === 'name') {
+      } else if (type === 'phoneNo') {
+      } else if (type === 'dateOfBirth') {
+      } else if (type === 'gender') {
+      }
+    },
+    [name, phoneNo, dateOfBirth, gender],
+  );
 
   const editChange = (e: any) => {
-    console.log(e.target.value);
+    setGender(e.target.value);
   };
 
+  const editSave = (e: any) => {
+    e.preventDefault();
+    asyncDispatch(updateUser.request({ name, phoneNo, dateOfBirth, gender }));
+  };
+
+  useEffect(() => {
+    console.log('useEffect');
+    dispatch({ type: 'ChangeName', data: user?.name || '' });
+    dispatch({ type: 'ChangePhoneNo', data: user?.phoneNo || '' });
+    dispatch({ type: 'ChangeDateOfBirth', data: user?.dateOfBirth || '' });
+    dispatch({ type: 'ChangeGender', data: user?.gender || '' });
+    return () => dispatch({ type: 'reset' });
+  }, [dispatch, state.name, state.phoneNo, state.gender, state.dateOfBirth]);
+  console.log(name, phoneNo, gender, dateOfBirth);
   return (
     <>
       <S.MypageLayout>
@@ -68,20 +85,16 @@ const Mypage = () => {
 
           <S.MypageContent>
             <S.InfoLayout>
-              <S.InfoTitle>아이디</S.InfoTitle>
-
-              <S.Infocontent>{UserDummy.id}</S.Infocontent>
-
-              <S.InfoEdit style={{ visibility: 'hidden' }}>수정</S.InfoEdit>
-            </S.InfoLayout>
-
-            <S.InfoLayout>
               <S.InfoTitle>이름</S.InfoTitle>
 
               {editType === 'name' ? (
                 <>
                   <S.InfoEditInput>
-                    <Input onChange={editChange} style={{ width: '50%' }} />
+                    <Input
+                      value={name}
+                      onChange={changeName}
+                      style={{ width: '50%' }}
+                    />
                   </S.InfoEditInput>
                   <S.InfoEdit
                     onClick={(e: any) => {
@@ -93,7 +106,7 @@ const Mypage = () => {
                 </>
               ) : (
                 <>
-                  <S.Infocontent>{UserDummy.name}</S.Infocontent>
+                  <S.Infocontent>{name}</S.Infocontent>
 
                   <S.InfoEdit
                     onClick={(e: any) => {
@@ -109,14 +122,18 @@ const Mypage = () => {
             <S.InfoLayout>
               <S.InfoTitle>휴대폰</S.InfoTitle>
 
-              {editType === 'phone' ? (
+              {editType === 'phoneNo' ? (
                 <>
                   <S.InfoEditInput>
-                    <Input onChange={editChange} style={{ width: '50%' }} />
+                    <Input
+                      value={phoneNo}
+                      onChange={changePhoneNo}
+                      style={{ width: '50%' }}
+                    />
                   </S.InfoEditInput>
                   <S.InfoEdit
                     onClick={(e: any) => {
-                      saveClick(e, 'phone');
+                      saveClick(e, 'phoneNo');
                     }}
                   >
                     저장
@@ -124,42 +141,11 @@ const Mypage = () => {
                 </>
               ) : (
                 <>
-                  <S.Infocontent>{UserDummy.phone}</S.Infocontent>
+                  <S.Infocontent>{phoneNo}</S.Infocontent>
 
                   <S.InfoEdit
                     onClick={(e: any) => {
-                      editClick(e, 'phone');
-                    }}
-                  >
-                    수정
-                  </S.InfoEdit>
-                </>
-              )}
-            </S.InfoLayout>
-
-            <S.InfoLayout>
-              <S.InfoTitle>이메일</S.InfoTitle>
-
-              {editType === 'email' ? (
-                <>
-                  <S.InfoEditInput>
-                    <Input onChange={editChange} style={{ width: '50%' }} />
-                  </S.InfoEditInput>
-                  <S.InfoEdit
-                    onClick={(e: any) => {
-                      saveClick(e, 'email');
-                    }}
-                  >
-                    저장
-                  </S.InfoEdit>
-                </>
-              ) : (
-                <>
-                  <S.Infocontent>{UserDummy.email}</S.Infocontent>
-
-                  <S.InfoEdit
-                    onClick={(e: any) => {
-                      editClick(e, 'email');
+                      editClick(e, 'phoneNo');
                     }}
                   >
                     수정
@@ -171,14 +157,18 @@ const Mypage = () => {
             <S.InfoLayout>
               <S.InfoTitle>생년월일</S.InfoTitle>
 
-              {editType === 'birth' ? (
+              {editType === 'dateOfBirth' ? (
                 <>
                   <S.InfoEditInput>
-                    <Input onChange={editChange} style={{ width: '50%' }} />
+                    <Input
+                      value={dateOfBirth}
+                      onChange={changeDateOfBirth}
+                      style={{ width: '50%' }}
+                    />
                   </S.InfoEditInput>
                   <S.InfoEdit
                     onClick={(e: any) => {
-                      saveClick(e, 'birth');
+                      saveClick(e, 'dateOfBirth');
                     }}
                   >
                     저장
@@ -186,11 +176,11 @@ const Mypage = () => {
                 </>
               ) : (
                 <>
-                  <S.Infocontent>{UserDummy.birth}</S.Infocontent>
+                  <S.Infocontent>{dateOfBirth}</S.Infocontent>
 
                   <S.InfoEdit
                     onClick={(e: any) => {
-                      editClick(e, 'birth');
+                      editClick(e, 'dateOfBirth');
                     }}
                   >
                     수정
@@ -205,9 +195,13 @@ const Mypage = () => {
               {editType === 'gender' ? (
                 <>
                   <S.InfoEditInput>
-                    <Radio.Group onChange={editChange} style={{ width: '50%' }}>
-                      <Radio value={'M'}>M</Radio>
-                      <Radio value={'W'}>W</Radio>
+                    <Radio.Group
+                      value={gender}
+                      onChange={editChange}
+                      style={{ width: '50%' }}
+                    >
+                      <Radio value={'male'}>M</Radio>
+                      <Radio value={'female'}>W</Radio>
                     </Radio.Group>
                   </S.InfoEditInput>
                   <S.InfoEdit
@@ -220,7 +214,7 @@ const Mypage = () => {
                 </>
               ) : (
                 <>
-                  <S.Infocontent>{UserDummy.gender}</S.Infocontent>
+                  <S.Infocontent>{gender}</S.Infocontent>
 
                   <S.InfoEdit
                     onClick={(e: any) => {
@@ -234,8 +228,11 @@ const Mypage = () => {
             </S.InfoLayout>
 
             <S.InfoLayout style={{ marginTop: 50 }}>
-              <S.InfoEdit style={{ marginLeft: '80%', height: 35 }}>
-                저장
+              <S.InfoEdit
+                style={{ marginLeft: '80%', height: 35 }}
+                onClick={editSave}
+              >
+                저장하기
               </S.InfoEdit>
             </S.InfoLayout>
           </S.MypageContent>

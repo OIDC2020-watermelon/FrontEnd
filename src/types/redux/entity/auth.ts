@@ -1,30 +1,51 @@
 export interface IUser {
-  name: string;
-  email: string;
-  password?: string;
+  dateOfBirth?: string;
+  gender?: string;
+  name?: string;
+  phoneNo?: string;
+  roles: [string];
 }
 
 export interface ILoginRequest {
-  email: string;
-  password: string;
+  provider: string;
+  accessToken: string;
 }
 
 export interface ILoginSuccess {
-  data: IUser;
+  data: any;
 }
 
 export interface ILoginFailure {}
 
-export interface ILogoutRequest {}
-
-export interface ILogoutSuccess {}
-
-export interface ILogoutFailure {}
+// get user
 
 export interface IGetCurrentUserRequest {}
 
 export interface IGetCurrentUserSuccess {
-  data: IUser;
+  data: any;
 }
 
 export interface IGetCurrentUserFailure {}
+
+// update
+export interface IUpdateUserRequest {
+  name?: string;
+  phoneNo?: string;
+  gender?: string;
+  dateOfBirth?: string;
+}
+
+export interface IUpdateUserSuccess {
+  data: any;
+}
+
+export interface IUpdateUserFailure {}
+
+// delete
+export interface IDeleteUserRequest {}
+
+export interface IDeleteUserSuccess {
+  data: any;
+}
+
+export interface IDeleteUserFailure {}

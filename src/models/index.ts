@@ -3,10 +3,8 @@ import { combineReducers } from 'redux';
 import auth, { authSaga } from './saga/reducers/auth';
 
 export function* rootSaga() {
-    yield all([
-        authSaga(),
-    ]);
-  }
+  yield all([authSaga()]);
+}
 
 const rootReducer = combineReducers({
   auth,

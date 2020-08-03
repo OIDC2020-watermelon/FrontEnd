@@ -3,21 +3,30 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Modal from '../../modal/Modal';
 import Login from '../../layout/Login';
+import { useAuth } from '../../../../models/hook/providers/auth/AuthProvider';
 
-export default function HeaderLinkList() {
-  const [visible, setVisible] = useState(false);
+interface HeaderLinkListProps {
+  login: boolean;
+}
+export default function HeaderLinkList({ login }: HeaderLinkListProps) {
+  const [visible, setVisible] = useState(false || login);
+  const [{ data }, logout] = useAuth();
   return (
     <>
       <S.LinkListWrap>
         <Link to="/">
           <S.LinkItem>메인</S.LinkItem>
         </Link>
-        <S.LinkLogin onClick={() => setVisible(!visible)}>
-          <S.LinkItem>로그인</S.LinkItem>
-        </S.LinkLogin>
-        <Link to="/">
-          <S.LinkItem>회원가입</S.LinkItem>
-        </Link>
+        {data?.name ? (
+          <S.LinkLogin onClick={logout}>
+            <S.LinkItem>로그아웃</S.LinkItem>
+          </S.LinkLogin>
+        ) : (
+          <S.LinkLogin onClick={() => setVisible(!visible)}>
+            <S.LinkItem>로그인</S.LinkItem>
+          </S.LinkLogin>
+        )}
+
         <Link to="/">
           <S.LinkItem>내정보</S.LinkItem>
         </Link>

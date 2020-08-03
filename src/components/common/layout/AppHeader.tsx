@@ -17,7 +17,9 @@ const AppHeader = () => {
         <header>
           <S.Container>
             <BreadScrum />
-            <HeaderLinkList />
+            <HeaderLinkList
+              login={window.location.pathname.includes('login')}
+            />
           </S.Container>
           <S.SearchWrap>
             <LogoComponent />
