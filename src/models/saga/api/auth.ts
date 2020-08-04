@@ -10,7 +10,7 @@ import {
   IDeleteUserSuccess,
 } from '../../../types/redux/entity/auth';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = process.env.REACT_APP_USER_SERVER_URL;
 
 export const loginApi = ({
   provider,

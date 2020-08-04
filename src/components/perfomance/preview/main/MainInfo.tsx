@@ -6,8 +6,14 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { performanceCost } from '../../../../assets/dummy/dummyData';
 import font from '../../../../lib/style/font';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../models';
 
 export default function MainInfo() {
+  const { data } = useSelector(
+    (state: RootState) => state.performance.performance,
+  );
+  if (!data) return null;
   const date = Date.now();
   return (
     <>
@@ -22,7 +28,7 @@ export default function MainInfo() {
                 장소
               </Col>
               <Col span={19} className="main_info_content">
-                대학로 유니플렉스 2관
+                {data.place.name}
               </Col>
             </Row>
             <Row className="main_info">
