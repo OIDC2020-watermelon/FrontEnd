@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import MainCategory from './MainCategory';
 import MainCard from './MainCard';
 import { Carousel } from 'antd';
-
+import { useTheme } from '../../../models/hook/providers/theme/ThemeProvider';
 const Main = () => {
+  const [{ data }] = useTheme();
+
+  console.log('data ; ', data?.hotIssue);
+  console.log('data ; ', data?.news);
+  console.log('data ; ', data?.commingSoon);
   return (
     <>
       <MainLayout>
