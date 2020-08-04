@@ -2,13 +2,15 @@ import client from '../../../lib/config/axios';
 import {
   ILoginRequest,
   ILoginSuccess,
-  ILogoutRequest,
-  ILogoutSuccess,
   IGetCurrentUserRequest,
   IGetCurrentUserSuccess,
+  IDeleteUserRequest,
+  IUpdateUserRequest,
+  IUpdateUserSuccess,
+  IDeleteUserSuccess,
 } from '../../../types/redux/entity/auth';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = process.env.REACT_APP_USER_SERVER_URL;
 
 export const loginApi = ({
   provider,
@@ -19,8 +21,18 @@ export const loginApi = ({
   );
 
 // eslint-disable-next-line
-export const logoutApi = ({}: ILogoutRequest): Promise<ILogoutSuccess> =>
-  client.get(`${SERVER_URL}/logout`);
+export const updateUserApi = ({
+  name,
+  phoneNo,
+  dateOfBirth,
+  gender,
+}: IUpdateUserRequest): Promise<IUpdateUserSuccess> =>
+  client.put(`${SERVER_URL}/auth/user`, { name, phoneNo, dateOfBirth, gender });
+
+// eslint-disable-next-line
+export const deleteUserApi = ({}: IDeleteUserRequest): Promise<
+  IDeleteUserSuccess
+> => client.delete(`${SERVER_URL}/auth/user`);
 
 // eslint-disable-next-line
 export const getCurrentUserApi = ({}: IGetCurrentUserRequest): Promise<

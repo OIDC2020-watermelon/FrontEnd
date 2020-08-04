@@ -1,8 +1,8 @@
 import React, { createContext, useContext, ReactNode } from 'react';
 import { logout } from './helper';
-import { IUser } from '../../../types/redux/entity/auth';
+import { IUser } from '../../../../types/redux/entity/auth';
 import { useSelector } from 'react-redux';
-import { RootState } from '../..';
+import { RootState } from '../../..';
 type AuthContextParams = [{ data: IUser | null }, typeof logout];
 
 const AuthContext = createContext<AuthContextParams>([{ data: null }, logout]);

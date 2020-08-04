@@ -5,16 +5,22 @@ import palette from '../../../../lib/style/palette';
 import { Link } from 'react-router-dom';
 import { perFormArtistInfo } from '../../../../assets/dummy/dummyData';
 import PerformArtistCard from './PerformArtistCard';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../models';
 
 export default function ArtistInfo() {
+  const { data } = useSelector(
+    (state: RootState) => state.performance.performance,
+  );
   return (
     <>
       <S.ArtistInfoContainer className="scroll">
-        {perFormArtistInfo.map((artist) => (
-          <S.PerformArtistCardWrap xs={12} sm={12} md={12} xl={8} xxl={6}>
-            <PerformArtistCard artist={artist}></PerformArtistCard>
-          </S.PerformArtistCardWrap>
-        ))}
+        {data &&
+          data.artists.map((artist: any) => (
+            <S.PerformArtistCardWrap xs={12} sm={12} md={12} xl={8} xxl={6}>
+              <PerformArtistCard artist={artist}></PerformArtistCard>
+            </S.PerformArtistCardWrap>
+          ))}
       </S.ArtistInfoContainer>
     </>
   );

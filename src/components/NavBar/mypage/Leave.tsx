@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Checkbox, Button } from 'antd';
 import Title from './Title';
+import { useDispatch } from 'react-redux';
+import { deleteUser } from '../../../models/saga/reducers/auth';
+import { useAuth } from '../../../models/hook/providers/auth/AuthProvider';
 
 const Leave = () => {
   const [deleteFlag, setDeleteFlag] = useState<boolean>(false);
+  const [_, logout] = useAuth();
+  const dispatch = useDispatch();
 
   const onCheck = (e: any) => {
     console.log('e : ', e.target.checked);
@@ -18,6 +23,12 @@ const Leave = () => {
 
   const onClick = (e: any) => {
     console.log(e.target);
+    try {
+      dispatch(deleteUser.request({}));
+      //logout();
+    } catch (e) {
+      console.error(e);
+    }
   };
   return (
     <>
