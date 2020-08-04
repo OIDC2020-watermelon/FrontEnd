@@ -4,9 +4,9 @@ import { RootState } from '../../..';
 import { initialState } from '../../../saga/reducers/theme';
 
 interface dataTypes {
-  hotIssue?: any;
-  news?: any;
-  commingSoon?: any;
+  hotIssue?: any | [];
+  news?: any | [];
+  commingSoon?: any | [];
 }
 type ThemeParams = [{ data: dataTypes | null }];
 
