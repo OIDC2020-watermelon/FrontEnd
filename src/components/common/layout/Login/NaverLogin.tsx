@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import NaverImg from '../../../../../src/assets/images/naver.png';
+
 declare global {
   interface Window {
     naver: any;

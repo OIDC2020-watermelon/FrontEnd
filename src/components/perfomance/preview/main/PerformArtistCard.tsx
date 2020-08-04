@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
-import { TArtist } from '../../../../assets/dummy/dummyData';
 import { Link } from 'react-router-dom';
 import font from '../../../../lib/style/font';
 import palette from '../../../../lib/style/palette';
 
 interface PerformArtistCardProps {
-  artist: TArtist;
+  artist: any;
 }
 
 export default function PerformArtistCard({ artist }: PerformArtistCardProps) {
@@ -27,7 +26,7 @@ export default function PerformArtistCard({ artist }: PerformArtistCardProps) {
               <S.StyledLink>자세히</S.StyledLink>
             </Col>
           </Row>
-          <Row className="artist_role">{artist.role}역</Row>
+          <Row className="artist_role">강남역</Row>
         </S.ArtistTextContainer>
       </S.ArtistCardContainer>
     </>
