@@ -1,15 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MainCategory from './MainCategory';
 import MainCard from './MainCard';
 import { Carousel } from 'antd';
-import { useTheme } from '../../../models/hook/providers/theme/ThemeProvider';
-const Main = () => {
-  const [{ data }] = useTheme();
+// import { useTheme } from '../../../models/hook/providers/theme/ThemeProvider';
+import { useDispatch } from 'react-redux';
+import {
+  getHotIssue,
+  getNew,
+  getCommingSoon,
+} from '../../../models/saga/reducers/theme';
+import store from '../../../models/configure';
 
-  console.log('data ; ', data?.hotIssue);
-  console.log('data ; ', data?.news);
-  console.log('data ; ', data?.commingSoon);
+const Main = () => {
+  const [hotIssue, setHotIssue] = useState<object>({ data: [], error: '' });
+  const [news, setnews] = useState<object>({ data: [], error: '' });
+  const [commingSoon, setCommingSoon] = useState<object>({
+    data: [],
+    error: '',
+  });
+
+  const page = 0;
+  const size = 4;
+  const dispatch = useDispatch();
+
+  store.subscribe(() => {
+    setHotIssue(store.getState().theme.hotIssue);
+    setnews(store.getState().theme.news);
+    setCommingSoon(store.getState().theme.commingSoon);
+  });
+
+  useEffect(() => {
+    dispatch(getHotIssue.request({ page, size }));
+    dispatch(getNew.request({ page, size }));
+    dispatch(getCommingSoon.request({ page, size }));
+  }, [dispatch]);
+
   return (
     <>
       <MainLayout>
@@ -23,9 +49,9 @@ const Main = () => {
 
         <MainCategory />
 
-        <MainCard types={'핫이슈 공연'} />
-        <MainCard types={'신규 공연'} />
-        <MainCard types={'comming soon'} />
+        <MainCard types={'핫이슈 공연'} data={hotIssue} />
+        <MainCard types={'신규 공연'} data={news} />
+        <MainCard types={'comming soon'} data={commingSoon} />
       </MainLayout>
     </>
   );

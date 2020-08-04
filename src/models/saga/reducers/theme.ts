@@ -43,17 +43,17 @@ export type TMainState = {
 //6. 리듀서의 값을 정의합니다.
 export const initialState: TMainState = {
   hotIssue: {
-    data: null,
+    data: [],
     error: null,
   },
 
   news: {
-    data: null,
+    data: [],
     error: null,
   },
 
   commingSoon: {
-    data: null,
+    data: [],
     error: null,
   },
 };
@@ -76,7 +76,7 @@ export default createReducer<TMainState>(initialState, {
     }),
   [GETNEW.SUCCESS]: (state, action: ActionType<typeof getNew.success>) =>
     produce(state, (draft) => {
-      draft.news.data = action.payload.data.data;
+      draft.news.data = action.payload.data;
     }),
   [GETNEW.FAILURE]: (state, action: ActionType<typeof getNew.failure>) =>
     produce(state, (draft) => {
@@ -88,7 +88,7 @@ export default createReducer<TMainState>(initialState, {
     action: ActionType<typeof getCommingSoon.success>,
   ) =>
     produce(state, (draft) => {
-      draft.commingSoon.data = action.payload.data.data;
+      draft.commingSoon.data = action.payload.data;
     }),
   [GETCOMMINGSOON.FAILURE]: (
     state,
