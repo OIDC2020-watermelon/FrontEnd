@@ -29,7 +29,7 @@ const Mypage = () => {
   const history = useHistory();
 
   if (!user) {
-    //history.push('/');
+    history.push('/');
   }
 
   const editClick = (e: any, type: string) => {
