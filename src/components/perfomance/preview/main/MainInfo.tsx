@@ -36,9 +36,9 @@ export default function MainInfo() {
                 시간
               </Col>
               <Col span={19} className="main_info_content">
-                {`${moment(date).format('YYYY-MM-DD')} ~ ${moment(
-                  date + 1,
-                ).format('YYYY-MM-DD')}`}
+                {`${moment(data.releaseStartTime).format(
+                  'YYYY-MM-DD',
+                )} ~ ${moment(data.releaseEndTime).format('YYYY-MM-DD')}`}
                 &nbsp;&nbsp;<S.StyledLink to="/">관람시간보기</S.StyledLink>
               </Col>
             </Row>
@@ -47,8 +47,8 @@ export default function MainInfo() {
                 출연
               </Col>
               <Col span={19} className="main_info_content">
-                박시원, 원종환, 유성재, 강정우, 주민진, 유제윤, 김지은, 홍승만,
-                정대헌&nbsp;&nbsp;<S.StyledLink to="/">더보기</S.StyledLink>
+                {data.artists.map((artist: any) => `${artist.name} `)}
+                &nbsp;&nbsp;<S.StyledLink to="/">더보기</S.StyledLink>
               </Col>
             </Row>
             <Divider />
