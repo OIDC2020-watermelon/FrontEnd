@@ -6,7 +6,11 @@ import font from '../../../../lib/style/font';
 export default function LogoComponent() {
   return (
     <>
-      <S.LogoContainer>
+      <S.LogoContainer
+        onClick={() => {
+          window.location.assign('/');
+        }}
+      >
         <img src={logo} alt="logo_image" width="60px" height="40px" />
         <S.LogoTextWrap>
           <S.LogoText>Water</S.LogoText>
@@ -21,6 +25,7 @@ const S: any = {};
 S.LogoContainer = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 S.LogoText = styled.div`
   font-size: 1rem;
