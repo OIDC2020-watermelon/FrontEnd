@@ -14,3 +14,6 @@ export const getThemeCommingSoonApi = ({ page, size }: any): any =>
   client.get(
     `${SERVER_URL}/products/themes/COMMING_SOON?page=${page}&size=${size}`,
   );
+
+export const getPromotionApi = ({}): any =>
+  client.get(`${SERVER_URL}/promotions/`);
