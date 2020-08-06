@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Input, Button, Select } from 'antd';
+import moment from 'moment';
+import { Input, Button, Select, message } from 'antd';
 import { Pagination } from 'antd';
-import { BookingList } from './index';
+import { useDispatch } from 'react-redux';
+import { getBooking } from '../../../models/saga/reducers/booking';
+import store from '../../../models/configure';
 
 const { Option } = Select;
 
-const Header = ({ BookingList }: { BookingList: BookingList }) => {
-  const [filter, setFilter] = useState<string>('');
-  const [category, setCategory] = useState<string>('');
-  const [arraySlice, setArraySlice] = useState<number>(0);
-  const [bookingList, setBookingList] = useState<BookingList>(BookingList);
+const Header = ({}: {}) => {
+  const dispatch = useDispatch();
 
+  const [keyword, setKeyword] = useState<string>('');
+  const [category, setCategory] = useState<string>('CONCERT');
+  const [arraySlice, setArraySlice] = useState<number>(0);
+  const [bookingList, setBookingList] = useState<any>({ data: [], error: '' });
+  const [page, setPage] = useState<number>(0);
   const SelectChange = (e: any) => {
     console.log(e);
     setCategory(e);
   };
 
   const SearchBarChange = (e: any) => {
-    setFilter(e.target.value);
+    setKeyword(e.target.value);
   };
 
   const paginationButton = (e: any) => {
@@ -27,25 +32,20 @@ const Header = ({ BookingList }: { BookingList: BookingList }) => {
     setArraySlice(4 * pageNum);
   };
 
-  useEffect(() => {
-    const filteredData = {
-      list: BookingList.list.filter((item: any) => {
-        return Object.keys(item).some((key: any) => item[key].includes(filter));
-      }),
-    };
+  const searchReservation = (e: any) => {
+    console.log('keyword : ', keyword);
+    console.log('category : ', category);
+    // API 호출
+    if (keyword === '') {
+      message.error('공연명을 입력해주세요!');
+    } else {
+      dispatch(getBooking.request({ category, keyword, page }));
+    }
+  };
 
-    setBookingList(filteredData);
-  }, [filter, BookingList]);
-
-  useEffect(() => {
-    const categoryData = {
-      list: BookingList.list.filter((item: any) =>
-        item.type.includes(category),
-      ),
-    };
-
-    setBookingList(categoryData);
-  }, [category, BookingList]);
+  store.subscribe(() => {
+    setBookingList(store.getState().booking.bookings);
+  });
 
   console.log(bookingList);
   return (
@@ -62,21 +62,27 @@ const Header = ({ BookingList }: { BookingList: BookingList }) => {
             <S.SearchBarTitle>
               <div>카테고리별</div>
             </S.SearchBarTitle>
-            <S.SearchBarSelect defaultValue="콘서트" onChange={SelectChange}>
-              <Option value="콘서트">콘서트</Option>
-              <Option value="연극">연극</Option>
-              <Option value="클래식/무용">클래식/무용</Option>
-              <Option value="전시/행사">전시/행사</Option>
+            <S.SearchBarSelect defaultValue="CONCERT" onChange={SelectChange}>
+              <Option value="CONCERT">콘서트</Option>
+              <Option value="PLAY">연극</Option>
+              <Option value="CLASSIC_DANCE">클래식/무용</Option>
+              <Option value="EXHIBITION_EVENT">전시/행사</Option>
             </S.SearchBarSelect>
+          </S.SearchInputContainer>
+
+          <S.SearchInputContainer>
+            <S.SearchBarTitle>
+              <S.OverButton onClick={searchReservation}>조회하기</S.OverButton>
+            </S.SearchBarTitle>
           </S.SearchInputContainer>
         </S.SearchBar>
       </S.HeaderContainer>
 
       <S.ContentLayout>
-        {bookingList.list.slice(arraySlice, arraySlice + 4).length === 0 ? (
+        {bookingList.data.slice(arraySlice, arraySlice + 5).length === 0 ? (
           <S.TitleContainer style={{ padding: 20, borderBottom: '1px solid' }}>
             <S.TitleContentName style={{ flex: 4, textAlign: 'left' }}>
-              상품기본정보(총{bookingList.list.length}건)
+              상품기본정보(총{bookingList.data.length}건)
             </S.TitleContentName>
 
             <S.TitleContentName>일시</S.TitleContentName>
@@ -90,7 +96,7 @@ const Header = ({ BookingList }: { BookingList: BookingList }) => {
         ) : (
           <S.TitleContainer style={{ padding: 20 }}>
             <S.TitleContentName style={{ flex: 4, textAlign: 'left' }}>
-              상품기본정보(총{bookingList.list.length}건)
+              상품기본정보(총{bookingList.data.length}건)
             </S.TitleContentName>
 
             <S.TitleContentName>일시</S.TitleContentName>
@@ -103,110 +109,129 @@ const Header = ({ BookingList }: { BookingList: BookingList }) => {
           </S.TitleContainer>
         )}
 
-        {bookingList.list.slice(arraySlice, arraySlice + 4).map((list, key) => {
-          return (
-            <div key={key}>
-              {key ===
-              bookingList.list.slice(arraySlice, arraySlice + 4).length - 1 ? (
-                <S.TitleContainer style={{ borderBottom: '1px solid' }}>
-                  <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
-                    <S.TitleContentLeft>
-                      <img
-                        alt="example"
-                        src="https://source.unsplash.com/random"
-                        width={100}
-                        height={100}
-                      />
-                    </S.TitleContentLeft>
+        {bookingList.data
+          .slice(arraySlice, arraySlice + 5)
+          .map((list: any, key: number) => {
+            return (
+              <div key={key}>
+                {key ===
+                bookingList.data.slice(arraySlice, arraySlice + 5).length -
+                  1 ? (
+                  <S.TitleContainer style={{ borderBottom: '1px solid' }}>
+                    <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
+                      <S.TitleContentLeft>
+                        <img
+                          alt="example"
+                          src={list.thumbnailImgUrl}
+                          width={110}
+                          height={110}
+                        />
+                      </S.TitleContentLeft>
 
-                    <S.TitleContentRight>
-                      <S.TitleContentRightName>
-                        {list.title}
-                      </S.TitleContentRightName>
+                      <S.TitleContentRight>
+                        <S.TitleContentRightName>
+                          {list.title}
+                        </S.TitleContentRightName>
 
-                      <S.TitleContentRightDesc>
-                        {list.type} | {list.time}분 | {list.age}세이상 관람가능
-                      </S.TitleContentRightDesc>
+                        <S.TitleContentRightDesc>
+                          {list.category} | {list.runningTime}분 | {list.rrated}
+                          세이상 관람가능
+                        </S.TitleContentRightDesc>
 
-                      <S.TitleContentRightDesc>
-                        {list.artist.map((art, idx) => {
-                          if (idx === 0) {
-                            return <span key={idx}>아티스트 : {art}, </span>;
-                          } else if (idx + 1 === list.artist.length) {
-                            return <span key={idx}>{art}</span>;
-                          } else {
-                            return <span key={idx}>{art}, </span>;
-                          }
-                        })}
-                      </S.TitleContentRightDesc>
-                    </S.TitleContentRight>
-                  </S.TitleContent>
+                        <S.TitleContentRightDesc>
+                          {list.artists.map((art: any, idx: number) => {
+                            if (idx === 0) {
+                              return <span key={idx}>아티스트 : {art}, </span>;
+                            } else if (idx + 1 === list.artists.length) {
+                              return <span key={idx}>{art}</span>;
+                            } else {
+                              return <span key={idx}>{art}, </span>;
+                            }
+                          })}
+                        </S.TitleContentRightDesc>
+                      </S.TitleContentRight>
+                    </S.TitleContent>
 
-                  <S.TitleContent>{list.Date}</S.TitleContent>
+                    <S.TitleContent style={{ flexDirection: 'column' }}>
+                      <div>
+                        {moment(list.releaseStartTime).format('YYYY-MM-DD')}~
+                      </div>
+                      <div>
+                        {moment(list.releaseEndTime).format('YYYY-MM-DD')}
+                      </div>
+                    </S.TitleContent>
 
-                  <S.TitleContent>{list.place}</S.TitleContent>
+                    <S.TitleContent>{list.place}</S.TitleContent>
 
-                  <S.TitleContent
-                    style={{ textAlign: 'center', display: 'block' }}
-                  >
-                    예매하기
-                  </S.TitleContent>
-                </S.TitleContainer>
-              ) : (
-                <S.TitleContainer>
-                  <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
-                    <S.TitleContentLeft>
-                      <img
-                        alt="example"
-                        src="https://source.unsplash.com/random"
-                        width={100}
-                        height={100}
-                      />
-                    </S.TitleContentLeft>
+                    <S.TitleContent
+                      style={{ textAlign: 'center', display: 'block' }}
+                    >
+                      예매하기
+                    </S.TitleContent>
+                  </S.TitleContainer>
+                ) : (
+                  <S.TitleContainer>
+                    <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
+                      <S.TitleContentLeft>
+                        <img
+                          alt="example"
+                          src={list.thumbnailImgUrl}
+                          width={110}
+                          height={110}
+                        />
+                      </S.TitleContentLeft>
 
-                    <S.TitleContentRight>
-                      <S.TitleContentRightName>
-                        {list.title}
-                      </S.TitleContentRightName>
+                      <S.TitleContentRight>
+                        <S.TitleContentRightName>
+                          {list.title}
+                        </S.TitleContentRightName>
 
-                      <S.TitleContentRightDesc>
-                        {list.type} | {list.time}분 | {list.age}세이상 관람가능
-                      </S.TitleContentRightDesc>
+                        <S.TitleContentRightDesc>
+                          {list.category} | {list.runningTime}분 | {list.rrated}
+                          세이상 관람가능
+                        </S.TitleContentRightDesc>
 
-                      <S.TitleContentRightDesc>
-                        {list.artist.map((art, idx) => {
-                          if (idx === 0) {
-                            return <span key={idx}>아티스트 : {art}, </span>;
-                          } else if (idx + 1 === list.artist.length) {
-                            return <span key={idx}>{art}</span>;
-                          } else {
-                            return <span key={idx}>{art}, </span>;
-                          }
-                        })}
-                      </S.TitleContentRightDesc>
-                    </S.TitleContentRight>
-                  </S.TitleContent>
+                        <S.TitleContentRightDesc>
+                          {list.artists.map((art: any, idx: number) => {
+                            if (idx === 0) {
+                              return <span key={idx}>아티스트 : {art}, </span>;
+                            } else if (idx + 1 === list.artists.length) {
+                              return <span key={idx}>{art}</span>;
+                            } else {
+                              return <span key={idx}>{art}, </span>;
+                            }
+                          })}
+                        </S.TitleContentRightDesc>
+                      </S.TitleContentRight>
+                    </S.TitleContent>
 
-                  <S.TitleContent>{list.Date}</S.TitleContent>
+                    <S.TitleContent style={{ flexDirection: 'column' }}>
+                      <div>
+                        {moment(list.releaseStartTime).format('YYYY-MM-DD')}~
+                      </div>
+                      <div>
+                        {moment(list.releaseEndTime).format('YYYY-MM-DD')}
+                      </div>
+                    </S.TitleContent>
 
-                  <S.TitleContent>{list.place}</S.TitleContent>
+                    <S.TitleContent>{list.place}</S.TitleContent>
 
-                  <S.TitleContent
-                    style={{ textAlign: 'center', display: 'block' }}
-                  >
-                    예매하기
-                  </S.TitleContent>
-                </S.TitleContainer>
-              )}
-            </div>
-          );
-        })}
+                    <S.TitleContent
+                      style={{ textAlign: 'center', display: 'block' }}
+                    >
+                      예매하기
+                    </S.TitleContent>
+                  </S.TitleContainer>
+                )}
+              </div>
+            );
+          })}
 
         <Pagination
           defaultCurrent={1}
-          total={bookingList.list.length}
+          total={bookingList.data.length}
           style={{ textAlign: 'center', marginTop: 30 }}
-          pageSize={4}
+          pageSize={5}
           onChange={paginationButton}
         />
       </S.ContentLayout>
@@ -244,11 +269,10 @@ S.SearchBarTitle = styled.div`
 `;
 
 S.SearchBarInput = styled(Input)`
-  width: 25rem;
-  margin-right: 3rem;
+  width: 20rem;
 `;
 S.SearchBarSelect = styled(Select)`
-  width: 25rem;
+  width: 20rem;
 `;
 
 S.HeaderButtonLayout = styled.div`
@@ -297,5 +321,5 @@ S.TitleContentRightName = styled.div`
 `;
 
 S.TitleContentRightDesc = styled.div`
-  margin-top: 15px;
+  margin-top: 10px;
 `;

@@ -3,6 +3,7 @@ import {
   getThemeHotIssueApi,
   getThemeNEWApi,
   getThemeCommingSoonApi,
+  getPromotionApi,
 } from './../api/theme';
 import { createReducer, ActionType } from 'typesafe-actions';
 import { takeEvery } from 'redux-saga/effects';
@@ -20,11 +21,13 @@ const prefix: string = 'theme/';
 const GETHOTISSUE = asyncActionCreator(`${prefix}GETHOTISSUE`);
 const GETNEW = asyncActionCreator(`${prefix}GETNEW`);
 const GETCOMMINGSOON = asyncActionCreator(`${prefix}GETCOMMINGSOON`);
+const GETPROMOTION = asyncActionCreator(`${prefix}GETPROMOTION`);
 
 //3. 액션에 대해서 정의합니다.
 export const getHotIssue = asyncAction<any, any, string>(GETHOTISSUE);
 export const getNew = asyncAction<any, any, string>(GETNEW);
 export const getCommingSoon = asyncAction<any, any, string>(GETCOMMINGSOON);
+export const getPromotion = asyncAction<any, any, string>(GETPROMOTION);
 
 //4. saga 비동기 관련 함수가 필요할 경우 작성 합니다. (optional) saga함수들의 모음은 최하단에 나열합니다.
 const getHotIssueSaga = createAsyncSaga(getHotIssue, getThemeHotIssueApi);
@@ -34,11 +37,13 @@ const getCommingSoonSaga = createAsyncSaga(
   getThemeCommingSoonApi,
 );
 
+const getPromotionSaga = createAsyncSaga(getPromotion, getPromotionApi);
 //5. 해당 리듀서의 상태 타입을 정의합니다.
 export type TMainState = {
   hotIssue: TAsyncState<any>;
   news: TAsyncState<any>;
   commingSoon: TAsyncState<any>;
+  promotion: TAsyncState<any>;
 };
 //6. 리듀서의 값을 정의합니다.
 export const initialState: TMainState = {
@@ -53,6 +58,11 @@ export const initialState: TMainState = {
   },
 
   commingSoon: {
+    data: [],
+    error: null,
+  },
+
+  promotion: {
     data: [],
     error: null,
   },
@@ -97,6 +107,21 @@ export default createReducer<TMainState>(initialState, {
     produce(state, (draft) => {
       draft.commingSoon.error = action.payload;
     }),
+
+  [GETPROMOTION.SUCCESS]: (
+    state,
+    action: ActionType<typeof getCommingSoon.success>,
+  ) =>
+    produce(state, (draft) => {
+      draft.promotion.data = action.payload.data;
+    }),
+  [GETPROMOTION.FAILURE]: (
+    state,
+    action: ActionType<typeof getCommingSoon.failure>,
+  ) =>
+    produce(state, (draft) => {
+      draft.promotion.error = action.payload;
+    }),
 });
 
 //8. `4`번에서 작성한 saga함수들에 대해 구독 요청에 대한 정의를 최하단에 해주도록 합니다.
@@ -104,4 +129,5 @@ export function* themeSaga() {
   yield takeEvery(GETHOTISSUE.REQUEST, getHotIssueSaga);
   yield takeEvery(GETNEW.REQUEST, getNewSaga);
   yield takeEvery(GETCOMMINGSOON.REQUEST, getCommingSoonSaga);
+  yield takeEvery(GETPROMOTION.REQUEST, getPromotionSaga);
 }

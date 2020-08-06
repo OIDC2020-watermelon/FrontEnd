@@ -9,6 +9,7 @@ import {
   getHotIssue,
   getNew,
   getCommingSoon,
+  getPromotion,
 } from '../../../models/saga/reducers/theme';
 import store from '../../../models/configure';
 
@@ -16,6 +17,10 @@ const Main = () => {
   const [hotIssue, setHotIssue] = useState<object>({ data: [], error: '' });
   const [news, setnews] = useState<object>({ data: [], error: '' });
   const [commingSoon, setCommingSoon] = useState<object>({
+    data: [],
+    error: '',
+  });
+  const [promotion, setPromotion] = useState<any>({
     data: [],
     error: '',
   });
@@ -28,23 +33,28 @@ const Main = () => {
     setHotIssue(store.getState().theme.hotIssue);
     setnews(store.getState().theme.news);
     setCommingSoon(store.getState().theme.commingSoon);
+    setPromotion(store.getState().theme.promotion);
   });
 
   useEffect(() => {
     dispatch(getHotIssue.request({ page, size }));
     dispatch(getNew.request({ page, size }));
     dispatch(getCommingSoon.request({ page, size }));
+    dispatch(getPromotion.request({}));
   }, [dispatch]);
-
+  console.log('promotion : ', promotion);
   return (
     <>
       <MainLayout>
         <OverCarousel>
-          <CarouselImg />
-          <CarouselImg />
-          <CarouselImg />
-          <CarouselImg />
-          <CarouselImg />
+          {promotion.data.map((data: any, idx: number) => {
+            console.log('data : ', data.promotionImgUrl);
+            return (
+              <>
+                <CarouselImg url={data.promotionImgUrl} key={data.productId} />
+              </>
+            );
+          })}
         </OverCarousel>
 
         <MainCategory />
@@ -76,9 +86,8 @@ const OverCarousel = styled(Carousel)`
 
 const CarouselImg = styled.div`
   height: 24rem;
-  width: 25rem;
   border-radius: 5px;
-  background: url(https://source.unsplash.com/random);
+  background: url(${({ url }: { url: string }) => url});
   background-position: 50% 50%;
   background-size: cover;
 `;
