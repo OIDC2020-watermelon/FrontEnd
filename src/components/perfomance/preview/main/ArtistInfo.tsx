@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Row, Col } from 'antd';
 import palette from '../../../../lib/style/palette';
 import { Link } from 'react-router-dom';
-import { perFormArtistInfo } from '../../../../assets/dummy/dummyData';
 import PerformArtistCard from './PerformArtistCard';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../models';

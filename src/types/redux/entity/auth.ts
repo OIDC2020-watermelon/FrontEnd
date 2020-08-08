@@ -4,6 +4,7 @@ export interface IUser {
   name?: string;
   phoneNo?: string;
   roles: [string];
+  uid: string;
 }
 
 export interface ILoginRequest {

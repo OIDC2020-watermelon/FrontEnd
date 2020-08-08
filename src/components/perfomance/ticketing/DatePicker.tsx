@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Calendar, Alert } from 'antd';
 import styled from 'styled-components';
 import moment, { Moment } from 'moment';
@@ -6,13 +6,15 @@ import moment, { Moment } from 'moment';
 interface DatePickerProps {
   ableStartDate?: Moment | number;
   ableEndDate?: Moment | number;
+  selectedDate: any;
+  setSelectedDate: any;
 }
 export default function DatePicker({
   ableStartDate,
   ableEndDate,
+  selectedDate,
+  setSelectedDate,
 }: DatePickerProps) {
-  const [selectedDate, setSelectedDate] = useState<Moment>(moment(Date.now()));
-
   function onPanelChange(date: Moment) {
     setSelectedDate(date);
   }

@@ -61,21 +61,6 @@ const ImageStyled = styled.img`
   position: relative;
 `;
 
-const NaverButtonStyled = {
-  background: '#2DC622',
-  borderRadius: '8px',
-  height: '100%',
-  borderWidth: 'inherit',
-  color: '#E2E1E2',
-  fontFamily: 'SpoqaHanSans',
-  fontSize: '0.75rem',
-  fontWeight: 600,
-  minWidth: 170,
-  minHeight: 25,
-  cursor: 'pointer',
-  width: '100%',
-};
-
 const GoogleButtonStyled = {
   background: '#6863FC',
   borderRadius: '8px',
