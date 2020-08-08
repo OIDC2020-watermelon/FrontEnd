@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import client from '../lib/config/axios';
 
 export default function LoginPage() {
   const GetProfile = () => {

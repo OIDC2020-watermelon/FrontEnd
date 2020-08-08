@@ -1,70 +1,69 @@
 import React, { useState } from 'react';
 import { Comment, Form, Button, Input, Typography } from 'antd';
-import { formatDate } from '../../../lib/utils/dataFormat';
 import styled from 'styled-components';
 import palette from '../../../lib/style/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../models';
+import { useAuth } from '../../../models/hook/providers/auth/AuthProvider';
 
-const { TextArea } = Input;
 const { Item } = Form;
-const CommentList = ({ comments }: any) => (
-  <>
-    <Typography>{`${comments.length} ${
-      comments.length > 1 ? '개의 답변' : '개의 답변'
-    }`}</Typography>
-    {comments.map((comment: any) => (
-      <Comment
-        author={comment.author}
-        content={comment.content}
-        datetime={comment.datetime}
-      />
-    ))}
-  </>
-);
+const CommentList = ({ comments }: any) => {
+  return (
+    <>
+      <Typography style={{ marginBottom: '1.5rem' }}>{`${
+        comments && comments.length
+      } ${
+        comments && comments.length > 1 ? '개의 답변' : '개의 답변'
+      }`}</Typography>
+      {comments.map((comment: any) => (
+        <Comment
+          author={comment.userId}
+          content={<p style={{ marginBottom: '1.5rem' }}>{comment.content}</p>}
+          datetime={comment.createdDateTime}
+        />
+      ))}
+    </>
+  );
+};
 
-const Editor = ({
-  onChangeContents,
-  onChangeTitle,
-  onSubmit,
-  submitting,
-  content,
-  title,
-}: any) => (
+const Editor = ({ onChangeContents, onSubmit, submitting, content }: any) => (
   <>
-    <S.AntdFormItem>
-      <label htmlFor="comment_title">제목</label>
-      <S.AntdInput onChange={onChangeTitle} value={title} id="comment_title" />
-    </S.AntdFormItem>
-    <S.AntdFormItem>
-      <label htmlFor="comment_content">내용</label>
-      <S.AntdTextArea
-        rows={4}
-        onChange={onChangeContents}
-        value={content}
-        id="comment_content"
-      />
-    </S.AntdFormItem>
-    <S.AntdFormItem>
-      <S.AntdButton
-        htmlType="submit"
-        loading={submitting}
-        onClick={onSubmit}
-        type="primary"
-      >
-        작성하기
-      </S.AntdButton>
-    </S.AntdFormItem>
+    <S.Editor>
+      <S.AntdFormItem>
+        <label htmlFor="comment_content">내용</label>
+        <S.AntdTextArea
+          rows={4}
+          onChange={onChangeContents}
+          value={content}
+          id="comment_content"
+        />
+      </S.AntdFormItem>
+      <S.AntdFormItem>
+        <S.AntdButton
+          htmlType="submit"
+          loading={submitting}
+          onClick={onSubmit}
+          type="primary"
+        >
+          작성하기
+        </S.AntdButton>
+      </S.AntdFormItem>
+    </S.Editor>
   </>
 );
 
 export default function PerformanceReview() {
-  const [comments, setComments] = useState<Array<any>>([]);
   const [submitting, setSubmitting] = useState(false);
   const [content, setContents] = useState('');
-  const [title, setTitle] = useState('');
+  const [{ data: user }] = useAuth();
+
+  const { comments } = useSelector((state: RootState) => ({
+    comments: state.performance.comments,
+  }));
 
   const handleSubmit = () => {
-    if (!content || !title) {
+    if (!content) {
       return;
     }
     setSubmitting(true);
@@ -72,20 +71,6 @@ export default function PerformanceReview() {
     setTimeout(() => {
       setSubmitting(true);
       setContents('');
-      setTitle('');
-      setComments([
-        {
-          author: '조혜형',
-          content: (
-            <>
-              <h4>{title}</h4>
-              <p>{content}</p>
-            </>
-          ),
-          datetime: <span>{formatDate(Date.now())}</span>,
-        },
-        ...comments,
-      ]);
       setSubmitting(false);
     }, 1000);
   };
@@ -93,42 +78,45 @@ export default function PerformanceReview() {
   const handleChangeContents = (e: any) => {
     setContents(e.target.value);
   };
-  const handleChangeTitle = (e: any) => {
-    setTitle(e.target.value);
-  };
-
   return (
     <>
       <S.InfoContainer className="scroll">
-        <S.CommentNoticeWrap>
-          <FontAwesomeIcon icon="exclamation-circle" size="1x" />
-          <span>유의사항</span>
-        </S.CommentNoticeWrap>
-        <S.CommentNoticeMessage>
-          게시판 운영 규정에 어긋난다고 판단되는 게시글은 사전 통보없이 블라인드
-          처리 될 수 있습니다.
-          <br />
-          특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일
-          등의 개인정보는 악용될 우려가 있으므로 게시를 삼가 주시기 바랍니다.
-          <br />
-          사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우
-          티켓 게시판 작성 권한이 제한됩니다.
-        </S.CommentNoticeMessage>
-        <S.CommentInputContainer>
-          <Comment
-            content={
-              <Editor
-                onChangeContents={handleChangeContents}
-                onChangeTitle={handleChangeTitle}
-                onSubmit={handleSubmit}
-                submitting={submitting}
-                content={content}
-                title={title}
+        {!user ? (
+          <p>로그인 후 이용해주세요</p>
+        ) : (
+          <>
+            <S.CommentNoticeWrap>
+              <FontAwesomeIcon icon="exclamation-circle" size="1x" />
+              <span>유의사항</span>
+            </S.CommentNoticeWrap>
+            <S.CommentNoticeMessage>
+              게시판 운영 규정에 어긋난다고 판단되는 게시글은 사전 통보없이
+              블라인드 처리 될 수 있습니다.
+              <br />
+              특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호,
+              이메일 등의 개인정보는 악용될 우려가 있으므로 게시를 삼가 주시기
+              바랍니다.
+              <br />
+              사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의
+              경우 티켓 게시판 작성 권한이 제한됩니다.
+            </S.CommentNoticeMessage>
+            <S.CommentInputContainer>
+              <Comment
+                content={
+                  <Editor
+                    submitting={submitting}
+                    onChangeContents={handleChangeContents}
+                    onSubmit={handleSubmit}
+                    content={content}
+                  />
+                }
               />
-            }
-          />
-        </S.CommentInputContainer>
-        {comments.length > 0 && <CommentList comments={comments} />}
+            </S.CommentInputContainer>
+            {comments
+              ? comments.length > 0 && <CommentList comments={comments} />
+              : null}
+          </>
+        )}
       </S.InfoContainer>
     </>
   );
@@ -143,6 +131,9 @@ S.InfoContainer = styled.div`
   padding: 4rem 5rem;
   border-radius: 5px;
   overflow: auto;
+  & .ant-comment-inner {
+    padding: 0;
+  }
 `;
 
 S.CommentNoticeWrap = styled.div`
@@ -152,11 +143,11 @@ S.CommentNoticeWrap = styled.div`
 `;
 
 S.CommentInputContainer = styled.div`
-  padding: 0.5rem 4rem 0;
+  padding: 1rem 2rem;
   border: 1px solid black;
   border-radius: 5px;
   width: 100%;
-  margin: 0 auto;
+  margin: 2rem auto;
 `;
 
 S.CommentNoticeMessage = styled.p`
@@ -165,7 +156,6 @@ S.CommentNoticeMessage = styled.p`
 
 S.AntdFormItem = styled(Item)`
   margin: 0;
-  margin-bottom: 1rem;
   & label {
     margin-right: 1rem;
     float: left;
@@ -173,13 +163,12 @@ S.AntdFormItem = styled(Item)`
   }
 `;
 
-S.AntdInput = styled(Input)`
-  width: 37.5rem;
-  float: right;
+S.Editor = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
-S.AntdTextArea = styled(TextArea)`
+S.AntdTextArea = styled(Input)`
   width: 37.5rem;
-  float: right;
 `;
 
 S.AntdButton = styled(Button)`

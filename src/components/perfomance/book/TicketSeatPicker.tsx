@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import SeatPicker from 'react-seat-picker';
 import styled from 'styled-components';
 
@@ -21,7 +21,7 @@ export default function TicketSeatPicker({
       addCb(row, number, id, newTooltip);
       setLoading(false);
     },
-    [loading, selectedSeat],
+    [selectedSeat, setSelectedSeat],
   );
 
   const removeSeat = useCallback(
@@ -33,7 +33,7 @@ export default function TicketSeatPicker({
       removeCb(row, number, newTooltip);
       setLoading(false);
     },
-    [loading, selectedSeat],
+    [selectedSeat, setSelectedSeat],
   );
 
   const rows = [

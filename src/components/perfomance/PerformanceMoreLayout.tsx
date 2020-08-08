@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Divider, Row } from 'antd';
 import styled from 'styled-components';
 import useInput from '../../lib/utils/hooks';
@@ -10,9 +10,13 @@ import PerformanceExpectation from './more/PerformanceExpectation';
 import BookNotice from './more/BookNotice';
 import MoreInfoNav from './more/MoreInfoNav';
 import PerformancePlace from './more/PerformancePlace';
+import { useDispatch } from 'react-redux';
+import { getPerformanceComments } from '../../models/saga/reducers/performance';
+import { useRouteMatch } from 'react-router-dom';
 
 export default function PerformanceMoreLayout() {
   const [filter, changeFilter] = useInput<TMorePerformanceFilter>('more');
+  const { id } = useRouteMatch().params as any;
 
   const ShowSelectedPreview = useCallback((filter: TMorePerformanceFilter) => {
     switch (filter) {
@@ -38,6 +42,30 @@ export default function PerformanceMoreLayout() {
         return;
     }
   }, []);
+
+  const type =
+    filter === 'review'
+      ? 'REVIEW'
+      : filter === 'qna'
+      ? 'QNA'
+      : filter === 'expect'
+      ? 'EXPECTATION'
+      : null;
+
+  console.log(type, filter);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      getPerformanceComments.request({
+        performanceId: id,
+        type,
+      }),
+    );
+    return () => {
+      dispatch({ type: 'COMMENT_RESET' });
+    };
+  }, [dispatch, type, id]);
   return (
     <>
       <Divider></Divider>

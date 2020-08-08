@@ -39,7 +39,7 @@ function App() {
         <AppLayout>
           <Switch>
             <Route exact path="/" component={MainPage} />
-            <Route exact path="/performance/:id?" component={PerformancePage} />
+            <Route exact path="/performance/:id" component={PerformancePage} />
             <Route exact path="/login" component={LoginPage} />
             <Route path="/booking" component={Booking} />
             <Route path="/mypage" component={Mypage} />

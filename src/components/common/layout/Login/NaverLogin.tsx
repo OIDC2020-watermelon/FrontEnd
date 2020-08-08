@@ -5,8 +5,10 @@ import NaverImg from '../../../../../src/assets/images/naver.png';
 declare global {
   interface Window {
     naver: any;
+    IMP: any;
   }
   const naver: any;
+  const IMP: any;
 }
 
 interface OnSuccessParameter {

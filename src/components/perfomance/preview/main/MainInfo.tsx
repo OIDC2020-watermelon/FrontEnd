@@ -14,7 +14,6 @@ export default function MainInfo() {
     (state: RootState) => state.performance.performance,
   );
   if (!data) return null;
-  const date = Date.now();
   return (
     <>
       <S.MainInfoContainer>

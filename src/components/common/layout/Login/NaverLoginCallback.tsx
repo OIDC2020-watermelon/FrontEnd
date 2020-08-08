@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { login } from '../../../../models/saga/reducers/auth';
 import NaverLogin from './NaverLogin';
 
