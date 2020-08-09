@@ -6,7 +6,6 @@ import reservation, { reservationSaga } from './saga/reducers/reservation';
 import performance, { performanceSaga } from './saga/reducers/performance';
 import theme, { themeSaga } from './saga/reducers/theme';
 import booking, { bookingSaga } from './saga/reducers/booking';
-import manage, { manageSaga } from './saga/reducers/manage';
 
 export function* rootSaga() {
   yield all([
@@ -16,7 +15,6 @@ export function* rootSaga() {
     performanceSaga(),
     themeSaga(),
     bookingSaga(),
-    manageSaga(),
   ]);
 }
 
@@ -27,7 +25,6 @@ const rootReducer = combineReducers({
   performance,
   theme,
   booking,
-  manage,
 });
 
 export default rootReducer;
