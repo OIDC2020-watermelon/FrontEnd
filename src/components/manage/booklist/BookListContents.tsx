@@ -1,84 +1,82 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Divider } from 'antd';
-import { Table, Tag, Space } from 'antd';
+import { Table, Space, Button } from 'antd';
 
-export default function BookListContents() {
+export default function BookListContents({ manages }: { manages: any }) {
+  console.log('manages : ', manages);
+  /*
+  availableDate: "2020-08-01" O
+  cancelableDate: "2020-07-29" O
+  canceled: true O
+  createdAt: null
+  id: 4
+  name: "watermelon 10주년 공연" O
+  pay: 20000
+  serialNumber: "e2dfa549997c47d2b0a389508a0f236b" O
+  startAt: "04:00:00"
+*/
+  const cancelButton = (idx: number) => {
+    console.log('idx : ', idx);
+  };
+
   const columns = [
     {
-      title: '예메일',
-      dataIndex: 'bookDate',
-      key: 'bookDate',
+      title: '공연일',
+      dataIndex: 'availableDate',
+      key: 'availableDate',
       render: (text: any) => <a href="/">{text}</a>,
     },
     {
       title: '예약번호',
-      dataIndex: 'id',
-      key: 'id',
+      dataIndex: 'serialNumber',
+      key: 'serialNumber',
     },
     {
       title: '상품명',
-      dataIndex: 'production',
-      key: 'production',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: '이용일/매수',
-      key: 'useDate',
-      dataIndex: 'useDate',
-      render: (useDate: any) => (
-        <>
-          {useDate.map((tag: any) => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
+      title: '이용일',
+      key: 'availableDate',
+      dataIndex: 'availableDate',
+    },
+    {
+      title: '가격',
+      dataIndex: 'pay',
+      key: 'pay',
     },
     {
       title: '취소가능일',
-      key: 'action',
+      key: 'cancelableDate',
+      dataIndex: 'cancelableDate',
+    },
+    {
+      title: '취소',
+      key: 'canceled',
+      dataIndex: 'canceled',
       render: (text: any, record: any) => (
         <Space size="middle">
-          <a href="/">{record.bookDate}</a>
-          <a href="/">취소</a>
+          {record.canceled ? (
+            <Button
+              onClick={() => {
+                cancelButton(record.serialNumber);
+              }}
+            >
+              취소가능
+            </Button>
+          ) : (
+            <Button>취소불가</Button>
+          )}
         </Space>
       ),
     },
   ];
 
-  const data = [
-    {
-      key: '1',
-      bookDate: '2020-01-01',
-      id: 'AEECCFWERQWEFD',
-      production: 'New York No. 1 Lake Park',
-      useDate: ['2020-02-01', '2매'],
-    },
-    {
-      key: '2',
-      bookDate: '2020-02-01',
-      id: 'AEdfgCFdsRQWEFD',
-      production: 'London No. 1 Lake Park',
-      useDate: ['2020-03-01', '1매'],
-    },
-    {
-      key: '3',
-      bookDate: '2020-03-01',
-      id: 'EGECCFWERERQED',
-      production: 'Sidney No. 1 Lake Park',
-      useDate: ['2020-04-01', '3매'],
-    },
-  ];
   return (
     <>
       <Divider></Divider>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={manages.data} />
     </>
   );
 }

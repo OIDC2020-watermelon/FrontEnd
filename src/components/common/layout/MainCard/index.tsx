@@ -149,12 +149,12 @@ const ShowMore = styled.div`
 `;
 const OverCard = styled(Card)`
   text-align: left;
-  margin-right: 20px;
   .ant-card-body {
     padding: 12px;
   }
-  max-width: 300px;
-  max-height: 300px;
+  width: 270px;
+  height: 350px;
+  margin-bottom: 20px;
 `;
 
 const CardContainer = styled.div`

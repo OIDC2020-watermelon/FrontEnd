@@ -42,13 +42,13 @@ const Main = () => {
     dispatch(getCommingSoon.request({ page, size }));
     dispatch(getPromotion.request({}));
   }, [dispatch]);
-  console.log('promotion : ', promotion);
+  // console.log('promotion : ', promotion);
   return (
     <>
       <MainLayout>
-        <OverCarousel>
+        <OverCarousel autoplay>
           {promotion.data.map((data: any, idx: number) => {
-            console.log('data : ', data.promotionImgUrl);
+            // console.log('data : ', data.promotionImgUrl);
             return (
               <>
                 <CarouselImg url={data.promotionImgUrl} key={data.productId} />
