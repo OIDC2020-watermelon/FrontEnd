@@ -160,15 +160,12 @@ const OverCard = styled(Card)`
 const CardContainer = styled.div`
   backgroud: #fff;
   display: inline-grid;
-  width: 80%;
   justify-items: center;
   align-items: center;
   /* Medium devices (landscape tablets, 0px and up) */
-  @media only screen and (min-width: 0px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+
   /* Large devices (laptops/desktops, 992px and up) */
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 0px) {
     grid-template-columns: repeat(3, 1fr);
   }
   /* Extra large devices (large laptops and desktops, 1200px and up) */
