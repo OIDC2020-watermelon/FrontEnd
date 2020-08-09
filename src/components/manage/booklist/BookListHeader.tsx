@@ -3,12 +3,13 @@ import { Row, Col } from 'antd';
 import styled from 'styled-components';
 import palette from '../../../lib/style/palette';
 
-export default function BookListHeader() {
+export default function BookListHeader({ managesLen }: { managesLen: number }) {
+  console.log('managesLen : ', managesLen);
   return (
     <>
       <S.BookListHeadWrap justify="space-between" align="middle">
         <Col>
-          <span>총 16건의 검색 기록이 있습니다.</span>
+          <span>총 {managesLen}건의 검색 기록이 있습니다.</span>
         </Col>
         <Col>
           <S.FilterLinkWrap>

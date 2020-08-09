@@ -60,7 +60,12 @@ export default function BookCanclePolicy() {
       <Divider />
       <Typography.Title level={4}>취소 수수료 정책</Typography.Title>
       <div>
-        <S.AntdTable columns={columns} dataSource={data} size="middle" />
+        <S.AntdTable
+          columns={columns}
+          dataSource={data}
+          size="middle"
+          pagination={false}
+        />
       </div>
     </>
   );

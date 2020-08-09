@@ -6,7 +6,7 @@ import palette from '../../lib/style/palette';
 
 const { RangePicker } = DatePicker;
 
-export default function BookManagerFilter() {
+export default function BookManagerFilter({ onOkPicker }: { onOkPicker: any }) {
   return (
     <>
       <S.FilterContainer>
@@ -17,29 +17,15 @@ export default function BookManagerFilter() {
             </span>
           </Col>
           <Col>
-            <RangePicker />
+            <RangePicker onChange={onOkPicker} />
           </Col>
           <S.FilterText>
             <span>최대 2개월까지 조회 가능합니다.</span>
           </S.FilterText>
-        </Row>
-        <Row align="middle" justify="space-between">
-          <Col>
-            <S.FilterLinkWrap>
-              <span>기간별&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <S.CustomLink>7일</S.CustomLink>
-              <span>|</span>
-              <S.CustomLink>15일</S.CustomLink>
-              <span>|</span>
-              <S.CustomLink>1개월</S.CustomLink>
-              <span>|</span>
-              <S.CustomLink>2개월</S.CustomLink>
-            </S.FilterLinkWrap>
-          </Col>
 
-          <Col>
+          <S.FilterText>
             <Button type="primary">조회</Button>
-          </Col>
+          </S.FilterText>
         </Row>
       </S.FilterContainer>
     </>
