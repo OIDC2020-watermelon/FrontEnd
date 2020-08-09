@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Divider } from 'antd';
+import { Divider, message, Popconfirm } from 'antd';
 import { Table, Space, Button } from 'antd';
 
-export default function BookListContents({ manages }: { manages: any }) {
-  console.log('manages : ', manages);
+export default function BookListContents({
+  manages,
+  cancelButton,
+}: {
+  manages: any;
+  cancelButton: any;
+}) {
+  // console.log('manages : ', manages);
   /*
   availableDate: "2020-08-01" O
   cancelableDate: "2020-07-29" O
@@ -15,9 +21,6 @@ export default function BookListContents({ manages }: { manages: any }) {
   serialNumber: "e2dfa549997c47d2b0a389508a0f236b" O
   startAt: "04:00:00"
 */
-  const cancelButton = (idx: number) => {
-    console.log('idx : ', idx);
-  };
 
   const columns = [
     {
@@ -58,15 +61,24 @@ export default function BookListContents({ manages }: { manages: any }) {
       render: (text: any, record: any) => (
         <Space size="middle">
           {record.canceled ? (
+            <Popconfirm
+              title="정말 삭제하시겠습니까?"
+              onConfirm={() => {
+                cancelButton(record.id);
+              }}
+              okText="예"
+              cancelText="아니요"
+            >
+              <Button>취소가능</Button>
+            </Popconfirm>
+          ) : (
             <Button
               onClick={() => {
-                cancelButton(record.serialNumber);
+                message.warning('취소가 불가능합니다.');
               }}
             >
-              취소가능
+              취소불가
             </Button>
-          ) : (
-            <Button>취소불가</Button>
           )}
         </Space>
       ),

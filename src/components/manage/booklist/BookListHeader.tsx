@@ -3,8 +3,13 @@ import { Row, Col } from 'antd';
 import styled from 'styled-components';
 import palette from '../../../lib/style/palette';
 
-export default function BookListHeader({ managesLen }: { managesLen: number }) {
-  console.log('managesLen : ', managesLen);
+export default function BookListHeader({
+  managesLen,
+  statusButton,
+}: {
+  managesLen: number;
+  statusButton: any;
+}) {
   return (
     <>
       <S.BookListHeadWrap justify="space-between" align="middle">
@@ -13,14 +18,22 @@ export default function BookListHeader({ managesLen }: { managesLen: number }) {
         </Col>
         <Col>
           <S.FilterLinkWrap>
-            <span>기간별&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <S.CustomLink>7일</S.CustomLink>
+            <span>상태별 조회&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <S.CustomLink
+              onClick={() => {
+                statusButton('all');
+              }}
+            >
+              전체
+            </S.CustomLink>
             <span>|</span>
-            <S.CustomLink>15일</S.CustomLink>
-            <span>|</span>
-            <S.CustomLink>1개월</S.CustomLink>
-            <span>|</span>
-            <S.CustomLink>2개월</S.CustomLink>
+            <S.CustomLink
+              onClick={() => {
+                statusButton('cancel');
+              }}
+            >
+              취소
+            </S.CustomLink>
           </S.FilterLinkWrap>
         </Col>
       </S.BookListHeadWrap>
@@ -43,7 +56,7 @@ S.CustomLink = styled.span`
 `;
 
 S.FilterLinkWrap = styled(Col)`
-  width: 18rem;
+  width: 10rem;
   display: flex;
   justify-content: space-between;
 `;

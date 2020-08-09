@@ -47,7 +47,7 @@ export type TReservationState = {
 //6. 리듀서의 값을 정의합니다.
 const initialState: TReservationState = {
   reservation: {
-    data: null,
+    data: [],
     error: null,
     issues: null,
   },
@@ -76,7 +76,8 @@ export default createReducer<TReservationState>(initialState, {
     action: ActionType<typeof deleteReservation.success>,
   ) =>
     produce(state, (draft) => {
-      draft.reservation.data = action.payload.data.data;
+      // draft.reservation.data = action.payload.data;
+      console.log('삭제 성공');
     }),
   [DELETE_RESERVATION.FAILURE]: (
     state,
@@ -90,7 +91,7 @@ export default createReducer<TReservationState>(initialState, {
     action: ActionType<typeof getReservations.success>,
   ) =>
     produce(state, (draft) => {
-      draft.reservation.data = action.payload.data.data;
+      draft.reservation.data = action.payload.data;
     }),
   [GET_RESERVATIONS.FAILURE]: (
     state,
