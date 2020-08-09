@@ -1,29 +1,38 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Input } from 'antd';
 import useInput from '../../../../lib/utils/hooks';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const { Search } = Input;
 
 export default function SearchBar() {
   const [searchWord, changeSearchWord, setSearchWord] = useInput<string>('');
-  const history = useHistory();
 
-  const onSearch = useCallback(() => {
-    history.push(`/`);
+  const onSearch = (e: any) => {
+    if (searchWord === '') {
+      return -1;
+    }
+
+    if (window.location.pathname.includes('search')) {
+      window.location.replace(`${searchWord}`);
+    } else {
+      window.location.assign(`search/performance/${searchWord}`);
+    }
+
     setSearchWord('');
-  }, [setSearchWord, history]);
+  };
 
   return (
     <>
       <S.StyledSearch
-        placeholder="input search text"
+        placeholder="검색어를 입력해주세요."
         enterButton="Search"
         size="large"
         value={searchWord}
         onChange={changeSearchWord}
-        onSearch={onSearch}
+        onSearch={(value: string) => {
+          onSearch(value);
+        }}
       />
     </>
   );

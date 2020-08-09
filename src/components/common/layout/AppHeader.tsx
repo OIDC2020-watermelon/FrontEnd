@@ -30,7 +30,7 @@ const AppHeader = () => {
         {/* End footer */}
       </S.HeaderContainer>
       <S.NavContainer>
-        {window.location.pathname.includes('search') ? (
+        {window.location.pathname.includes('/search/') ? (
           ''
         ) : window.location.pathname.includes('/artist/') ? (
           ''
