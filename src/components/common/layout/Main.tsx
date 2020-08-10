@@ -50,9 +50,9 @@ const Main = () => {
           {promotion.data.map((data: any, idx: number) => {
             // console.log('data : ', data.promotionImgUrl);
             return (
-              <>
+              <div key={idx}>
                 <CarouselImg url={data.promotionImgUrl} key={data.productId} />
-              </>
+              </div>
             );
           })}
         </OverCarousel>

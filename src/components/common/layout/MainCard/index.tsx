@@ -4,39 +4,6 @@ import palette from '../../../../lib/style/palette';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 
-interface CardContent {
-  title: string;
-  place: string;
-  artist: Array<string>;
-}
-interface CardList {
-  list: CardContent[];
-}
-
-const CardList: CardList = {
-  list: [
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['박시원', '원종환', '유성재', '강정우', '주민진', '유제윤'],
-    },
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['아티스트'],
-    },
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['아티스트'],
-    },
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['아티스트'],
-    },
-  ],
-};
 const index = ({ types, data }: { types: string; data: any }) => {
   //console.log("data : ", types, data);
 

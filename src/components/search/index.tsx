@@ -89,9 +89,9 @@ const Index = () => {
     dispatch(getArtists.request({ keyword: params }));
   }, [dispatch]);
 
-  console.log('performance : ', performances);
-  console.log('places : ', places);
-  console.log('artists : ', artists);
+  // console.log('performance : ', performances);
+  // console.log('places : ', places);
+  // console.log('artists : ', artists);
   return (
     <>
       <S.StyledMenu
