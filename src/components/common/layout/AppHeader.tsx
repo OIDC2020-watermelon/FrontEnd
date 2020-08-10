@@ -53,6 +53,7 @@ S.HeaderContainer = styled.div`
   height: 100%;
   max-width: 1130px;
   margin: 0 auto;
+  margin-top: 10px;
 `;
 
 S.Container = styled.div`
