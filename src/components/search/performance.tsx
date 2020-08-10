@@ -20,6 +20,11 @@ const Performance = ({ performances }: { performances: any }) => {
 
   const SelectChange = (e: any) => {
     var willFilterData = performances;
+    if (e === '전체') {
+      setSelectChangeFlag(false);
+      setPerformanceList(willFilterData);
+      return 1;
+    }
     if (selectSiturationFlag) {
       willFilterData = performancesList;
     }
@@ -106,7 +111,8 @@ const Performance = ({ performances }: { performances: any }) => {
           </S.SearchBarTitle>
 
           <S.AntComponent>
-            <S.SearchBarSelect defaultValue="콘서트" onChange={SelectChange}>
+            <S.SearchBarSelect defaultValue="전체" onChange={SelectChange}>
+              <Option value="전체">전체</Option>
               <Option value="콘서트">콘서트</Option>
               <Option value="공연">공연</Option>
               <Option value="클래식/댄스">클래식/댄스</Option>
@@ -175,8 +181,8 @@ const Performance = ({ performances }: { performances: any }) => {
                     <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="example"
-                          src="https://source.unsplash.com/random"
+                          alt="image"
+                          src={list.thumbnailImgUrl}
                           width={100}
                           height={100}
                         />
@@ -224,8 +230,8 @@ const Performance = ({ performances }: { performances: any }) => {
                     <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="example"
-                          src="https://source.unsplash.com/random"
+                          alt="image"
+                          src={list.thumbnailImgUrl}
                           width={100}
                           height={100}
                         />

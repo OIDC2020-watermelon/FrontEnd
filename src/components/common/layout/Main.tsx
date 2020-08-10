@@ -57,7 +57,7 @@ const Main = () => {
           })}
         </OverCarousel>
 
-        <MainCategory />
+        {/* <MainCategory /> */}
 
         <MainCard types={'핫이슈 공연'} data={hotIssue} />
         <MainCard types={'신규 공연'} data={news} />
