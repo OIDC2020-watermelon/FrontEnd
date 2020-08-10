@@ -33,7 +33,7 @@ const initLoginButton = function (props: any) {
     return;
   }
   const clientId = process.env.REACT_APP_NAVER_CLIENT_ID,
-    callbackUrl = 'http://localhost:3000/login';
+    callbackUrl = 'http://101.101.218.225/login';
   const onSuccess = props.onSuccess;
   const onFailure = props.onFailure;
   const location = window.location;
