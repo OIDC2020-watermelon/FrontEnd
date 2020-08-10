@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
 import SeatPicker from 'react-seat-picker';
 import styled from 'styled-components';
+import { RootState } from '../../../models';
 
 interface TicketSeatPickerProps {
   selectedSeat: any;
@@ -11,13 +13,50 @@ export default function TicketSeatPicker({
   setSelectedSeat,
 }: TicketSeatPickerProps) {
   const [loading, setLoading] = useState(false);
-  console.log(selectedSeat);
+  const data = useSelector((state: RootState) => state.performance.ticket);
+  console.log('data', data);
 
+  const seatData: any = [[], [], [], [], [], [], [], [], [], []];
+  const row: any = [];
+
+  data?.forEach((seat: any, index: number) => {
+    const format: any = {};
+    format['id'] = seat.id;
+    format['number'] = (index % 10) + 1;
+    // format['tooltip'] = `${seat.grade}/${seat.price}`;
+    if (seat.sold) {
+      format['isReserved'] = seat.sold;
+    }
+    console.log('format', format);
+    row[index] = format;
+  });
+  console.log('row, seatData', row, seatData);
+
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach((i: number) => {
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach((j: number) => {
+      console.log(row[i * 10 + j]);
+      seatData[i][j] = row[i * 10 + j];
+    });
+  });
+
+  console.log(seatData);
   const addSeat = useCallback(
     async ({ row, number, id }: any, addCb: any) => {
       setLoading(true);
       const newTooltip = `tooltip for id-${id} added by callback`;
-      setSelectedSeat([...selectedSeat, { row, number, id, cost: 1000 }]);
+      const selected = data?.filter((seat: any) => seat.id === id);
+      console.log(selected, '=============', selected[0].price);
+
+      setSelectedSeat([
+        ...selectedSeat,
+        {
+          row,
+          number,
+          id,
+          cost: selected[0].price,
+          grade: selected[0].grade,
+        },
+      ]);
       addCb(row, number, id, newTooltip);
       setLoading(false);
     },
@@ -106,7 +145,7 @@ export default function TicketSeatPicker({
         <SeatPicker
           addSeatCallback={addSeat}
           removeSeatCallback={removeSeat}
-          rows={rows}
+          rows={seatData}
           maxReservableSeats={3}
           alpha
           visible

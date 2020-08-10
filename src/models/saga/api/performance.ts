@@ -7,7 +7,9 @@ export const getPerformanceApi = ({ performanceId }: any): any =>
   client.get(`${SERVER_URL}/api/performance/${performanceId}`);
 
 export const getPerformanceTicketApi = ({ performanceId }: any): any =>
-  client.get(`${TICKET_SERVER_URL}/api/ticket/performance/${performanceId}`);
+  client.get(
+    `${TICKET_SERVER_URL}/reservation/ticket/performance/${performanceId}`,
+  );
 
 export const getPerformanceCommentsApi = ({ performanceId, type }: any): any =>
-  client.get(`${SERVER_URL}/products/${performanceId}/comments/${type}`);
+  client.get(`${SERVER_URL}/show/products/${performanceId}/comments/${type}`);

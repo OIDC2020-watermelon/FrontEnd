@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
+import moment from 'moment';
 import palette from '../../lib/style/palette';
+import { RootState } from '../../models';
+import { getArtist } from '../../models/saga/reducers/artist';
 import ArtistCard from './ArtistCard';
 import ArtistJobCard from './ArtistJobCard';
 export default function PlaceLayout() {
   const [addFlag, setAddFlag] = useState<boolean>(false);
-
+  const { id: artistId } = useRouteMatch().params as any;
+  const dispatch = useDispatch();
+  const data = useSelector((state: RootState) => state.artist.artist.data);
+  console.log(data, '---------------');
+  useEffect(() => {
+    dispatch(getArtist.request({ artistId }));
+  }, [dispatch]);
   const addFlagClick = () => {
     setAddFlag(true);
   };
@@ -18,7 +29,7 @@ export default function PlaceLayout() {
         <S.InfoItemWrap>
           <S.InfoTitle>소개</S.InfoTitle>
           <S.InfoContents>
-            <ArtistCard />
+            <ArtistCard data={data} />
           </S.InfoContents>
         </S.InfoItemWrap>
         <S.InfoItemWrap>
@@ -38,23 +49,24 @@ export default function PlaceLayout() {
           </S.InfoTitle>
           {addFlag ? (
             <>
-              {jobLength.map((list, key) => {
+              {data?.products.map((list: any) => {
+                console.log('list', list);
                 return (
-                  <S.InfoContentsJob>
-                    <ArtistJobCard />
+                  <S.InfoContentsJob key={list?.id}>
+                    <ArtistJobCard data={list} />
                   </S.InfoContentsJob>
                 );
               })}
             </>
           ) : (
             <>
-              {jobLength.map((list, key) => {
-                if (key >= 10) {
+              {data?.products.map((list: any, index: number) => {
+                if (index >= 10) {
                   return '';
                 } else {
                   return (
-                    <S.InfoContentsJob>
-                      <ArtistJobCard />
+                    <S.InfoContentsJob key={list?.id}>
+                      <ArtistJobCard data={list} />
                     </S.InfoContentsJob>
                   );
                 }
@@ -66,15 +78,19 @@ export default function PlaceLayout() {
         <S.InfoItemWrap>
           <S.InfoTitle>수상 / 경력</S.InfoTitle>
           <S.InfoContents style={{ display: 'block' }}>
-            <S.InfoContentsDetail>
-              수상 : 2012 제9회 한국대중음악상 올해의 노래상 2012 제24회
-              한국PD대상 가수부문 출연자상
-            </S.InfoContentsDetail>
-
-            <S.InfoContentsDetail>
-              경력 : 2012.02 경찰청 학교폭력 예방 홍보대사 2011.05 2012
-              여수세계박람회 홍보대사
-            </S.InfoContentsDetail>
+            {data?.careers.map((career: any) => (
+              <>
+                <S.InfoContentsDetail key={career.id}>
+                  경력일자 : {moment(career.data).format('YYYY-MM-DD')}
+                </S.InfoContentsDetail>
+                <S.InfoContentsDetail
+                  style={{ marginBottom: '1rem' }}
+                  key={career.id}
+                >
+                  경력설명 : {career.description}
+                </S.InfoContentsDetail>
+              </>
+            ))}
           </S.InfoContents>
         </S.InfoItemWrap>
       </S.Container>

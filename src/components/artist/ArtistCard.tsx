@@ -1,17 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Select } from 'antd';
+import moment from 'moment';
 
-export default function ArtistCard() {
-  const PlaceDummyData = {
-    img: 'hi',
-    name: '아이유',
-    job: '가수',
-    year: '1995.01.18',
-    birth: '95.01.18',
-    pysical: ['100', '100'],
-    sns: ['TwitterId', 'InstaId', 'FBId'],
-  };
+export default function ArtistCard({ data }: any) {
   return (
     <>
       <S.TitleContainer style={{ borderBottom: '1px solid' }}>
@@ -42,29 +34,28 @@ export default function ArtistCard() {
 
         <S.TitleContent style={{ flex: 6, textAlign: 'left' }}>
           <S.TitleContentRight>
-            <S.TitleContentRightName>
-              {PlaceDummyData.name}
-            </S.TitleContentRightName>
+            <S.TitleContentRightName>{data?.name}</S.TitleContentRightName>
 
             <S.TitleContentRightDesc>
-              {PlaceDummyData.job}
+              {data?.occupation}
             </S.TitleContentRightDesc>
 
             <S.TitleContentRightDesc>
-              {PlaceDummyData.year}
+              {moment(data?.debutDate).format('YYYY-MM-DD')}
             </S.TitleContentRightDesc>
 
             <S.TitleContentRightDesc>
-              {PlaceDummyData.birth}
+              {moment(data?.birthData).format('YYYY-MM-DD')}
             </S.TitleContentRightDesc>
 
             <S.TitleContentRightDesc>
-              {PlaceDummyData.pysical[0]}cm / {PlaceDummyData.pysical[1]}kg
+              {data?.height}cm / {data?.weight}kg
             </S.TitleContentRightDesc>
 
             <S.TitleContentRightDesc>
-              {PlaceDummyData.sns[0]} | {PlaceDummyData.sns[1]} |{' '}
-              {PlaceDummyData.sns[2]}
+              <a href={data?.instagramUrl}>인스타그램</a> |
+              <a href={data?.twitterUrl}>트위터</a> |
+              <a href={data?.facebookUrl}>페이스북</a>
             </S.TitleContentRightDesc>
           </S.TitleContentRight>
         </S.TitleContent>

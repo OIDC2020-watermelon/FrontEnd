@@ -1,14 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import { Select } from 'antd';
 
-export default function ArtistJobCard() {
-  const PlaceDummyData = {
-    img: 'hi',
-    name: '블루 스퀘어',
-    date: '1995.01.18',
-    addr: '서울시 용산구 이태원로 294 블루스퀘어',
-  };
+export default function ArtistJobCard({ data }: any) {
   return (
     <>
       <S.TitleContainer>
@@ -23,7 +18,7 @@ export default function ArtistJobCard() {
           </S.TitleContentLeft>
 
           <S.TitleContentRight>
-            <S.TitleContentRightName>공연장 명</S.TitleContentRightName>
+            <S.TitleContentRightName>공연명</S.TitleContentRightName>
 
             <S.TitleContentRightDesc>일자</S.TitleContentRightDesc>
 
@@ -34,15 +29,16 @@ export default function ArtistJobCard() {
         <S.TitleContent style={{ flex: 6, textAlign: 'left' }}>
           <S.TitleContentRight>
             <S.TitleContentRightName>
-              {PlaceDummyData.name}
+              {data?.title.slice(0, 25)}
             </S.TitleContentRightName>
 
             <S.TitleContentRightDesc>
-              {PlaceDummyData.date}
+              {moment(data?.releaseEndTime).format('YYYY-MM-DD')} ~{' '}
+              {moment(data?.releaseStartTime).format('YYYY-MM-DD')}
             </S.TitleContentRightDesc>
 
             <S.TitleContentRightDesc>
-              {PlaceDummyData.addr}
+              {data?.place.slice(0, 25)}
             </S.TitleContentRightDesc>
           </S.TitleContentRight>
         </S.TitleContent>

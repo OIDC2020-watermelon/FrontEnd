@@ -13,6 +13,7 @@ export default function TicketPayment({ selectedSeat }: any) {
   function handleChange(value: string) {
     console.log(`selected ${value}`);
   }
+  console.log('selectedSeat', selectedSeat);
   return (
     <>
       <S.Container>
@@ -22,18 +23,20 @@ export default function TicketPayment({ selectedSeat }: any) {
             <h5>기본정보</h5>
             <h5>가격</h5>
           </S.ContentTitleWrap>
+
           <S.ContentBodyWrap>
             <div>
               {selectedSeat.map((seat: any) => (
                 <li style={alignStyle}>
                   <span>{`${seat.row}-${seat.number}`}</span>
-                  <span>10,000</span>
+                  <span>{`${seat.grade}`}</span>
+                  <span>{`${seat.cost}`}</span>
                 </li>
               ))}
             </div>
             <div style={alignStyle}>
               <span>{`총 가격 : `}</span>
-              <span>{`${selectedSeat.length * 10000}원`}</span>
+              <span>{`${selectedSeat[0].cost * selectedSeat.length}원`}</span>
             </div>
           </S.ContentBodyWrap>
         </S.PaymentContainer>

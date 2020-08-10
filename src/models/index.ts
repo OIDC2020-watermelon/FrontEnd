@@ -7,6 +7,8 @@ import performance, { performanceSaga } from './saga/reducers/performance';
 import theme, { themeSaga } from './saga/reducers/theme';
 import booking, { bookingSaga } from './saga/reducers/booking';
 import search, { searchSaga } from './saga/reducers/search';
+import artist, { artistSaga } from './saga/reducers/artist';
+import place, { placeSaga } from './saga/reducers/place';
 
 export function* rootSaga() {
   yield all([
@@ -17,6 +19,8 @@ export function* rootSaga() {
     themeSaga(),
     bookingSaga(),
     searchSaga(),
+    artistSaga(),
+    placeSaga(),
   ]);
 }
 
@@ -28,6 +32,8 @@ const rootReducer = combineReducers({
   theme,
   booking,
   search,
+  artist,
+  place,
 });
 
 export default rootReducer;

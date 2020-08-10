@@ -18,10 +18,14 @@ export default function CostInfo() {
           </Col>
         </S.CostInfoHeadWrap>
         <S.CostInfoBodyWrap>
-          {performanceCost.map((cost) => (
+          {performanceCost.map((cost: any, i: number) => (
             <>
-              <Col span={5}>{cost.type}석</Col>
-              <Col span={19}>{cost.cost}원</Col>
+              <Col span={5} key={cost.type}>
+                {cost.type}석
+              </Col>
+              <Col span={19} key={`${cost.type}${i}`}>
+                {cost.cost}원
+              </Col>
             </>
           ))}
         </S.CostInfoBodyWrap>

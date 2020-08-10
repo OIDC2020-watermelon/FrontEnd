@@ -15,7 +15,6 @@ function* seatArray(data: any) {
 
 export default function SelectAbleSeat() {
   const data = useSelector((state: RootState) => state.performance.ticket);
-  console.log(data);
 
   const iterator = seatArray(data) as any;
   const items: any = [];

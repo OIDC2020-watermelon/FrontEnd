@@ -15,7 +15,6 @@ const data = [
 
 export default function SelectAbleTime() {
   const tickets = useSelector((state: RootState) => state.performance.ticket);
-  console.log('tickets', tickets);
   return (
     <>
       <S.AntdList
