@@ -37,7 +37,9 @@ const CardList: CardList = {
     },
   ],
 };
-const index = ({ types }: { types: string }) => {
+const index = ({ types, data }: { types: string; data: any }) => {
+  //console.log("data : ", types, data);
+
   return (
     <>
       <CardLayout>
@@ -47,64 +49,80 @@ const index = ({ types }: { types: string }) => {
           <ShowMore>더보기</ShowMore>
         </ShowLayout>
         <CardContainer style={{}}>
-          {CardList.list.map((list, key) => {
-            if (key === 3) {
-              return (
-                <Link key={key} to={`/performance/${key}`}>
-                  <OverCard
-                    style={{ marginRight: 0 }}
-                    cover={
-                      <img
-                        alt="example"
-                        src="https://source.unsplash.com/random"
-                        width="100%"
-                        height="170px"
-                      />
+          {data !== undefined ? (
+            <>
+              {data.data.length > 0 ? (
+                <>
+                  {data.data.map((list: any, key: number) => {
+                    if (key === 3) {
+                      return (
+                        <Link key={key} to={`/performance/${key}`}>
+                          <OverCard
+                            style={{ marginRight: 0 }}
+                            cover={
+                              <img
+                                alt="example"
+                                src={list.thumbnailImgUrl}
+                                width="100%"
+                                height="170px"
+                              />
+                            }
+                          >
+                            <p>공연명 : {list.title}</p>
+                            <p>장소명 : {list.place}</p>
+                            {list.artists.map((art: string, idx: number) => {
+                              if (idx === 0) {
+                                return (
+                                  <span key={idx}>아티스트 : {art}, </span>
+                                );
+                              } else if (idx + 1 === list.artists.length) {
+                                return <span key={idx}>{art}</span>;
+                              } else {
+                                return <span key={idx}>{art}, </span>;
+                              }
+                            })}
+                          </OverCard>
+                        </Link>
+                      );
+                    } else {
+                      return (
+                        <Link key={key} to={`/performance/${key}`}>
+                          <OverCard
+                            cover={
+                              <img
+                                alt="example"
+                                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                                width="100%"
+                                height="170px"
+                              />
+                            }
+                          >
+                            <p>공연명 : {list.title}</p>
+                            <p>장소명 : {list.place}</p>
+                            {list.artists.map((art: string, idx: number) => {
+                              if (idx === 0) {
+                                return (
+                                  <span key={idx}>아티스트 : {art}, </span>
+                                );
+                              } else if (idx + 1 === list.artists.length) {
+                                return <span key={idx}>{art}</span>;
+                              } else {
+                                return <span key={idx}>{art}, </span>;
+                              }
+                            })}
+                          </OverCard>
+                        </Link>
+                      );
                     }
-                  >
-                    <p>공연명 : {list.title}</p>
-                    <p>장소명 : {list.place}</p>
-                    {list.artist.map((art, idx) => {
-                      if (idx === 0) {
-                        return <span key={idx}>아티스트 : {art}, </span>;
-                      } else if (idx + 1 === list.artist.length) {
-                        return <span key={idx}>{art}</span>;
-                      } else {
-                        return <span key={idx}>{art}, </span>;
-                      }
-                    })}
-                  </OverCard>
-                </Link>
-              );
-            } else {
-              return (
-                <Link key={key} to={`/performance/${key}`}>
-                  <OverCard
-                    cover={
-                      <img
-                        alt="example"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                        width="100%"
-                        height="170px"
-                      />
-                    }
-                  >
-                    <p>공연명 : {list.title}</p>
-                    <p>장소명 : {list.place}</p>
-                    {list.artist.map((art, idx) => {
-                      if (idx === 0) {
-                        return <span key={idx}>아티스트 : {art}, </span>;
-                      } else if (idx + 1 === list.artist.length) {
-                        return <span key={idx}>{art}</span>;
-                      } else {
-                        return <span key={idx}>{art}, </span>;
-                      }
-                    })}
-                  </OverCard>
-                </Link>
-              );
-            }
-          })}
+                  })}
+                </>
+              ) : (
+                ''
+              )}
+            </>
+          ) : (
+            ''
+          )}
         </CardContainer>
       </CardLayout>
     </>
@@ -131,26 +149,23 @@ const ShowMore = styled.div`
 `;
 const OverCard = styled(Card)`
   text-align: left;
-  margin-right: 20px;
   .ant-card-body {
     padding: 12px;
   }
-  max-width: 300px;
-  max-height: 300px;
+  width: 270px;
+  height: 350px;
+  margin-bottom: 20px;
 `;
 
 const CardContainer = styled.div`
   backgroud: #fff;
   display: inline-grid;
-  width: 80%;
   justify-items: center;
   align-items: center;
   /* Medium devices (landscape tablets, 0px and up) */
-  @media only screen and (min-width: 0px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+
   /* Large devices (laptops/desktops, 992px and up) */
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 0px) {
     grid-template-columns: repeat(3, 1fr);
   }
   /* Extra large devices (large laptops and desktops, 1200px and up) */

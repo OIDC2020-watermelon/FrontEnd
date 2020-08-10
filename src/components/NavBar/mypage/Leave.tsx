@@ -4,11 +4,9 @@ import { Checkbox, Button } from 'antd';
 import Title from './Title';
 import { useDispatch } from 'react-redux';
 import { deleteUser } from '../../../models/saga/reducers/auth';
-import { useAuth } from '../../../models/hook/providers/auth/AuthProvider';
 
 const Leave = () => {
   const [deleteFlag, setDeleteFlag] = useState<boolean>(false);
-  const [_, logout] = useAuth();
   const dispatch = useDispatch();
 
   const onCheck = (e: any) => {

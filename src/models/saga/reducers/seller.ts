@@ -1,7 +1,4 @@
-import {
-  TAsyncMultiState,
-  TAsyncState,
-} from './../../../types/redux/state/stateTypes';
+import { TAsyncState } from './../../../types/redux/state/stateTypes';
 import { addPerformanceApi, deletePerformanceApi } from './../api/seller';
 import { createReducer, ActionType } from 'typesafe-actions';
 import { takeEvery } from 'redux-saga/effects';

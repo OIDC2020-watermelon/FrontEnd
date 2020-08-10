@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Pagination, Select } from 'antd';
-import { PerformanceList } from './index';
-
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 const { Option } = Select;
 
-const Performance = ({
-  PerformanceList,
-}: {
-  PerformanceList: PerformanceList;
-}) => {
+const Performance = ({ performances }: { performances: any }) => {
   const [arraySlice, setArraySlice] = useState<number>(0);
-  const [performanceList, setPerformanceList] = useState<PerformanceList>(
-    PerformanceList,
-  );
   const [category, setCategory] = useState<string>('');
-
+  const [performancesList, setPerformanceList] = useState<any>({
+    data: [],
+    error: null,
+    issues: null,
+  });
   const SelectChange = (e: any) => {
+    setPerformanceList(performances);
     console.log(e);
     setCategory(e);
   };
@@ -29,15 +27,22 @@ const Performance = ({
   };
 
   useEffect(() => {
-    const categoryData = {
-      list: PerformanceList.list.filter((item: any) =>
-        item.type.includes(category),
-      ),
-    };
+    console.log('changes');
+    setPerformanceList(performances);
+  }, [performances]);
 
-    setPerformanceList(categoryData);
-  }, [category, PerformanceList]);
+  // 여기서 사이드 이펙트 존재
+  // useEffect(() => {
+  //   const categoryData = {
+  //     data: performancesList.data.filter((item: any) =>
+  //       item.category.includes(category),
+  //     ),
+  //   };
 
+  //   setPerformanceList(categoryData);
+  // }, [category]);
+
+  console.log('performancesList : ', performancesList);
   return (
     <>
       <S.HeaderContainer>
@@ -51,9 +56,9 @@ const Performance = ({
           <S.AntComponent>
             <S.SearchBarSelect defaultValue="콘서트" onChange={SelectChange}>
               <Option value="콘서트">콘서트</Option>
-              <Option value="연극">연극</Option>
-              <Option value="클래식/무용">클래식/무용</Option>
-              <Option value="전시/행사">전시/행사</Option>
+              <Option value="공연">공연</Option>
+              <Option value="클래식/댄스">클래식/댄스</Option>
+              <Option value="전시/이벤트">전시/이벤트</Option>
             </S.SearchBarSelect>
           </S.AntComponent>
 
@@ -75,10 +80,11 @@ const Performance = ({
       </S.HeaderContainer>
 
       <S.ContentLayout>
-        {performanceList.list.slice(arraySlice, arraySlice + 4).length === 0 ? (
+        {performancesList.data.slice(arraySlice, arraySlice + 4).length ===
+        0 ? (
           <S.TitleContainer style={{ padding: 20, borderBottom: '1px solid' }}>
             <S.TitleContentName style={{ flex: 4, textAlign: 'left' }}>
-              상품기본정보(총{performanceList.list.length}건)
+              상품기본정보(총{performancesList.data.length}건)
             </S.TitleContentName>
 
             <S.TitleContentName>일시</S.TitleContentName>
@@ -92,7 +98,7 @@ const Performance = ({
         ) : (
           <S.TitleContainer style={{ padding: 20 }}>
             <S.TitleContentName style={{ flex: 4, textAlign: 'left' }}>
-              공연 정보 (총{performanceList.list.length}건)
+              공연 정보 (총{performancesList.data.length}건)
             </S.TitleContentName>
 
             <S.TitleContentName>일시</S.TitleContentName>
@@ -105,13 +111,13 @@ const Performance = ({
           </S.TitleContainer>
         )}
 
-        {performanceList.list
+        {performancesList.data
           .slice(arraySlice, arraySlice + 4)
-          .map((list, key) => {
+          .map((list: any, key: number) => {
             return (
               <div key={key}>
                 {key ===
-                performanceList.list.slice(arraySlice, arraySlice + 4).length -
+                performancesList.data.slice(arraySlice, arraySlice + 4).length -
                   1 ? (
                   <S.TitleContainer style={{ borderBottom: '1px solid' }}>
                     <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
@@ -130,15 +136,15 @@ const Performance = ({
                         </S.TitleContentRightName>
 
                         <S.TitleContentRightDesc>
-                          {list.type} | {list.time}분 | {list.age}세이상
-                          관람가능
+                          {list.category} | {list.runningTime}분 | {list.rrated}
+                          세이상 관람가능
                         </S.TitleContentRightDesc>
 
                         <S.TitleContentRightDesc>
-                          {list.artist.map((art, idx) => {
+                          {list.artists.map((art: any, idx: number) => {
                             if (idx === 0) {
                               return <span key={idx}>아티스트 : {art}, </span>;
-                            } else if (idx + 1 === list.artist.length) {
+                            } else if (idx + 1 === list.artists.length) {
                               return <span key={idx}>{art}</span>;
                             } else {
                               return <span key={idx}>{art}, </span>;
@@ -148,14 +154,17 @@ const Performance = ({
                       </S.TitleContentRight>
                     </S.TitleContent>
 
-                    <S.TitleContent>{list.Date}</S.TitleContent>
+                    <S.TitleContent>
+                      {moment(list.releaseEndTime).format('YYYY-MM-DD')}~
+                      {moment(list.releaseStartTime).format('YYYY-MM-DD')}
+                    </S.TitleContent>
 
                     <S.TitleContent>{list.place}</S.TitleContent>
 
                     <S.TitleContent
                       style={{ textAlign: 'center', display: 'block' }}
                     >
-                      예매하기
+                      <Link to={`/performance/${list.id}`}>예매하기</Link>
                     </S.TitleContent>
                   </S.TitleContainer>
                 ) : (
@@ -176,15 +185,15 @@ const Performance = ({
                         </S.TitleContentRightName>
 
                         <S.TitleContentRightDesc>
-                          {list.type} | {list.time}분 | {list.age}세이상
-                          관람가능
+                          {list.category} | {list.runningTime}분 | {list.rrated}
+                          세이상 관람가능
                         </S.TitleContentRightDesc>
 
                         <S.TitleContentRightDesc>
-                          {list.artist.map((art, idx) => {
+                          {list.artists.map((art: any, idx: number) => {
                             if (idx === 0) {
                               return <span key={idx}>아티스트 : {art}, </span>;
-                            } else if (idx + 1 === list.artist.length) {
+                            } else if (idx + 1 === list.artists.length) {
                               return <span key={idx}>{art}</span>;
                             } else {
                               return <span key={idx}>{art}, </span>;
@@ -194,14 +203,17 @@ const Performance = ({
                       </S.TitleContentRight>
                     </S.TitleContent>
 
-                    <S.TitleContent>{list.Date}</S.TitleContent>
+                    <S.TitleContent>
+                      {moment(list.releaseEndTime).format('YYYY-MM-DD')}~
+                      {moment(list.releaseStartTime).format('YYYY-MM-DD')}
+                    </S.TitleContent>
 
                     <S.TitleContent>{list.place}</S.TitleContent>
 
                     <S.TitleContent
                       style={{ textAlign: 'center', display: 'block' }}
                     >
-                      예매하기
+                      <Link to={`/performance/${list.id}`}>예매하기</Link>
                     </S.TitleContent>
                   </S.TitleContainer>
                 )}
@@ -211,7 +223,7 @@ const Performance = ({
 
         <Pagination
           defaultCurrent={1}
-          total={performanceList.list.length}
+          total={performancesList.data.length}
           style={{ textAlign: 'center', marginTop: 30 }}
           pageSize={4}
           onChange={paginationButton}

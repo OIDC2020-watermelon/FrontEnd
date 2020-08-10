@@ -23,7 +23,7 @@ export default function PerformArtistCard({ artist }: PerformArtistCardProps) {
               {artist.name}
             </Col>
             <Col span={10}>
-              <S.StyledLink>자세히</S.StyledLink>
+              <S.StyledLink to="/artist/1">자세히</S.StyledLink>
             </Col>
           </Row>
           <Row className="artist_role">강남역</Row>

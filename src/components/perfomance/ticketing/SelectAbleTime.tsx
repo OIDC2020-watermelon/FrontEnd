@@ -1,6 +1,8 @@
 import React from 'react';
 import { List, Typography } from 'antd';
 import styled from 'styled-components';
+import { RootState } from '../../../models';
+import { useSelector } from 'react-redux';
 
 const data = [
   '13시 00분',
@@ -12,6 +14,7 @@ const data = [
 ];
 
 export default function SelectAbleTime() {
+  const tickets = useSelector((state: RootState) => state.performance.ticket);
   return (
     <>
       <S.AntdList
@@ -34,10 +37,6 @@ const S: any = {};
 S.AntdList = styled(List)`
   height: 18rem;
   overflow: auto;
-<<<<<<< HEAD
-=======
-
->>>>>>> 8285e78e868e6c15f983ad4f38363756871c600b
   border-radius: 5px;
 `;
 

@@ -16,11 +16,11 @@ const Mypage = () => {
 
   const asyncDispatch = useDispatch();
 
-  const [name, changeName, setName] = useInput(state?.name || user?.name || '');
-  const [phoneNo, changePhoneNo, setPhoneNo] = useInput(
+  const [name, changeName] = useInput(state?.name || user?.name || '');
+  const [phoneNo, changePhoneNo] = useInput(
     state?.phoneNo || user?.phoneNo || '',
   );
-  const [dateOfBirth, changeDateOfBirth, setDateOfBirth] = useInput(
+  const [dateOfBirth, changeDateOfBirth] = useInput(
     state?.dateOfBirth || user?.dateOfBirth || '',
   );
   const [gender, setGender] = useState(state?.gender || user?.gender || '');
@@ -44,18 +44,15 @@ const Mypage = () => {
     }
   };
 
-  const saveClick = useCallback(
-    (e: any, type: string) => {
-      console.log('saveClick');
-      setEditType('');
-      if (type === 'name') {
-      } else if (type === 'phoneNo') {
-      } else if (type === 'dateOfBirth') {
-      } else if (type === 'gender') {
-      }
-    },
-    [name, phoneNo, dateOfBirth, gender],
-  );
+  const saveClick = useCallback((e: any, type: string) => {
+    console.log('saveClick');
+    setEditType('');
+    if (type === 'name') {
+    } else if (type === 'phoneNo') {
+    } else if (type === 'dateOfBirth') {
+    } else if (type === 'gender') {
+    }
+  }, []);
 
   const editChange = (e: any) => {
     setGender(e.target.value);
@@ -73,7 +70,14 @@ const Mypage = () => {
     dispatch({ type: 'ChangeDateOfBirth', data: user?.dateOfBirth || '' });
     dispatch({ type: 'ChangeGender', data: user?.gender || '' });
     return () => dispatch({ type: 'reset' });
-  }, [dispatch, state.name, state.phoneNo, state.gender, state.dateOfBirth]);
+  }, [
+    dispatch,
+    state.name,
+    state.phoneNo,
+    state.gender,
+    state.dateOfBirth,
+    user,
+  ]);
   console.log(name, phoneNo, gender, dateOfBirth);
   return (
     <>
@@ -84,6 +88,11 @@ const Mypage = () => {
           <S.MypageEmpty />
 
           <S.MypageContent>
+            <S.InfoLayout>
+              <S.InfoTitle>이메일</S.InfoTitle>
+              <S.Infocontent>{user?.uid}</S.Infocontent>
+            </S.InfoLayout>
+
             <S.InfoLayout>
               <S.InfoTitle>이름</S.InfoTitle>
 

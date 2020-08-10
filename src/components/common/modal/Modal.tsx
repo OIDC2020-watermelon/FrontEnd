@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
-import closeSVG from '../../../assets/images/close.svg';
 
 interface ModalProps {
   setVisible: any;
@@ -11,21 +9,24 @@ interface ModalProps {
 }
 
 export default function Modal({ visible, setVisible, render }: ModalProps) {
-  const toggle = useCallback(() => setVisible(!visible), [visible]);
+  const toggle = useCallback(() => setVisible(!visible), [visible, setVisible]);
   const noneEvent = useCallback((e) => e.stopPropagation(), []);
 
-  const escapeKey = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      toggle();
-    }
-  };
+  const escapeKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        toggle();
+      }
+    },
+    [toggle],
+  );
   useEffect(() => {
     if (visible) window.addEventListener('keydown', escapeKey);
     else if (!visible) window.removeEventListener('keydown', escapeKey);
     return () => {
       window.removeEventListener('keydown', escapeKey);
     };
-  }, [visible]);
+  }, [visible, setVisible, escapeKey]);
 
   return visible
     ? createPortal(

@@ -11,7 +11,7 @@ export default function PerformancePage() {
 
   useEffect(() => {
     dispatch(getPerformance.request({}));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
