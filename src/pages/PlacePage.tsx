@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PlaceLayout from '../components/place/PlaceLayout';
 import palette from '../lib/style/palette';

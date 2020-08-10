@@ -16,7 +16,14 @@ export default function ArtistInfo() {
       <S.ArtistInfoContainer className="scroll">
         {data &&
           data.artists.map((artist: any) => (
-            <S.PerformArtistCardWrap xs={12} sm={12} md={12} xl={8} xxl={6}>
+            <S.PerformArtistCardWrap
+              key={artist.id}
+              xs={12}
+              sm={12}
+              md={12}
+              xl={8}
+              xxl={6}
+            >
               <PerformArtistCard artist={artist}></PerformArtistCard>
             </S.PerformArtistCardWrap>
           ))}

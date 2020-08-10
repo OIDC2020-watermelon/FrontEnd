@@ -2,14 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Select } from 'antd';
 
-export default function PlaceCard() {
-  const PlaceDummyData = {
-    img: 'hi',
-    name: '블루 스퀘어',
-    addr: '서울시 용산구 이태원로 294 블루스퀘어',
-    number: '1544-1591',
-    url: 'www.bluesquare.com/asp',
-  };
+export default function PlaceCard({ data }: any) {
   return (
     <>
       <S.TitleContainer style={{ borderBottom: '1px solid' }}>
@@ -36,20 +29,14 @@ export default function PlaceCard() {
 
         <S.TitleContent style={{ flex: 6, textAlign: 'left' }}>
           <S.TitleContentRight>
-            <S.TitleContentRightName>
-              {PlaceDummyData.name}
-            </S.TitleContentRightName>
+            <S.TitleContentRightName>{data?.name}</S.TitleContentRightName>
+
+            <S.TitleContentRightDesc>{data?.address}</S.TitleContentRightDesc>
+
+            <S.TitleContentRightDesc>{data?.telephone}</S.TitleContentRightDesc>
 
             <S.TitleContentRightDesc>
-              {PlaceDummyData.addr}
-            </S.TitleContentRightDesc>
-
-            <S.TitleContentRightDesc>
-              {PlaceDummyData.number}
-            </S.TitleContentRightDesc>
-
-            <S.TitleContentRightDesc>
-              {PlaceDummyData.url}
+              {data?.homepage.slice(0, 100)}
             </S.TitleContentRightDesc>
           </S.TitleContentRight>
         </S.TitleContent>
