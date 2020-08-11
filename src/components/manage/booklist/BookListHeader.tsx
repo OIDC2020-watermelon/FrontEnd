@@ -29,6 +29,14 @@ export default function BookListHeader({
             <span>|</span>
             <S.CustomLink
               onClick={() => {
+                statusButton('reservation');
+              }}
+            >
+              예매
+            </S.CustomLink>
+            <span>|</span>
+            <S.CustomLink
+              onClick={() => {
                 statusButton('cancel');
               }}
             >
@@ -56,7 +64,7 @@ S.CustomLink = styled.span`
 `;
 
 S.FilterLinkWrap = styled(Col)`
-  width: 10rem;
+  width: 13rem;
   display: flex;
   justify-content: space-between;
 `;
