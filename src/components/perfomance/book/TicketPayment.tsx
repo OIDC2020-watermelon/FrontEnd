@@ -1,19 +1,16 @@
 import React, { useMemo } from 'react';
-import { Select, Input } from 'antd';
+import { Input } from 'antd';
 import styled from 'styled-components';
 import palette from '../../../lib/style/palette';
-
-const { Option } = Select;
+import { useAuth } from '../../../models/hook/providers/auth/AuthProvider';
 
 export default function TicketPayment({ selectedSeat }: any) {
+  const [{ data: user }] = useAuth();
   const alignStyle = useMemo(
     () => ({ display: 'flex', justifyContent: 'space-between' }),
     [],
   );
-  function handleChange(value: string) {
-    console.log(`selected ${value}`);
-  }
-  console.log('selectedSeat', selectedSeat);
+
   return (
     <>
       <S.Container>
@@ -48,30 +45,13 @@ export default function TicketPayment({ selectedSeat }: any) {
           </S.ContentTitleWrap>
           <div>
             <S.ContentBodyWrap>
-              <S.StyledAntdInput placeholder="이름" />
-              <S.StyledAntdInput placeholder="생년월일" />
-              <S.StyledAntdInput placeholder="연락처" />
-              <S.StyledAntdInput placeholder="이메일" />
-            </S.ContentBodyWrap>
-            <S.ContentBodyWrap>
-              <Select
-                placeholder="카드 종류"
-                style={{ width: '7.8rem', marginBottom: '1rem' }}
-                onChange={handleChange}
-              >
-                <Option value="A사 카드">A사 카드</Option>
-                <Option value="B사 카드">B사 카드</Option>
-                <Option value="C사 카드">C사 카드</Option>
-              </Select>
-              <Select
-                placeholder="할부 종류"
-                style={{ width: '7.8rem' }}
-                onChange={handleChange}
-              >
-                <Option value="일시불">일시불</Option>
-                <Option value="6개월 할부">6개월 할부</Option>
-                <Option value="12개월 할부">12개월 할부</Option>
-              </Select>
+              <S.StyledAntdInput placeholder="이름" value={user?.name} />
+              <S.StyledAntdInput
+                placeholder="생년월일"
+                value={user?.dateOfBirth}
+              />
+              <S.StyledAntdInput placeholder="연락처" value={user?.phoneNo} />
+              <S.StyledAntdInput placeholder="이메일" value={user?.uid} />
             </S.ContentBodyWrap>
           </div>
         </S.TicketerContainer>
@@ -105,7 +85,7 @@ S.ContentTitleWrap = styled.div`
   }
 `;
 S.ContentBodyWrap = styled.div`
-  width: 9rem;
+  width: 100%;
   height: 10rem;
   overflow: auto;
   margin-top: 0.5rem;

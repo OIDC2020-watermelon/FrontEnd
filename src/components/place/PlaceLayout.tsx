@@ -27,12 +27,6 @@ export default function PlaceLayout() {
           </S.InfoContents>
         </S.InfoItemWrap>
         <S.InfoItemWrap>
-          <S.InfoTitle>좌석 정보</S.InfoTitle>
-          <S.InfoContents>
-            <PlaceSeat />
-          </S.InfoContents>
-        </S.InfoItemWrap>
-        <S.InfoItemWrap>
           <S.InfoTitle>공연장 설명</S.InfoTitle>
           <S.InfoContents>{data?.description}</S.InfoContents>
         </S.InfoItemWrap>
