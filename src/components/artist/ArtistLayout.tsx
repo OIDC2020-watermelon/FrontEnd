@@ -32,16 +32,7 @@ export default function PlaceLayout() {
             <ArtistCard data={data} />
           </S.InfoContents>
         </S.InfoItemWrap>
-        <S.InfoItemWrap>
-          <S.InfoTitle>인물 소개</S.InfoTitle>
-          <S.InfoContents style={{ display: 'block' }}>
-            <S.InfoContentsDetail>
-              소속사 : {'SM Entertainment'}
-            </S.InfoContentsDetail>
 
-            <S.InfoContentsDetail>데뷔곡 : {'깡(2019)'}</S.InfoContentsDetail>
-          </S.InfoContents>
-        </S.InfoItemWrap>
         <S.InfoItemWrap>
           <S.InfoTitle>
             출연작품
