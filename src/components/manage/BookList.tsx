@@ -104,7 +104,8 @@ export default function BookList() {
     var filter = {
       data: manage.data.filter(function (el: any, idx: number) {
         if (el.id === serialNumber) {
-          return false;
+          el.canceled = true;
+          return el;
         } else {
           return el;
         }
@@ -131,6 +132,18 @@ export default function BookList() {
             return el;
           } else {
             return;
+          }
+        }),
+        error: '',
+      };
+      setFilterManage(filter);
+    } else if (type === 'reservation') {
+      var filter = {
+        data: manage.data.filter(function (el: any, idx: number) {
+          if (el.canceled) {
+            return;
+          } else {
+            return el;
           }
         }),
         error: '',
