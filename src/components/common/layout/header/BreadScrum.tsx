@@ -6,10 +6,10 @@ export default function BreadScrum() {
     <>
       <div>
         <FontAwesomeIcon icon="home" size="1x" />
-        <span>&nbsp;&gt;&nbsp;</span>
+        {/* <span>&nbsp;&gt;&nbsp;</span>
         <span>세부1</span>
         <span>&nbsp;&gt;&nbsp;</span>
-        <span>세부2</span>
+        <span>세부2</span> */}
       </div>
     </>
   );

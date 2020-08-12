@@ -58,7 +58,7 @@ const Artist = ({ ArtistList }: { ArtistList: any }) => {
                     <S.TitleContent style={{ flex: 3, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="example"
+                          alt="thumbnailImgUrl"
                           src={list.thumbnailImgUrl}
                           width={100}
                           height={100}
@@ -107,7 +107,7 @@ const Artist = ({ ArtistList }: { ArtistList: any }) => {
                     <S.TitleContent
                       style={{ textAlign: 'center', display: 'block', flex: 3 }}
                     >
-                      <Link to={`/place/${list.id}`}>상세보기</Link>
+                      <Link to={`/artist/${list.id}`}>상세보기</Link>
                     </S.TitleContent>
                   </S.TitleContainer>
                 ) : (
@@ -115,7 +115,7 @@ const Artist = ({ ArtistList }: { ArtistList: any }) => {
                     <S.TitleContent style={{ flex: 3, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="example"
+                          alt="thumbnailImgUrl"
                           src={list.thumbnailImgUrl}
                           width={100}
                           height={100}
@@ -163,7 +163,7 @@ const Artist = ({ ArtistList }: { ArtistList: any }) => {
                     <S.TitleContent
                       style={{ textAlign: 'center', display: 'block', flex: 3 }}
                     >
-                      <Link to={`/place/${list.id}`}>상세보기</Link>
+                      <Link to={`/artist/${list.id}`}>상세보기</Link>
                     </S.TitleContent>
                   </S.TitleContainer>
                 )}

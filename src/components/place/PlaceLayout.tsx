@@ -6,7 +6,7 @@ import palette from '../../lib/style/palette';
 import { RootState } from '../../models';
 import { getPlace } from '../../models/saga/reducers/place';
 import PlaceCard from './PlaceCard';
-import PlaceSeat from './PlaceSeat';
+//import PlaceSeat from './PlaceSeat';
 
 export default function PlaceLayout() {
   const dispatch = useDispatch();
@@ -24,12 +24,6 @@ export default function PlaceLayout() {
           <S.InfoTitle>공연장 정보</S.InfoTitle>
           <S.InfoContents>
             <PlaceCard data={data} />
-          </S.InfoContents>
-        </S.InfoItemWrap>
-        <S.InfoItemWrap>
-          <S.InfoTitle>좌석 정보</S.InfoTitle>
-          <S.InfoContents>
-            <PlaceSeat />
           </S.InfoContents>
         </S.InfoItemWrap>
         <S.InfoItemWrap>

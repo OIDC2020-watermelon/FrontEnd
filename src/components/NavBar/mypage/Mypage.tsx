@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import useInput from '../../../lib/utils/hooks';
 import { useWrite } from '../../../models/hook/providers/write/WriteProvider';
 import { useDispatch } from 'react-redux';
+import message from '../../../lib/utils/message';
 // const phoneNumberRegExp = /^\d{3}-\d{3,4}-\d{4}$/;
 
 const Mypage = () => {
@@ -29,6 +30,7 @@ const Mypage = () => {
   const history = useHistory();
 
   if (!user) {
+    message('로그인 후 이용해주세요.');
     history.push('/');
   }
 

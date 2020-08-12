@@ -25,9 +25,8 @@ export default function BookListContents({
   const columns = [
     {
       title: '공연일',
-      dataIndex: 'availableDate',
-      key: 'availableDate',
-      render: (text: any) => <a href="/">{text}</a>,
+      dataIndex: 'createdAt',
+      key: 'createdAt',
     },
     {
       title: '예약번호',
@@ -45,6 +44,11 @@ export default function BookListContents({
       dataIndex: 'availableDate',
     },
     {
+      title: '매수',
+      key: 'pieces',
+      dataIndex: 'pieces',
+    },
+    {
       title: '가격',
       dataIndex: 'pay',
       key: 'pay',
@@ -55,30 +59,24 @@ export default function BookListContents({
       dataIndex: 'cancelableDate',
     },
     {
-      title: '취소',
+      title: '현재상태',
       key: 'canceled',
       dataIndex: 'canceled',
       render: (text: any, record: any) => (
         <Space size="middle">
           {record.canceled ? (
+            <span>취소</span>
+          ) : (
             <Popconfirm
-              title="정말 삭제하시겠습니까?"
+              title="정말 취소하시겠습니까?"
               onConfirm={() => {
                 cancelButton(record.id);
               }}
               okText="예"
               cancelText="아니요"
             >
-              <Button>취소가능</Button>
+              <Button>예매</Button>
             </Popconfirm>
-          ) : (
-            <Button
-              onClick={() => {
-                message.warning('취소가 불가능합니다.');
-              }}
-            >
-              취소불가
-            </Button>
           )}
         </Space>
       ),

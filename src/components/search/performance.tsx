@@ -7,19 +7,76 @@ const { Option } = Select;
 
 const Performance = ({ performances }: { performances: any }) => {
   const [arraySlice, setArraySlice] = useState<number>(0);
-  const [category, setCategory] = useState<string>('');
+  //const [category, setCategory] = useState<string>('');
   const [performancesList, setPerformanceList] = useState<any>({
     data: [],
     error: null,
     issues: null,
   });
+  const [selectChangeFlag, setSelectChangeFlag] = useState<boolean>(false);
+  const [selectSiturationFlag, setSelectSiturationFlag] = useState<boolean>(
+    false,
+  );
+
   const SelectChange = (e: any) => {
-    setPerformanceList(performances);
-    console.log(e);
-    setCategory(e);
+    var willFilterData = performances;
+    if (e === '전체') {
+      setSelectChangeFlag(false);
+      setPerformanceList(willFilterData);
+      return 1;
+    }
+    if (selectSiturationFlag) {
+      willFilterData = performancesList;
+    }
+
+    const categoryData = {
+      data: willFilterData.data.filter((item: any) =>
+        item.category.includes(e),
+      ),
+    };
+    setSelectChangeFlag(true);
+    setPerformanceList(categoryData);
   };
 
-  const SelectSituration = (e: any) => {};
+  const SelectSituration = (e: any) => {
+    var willFilterData = performances;
+    var nowDate = moment();
+    let categoryData;
+
+    if (selectChangeFlag) {
+      willFilterData = performancesList;
+    }
+
+    if (e === '판매예정') {
+      //moment('2010-10-20').isBefore('2010-12-31', 'year');
+      categoryData = {
+        data: willFilterData.data.filter((item: any) =>
+          nowDate.isBefore(item.releaseStartTime),
+        ),
+      };
+    } else if (e === '판매종료') {
+      categoryData = {
+        data: willFilterData.data.filter((item: any) =>
+          moment(item.releaseEndTime).isBefore(nowDate),
+        ),
+      };
+    } else if (e === '전체') {
+      setPerformanceList(performances);
+      setSelectSiturationFlag(false);
+      return true;
+    } else {
+      categoryData = {
+        data: willFilterData.data.filter(
+          (item: any) =>
+            moment(nowDate).isBefore(item.releaseEndTime) &&
+            moment(item.releaseStartTime).isBefore(nowDate),
+        ),
+      };
+    }
+
+    setSelectSiturationFlag(true);
+    setPerformanceList(categoryData);
+  };
   const paginationButton = (e: any) => {
     console.log(e);
     let pageNum = e - 1;
@@ -33,16 +90,16 @@ const Performance = ({ performances }: { performances: any }) => {
 
   // 여기서 사이드 이펙트 존재
   // useEffect(() => {
-  //   const categoryData = {
-  //     data: performancesList.data.filter((item: any) =>
-  //       item.category.includes(category),
-  //     ),
-  //   };
+  // const categoryData = {
+  //   data: performancesList.data.filter((item: any) =>
+  //     item.category.includes(category),
+  //   ),
+  // };
 
   //   setPerformanceList(categoryData);
   // }, [category]);
 
-  console.log('performancesList : ', performancesList);
+  //console.log('performancesList : ', performancesList);
   return (
     <>
       <S.HeaderContainer>
@@ -54,7 +111,8 @@ const Performance = ({ performances }: { performances: any }) => {
           </S.SearchBarTitle>
 
           <S.AntComponent>
-            <S.SearchBarSelect defaultValue="콘서트" onChange={SelectChange}>
+            <S.SearchBarSelect defaultValue="전체" onChange={SelectChange}>
+              <Option value="전체">전체</Option>
               <Option value="콘서트">콘서트</Option>
               <Option value="공연">공연</Option>
               <Option value="클래식/댄스">클래식/댄스</Option>
@@ -123,8 +181,8 @@ const Performance = ({ performances }: { performances: any }) => {
                     <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="example"
-                          src="https://source.unsplash.com/random"
+                          alt="thumbnailImgUrl"
+                          src={list.thumbnailImgUrl}
                           width={100}
                           height={100}
                         />
@@ -155,8 +213,8 @@ const Performance = ({ performances }: { performances: any }) => {
                     </S.TitleContent>
 
                     <S.TitleContent>
-                      {moment(list.releaseEndTime).format('YYYY-MM-DD')}~
-                      {moment(list.releaseStartTime).format('YYYY-MM-DD')}
+                      {moment(list.releaseStartTime).format('YYYY-MM-DD')}~
+                      {moment(list.releaseEndTime).format('YYYY-MM-DD')}
                     </S.TitleContent>
 
                     <S.TitleContent>{list.place}</S.TitleContent>
@@ -172,8 +230,8 @@ const Performance = ({ performances }: { performances: any }) => {
                     <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="example"
-                          src="https://source.unsplash.com/random"
+                          alt="thumbnailImgUrl"
+                          src={list.thumbnailImgUrl}
                           width={100}
                           height={100}
                         />
@@ -204,8 +262,8 @@ const Performance = ({ performances }: { performances: any }) => {
                     </S.TitleContent>
 
                     <S.TitleContent>
-                      {moment(list.releaseEndTime).format('YYYY-MM-DD')}~
-                      {moment(list.releaseStartTime).format('YYYY-MM-DD')}
+                      {moment(list.releaseStartTime).format('YYYY-MM-DD')}~
+                      {moment(list.releaseEndTime).format('YYYY-MM-DD')}
                     </S.TitleContent>
 
                     <S.TitleContent>{list.place}</S.TitleContent>

@@ -27,7 +27,7 @@ export default function HeaderLinkList({ login }: HeaderLinkListProps) {
           </S.LinkLogin>
         )}
 
-        <Link to="/">
+        <Link to="/mypage">
           <S.LinkItem>내정보</S.LinkItem>
         </Link>
       </S.LinkListWrap>

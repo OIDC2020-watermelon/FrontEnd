@@ -4,12 +4,16 @@ import { Modal, Button } from 'antd';
 import TicketSeatPicker from './TicketSeatPicker';
 import TicketPayment from './TicketPayment';
 import axios from 'axios';
+import { useAuth } from '../../../models/hook/providers/auth/AuthProvider';
+import message from '../../../lib/utils/message';
+import { useHistory } from 'react-router-dom';
 
 export default function BookModal() {
   const [visible, setVisible] = useState(false);
   const [selectModal, setSelectModal] = useState('1');
-
   const [selectedSeat, setSelectedSeat] = useState<Array<any>>([]);
+  const [{ data: user }] = useAuth();
+  const history = useHistory();
 
   function onClickPayment() {
     /* 1. 가맹점 식별하기 */
@@ -57,6 +61,16 @@ export default function BookModal() {
   }
 
   const showModalOne = () => {
+    if (!user) {
+      message('로그인 후 이용해주세요');
+      return;
+    } else if (
+      [user.dateOfBirth, user.gender, user.name, user.phoneNo].every(Boolean)
+    ) {
+      message('추가 정보를 입력해주세요.');
+      history.push('/mypage');
+    }
+
     setVisible(true);
     // 모달 초기화
     setSelectModal('1');
@@ -74,6 +88,10 @@ export default function BookModal() {
 
   const handleOneOk = (e: any) => {
     console.log(e);
+    if (selectedSeat.length < 1) {
+      message('좌석을 선택해주세요.');
+      return;
+    }
     showModalTwo();
   };
 

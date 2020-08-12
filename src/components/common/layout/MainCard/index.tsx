@@ -4,39 +4,6 @@ import palette from '../../../../lib/style/palette';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 
-interface CardContent {
-  title: string;
-  place: string;
-  artist: Array<string>;
-}
-interface CardList {
-  list: CardContent[];
-}
-
-const CardList: CardList = {
-  list: [
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['박시원', '원종환', '유성재', '강정우', '주민진', '유제윤'],
-    },
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['아티스트'],
-    },
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['아티스트'],
-    },
-    {
-      title: 'Cats',
-      place: '대학로 유니플렉스 2관',
-      artist: ['아티스트'],
-    },
-  ],
-};
 const index = ({ types, data }: { types: string; data: any }) => {
   //console.log("data : ", types, data);
 
@@ -56,7 +23,7 @@ const index = ({ types, data }: { types: string; data: any }) => {
                   {data.data.map((list: any, key: number) => {
                     if (key === 3) {
                       return (
-                        <Link key={key} to={`/performance/${key}`}>
+                        <Link key={key} to={`/performance/${list.id}`}>
                           <OverCard
                             style={{ marginRight: 0 }}
                             cover={
@@ -86,7 +53,7 @@ const index = ({ types, data }: { types: string; data: any }) => {
                       );
                     } else {
                       return (
-                        <Link key={key} to={`/performance/${key}`}>
+                        <Link key={key} to={`/performance/${list.id}`}>
                           <OverCard
                             cover={
                               <img
@@ -133,7 +100,7 @@ const CardLayout = styled.div``;
 
 const ShowLayout = styled.div`
   height: 32px;
-  margin: 20px 0;
+  margin: 40px 0;
   padding-top: 10px;
   border-top: 1px solid;
 `;
@@ -162,15 +129,21 @@ const CardContainer = styled.div`
   display: inline-grid;
   justify-items: center;
   align-items: center;
-  /* Medium devices (landscape tablets, 0px and up) */
 
-  /* Large devices (laptops/desktops, 992px and up) */
+  /* Medium devices (landscape tablets, 0px and up) */
   @media only screen and (min-width: 0px) {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 100px;
+  }
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
     grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
   }
   /* Extra large devices (large laptops and desktops, 1200px and up) */
   @media only screen and (min-width: 1200px) {
     grid-template-columns: repeat(4, 1fr);
+    column-gap: 20px;
   }
 `;
 export default index;

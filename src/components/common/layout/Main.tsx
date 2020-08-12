@@ -50,14 +50,14 @@ const Main = () => {
           {promotion.data.map((data: any, idx: number) => {
             // console.log('data : ', data.promotionImgUrl);
             return (
-              <>
+              <div key={idx}>
                 <CarouselImg url={data.promotionImgUrl} key={data.productId} />
-              </>
+              </div>
             );
           })}
         </OverCarousel>
 
-        <MainCategory />
+        {/* <MainCategory /> */}
 
         <MainCard types={'핫이슈 공연'} data={hotIssue} />
         <MainCard types={'신규 공연'} data={news} />
