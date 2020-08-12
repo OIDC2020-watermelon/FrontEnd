@@ -9,7 +9,7 @@ import booking, { bookingSaga } from './saga/reducers/booking';
 import search, { searchSaga } from './saga/reducers/search';
 import artist, { artistSaga } from './saga/reducers/artist';
 import place, { placeSaga } from './saga/reducers/place';
-
+import admin, { adminSaga } from './saga/reducers/admin';
 export function* rootSaga() {
   yield all([
     authSaga(),
@@ -21,6 +21,7 @@ export function* rootSaga() {
     searchSaga(),
     artistSaga(),
     placeSaga(),
+    adminSaga(),
   ]);
 }
 
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   search,
   artist,
   place,
+  admin,
 });
 
 export default rootReducer;
