@@ -31,10 +31,10 @@ export default function IndexLayout() {
   const [trafficTwoData, setTrafficTwoData] = useState<any>('');
   const dispatch = useDispatch();
   const history = useHistory();
-  // if (!user) {
-  //   messageCustom('로그인 후 이용해주세요.');
-  //   history.push('/');
-  // }
+  if (!user) {
+    messageCustom('로그인 후 이용해주세요.');
+    history.push('/');
+  }
 
   const enrollPerformance = () => {
     let validation = '';
