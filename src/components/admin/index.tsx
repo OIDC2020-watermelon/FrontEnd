@@ -2,21 +2,53 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/style/palette';
 import CustomInput from '../common/input/CustomInput';
-import { Button, message } from 'antd';
+import { Button, message, Popconfirm } from 'antd';
+import {
+  addPerformance,
+  deletePerformance,
+  getTraffic,
+} from '../../models/saga/reducers/admin';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../models/hook/providers/auth/AuthProvider';
+import messageCustom from '../../lib/utils/message';
+import store from '../../models/configure';
+import Graph from './graph';
 
 export default function IndexLayout() {
+  const [{ data: user }] = useAuth();
   const [name, setName] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [place, setPlace] = useState<string>('');
   const [artist, setArtist] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [deleteNum, setDeleteNum] = useState<number>(0);
+  const [trafficNum, setTrafficNum] = useState<number>(0);
+  const [trafficLabel, setTrafficLabel] = useState<any>('');
+  const [trafficData, setTrafficData] = useState<any>('');
+  const dispatch = useDispatch();
+  const history = useHistory();
+  /*if (!user) {
+    messageCustom('로그인 후 이용해주세요.');
+    history.push('/');
+  }*/
 
-  const addPerformance = () => {
+  const enrollPerformance = () => {
     let validation = '';
 
     if (name && date && place && artist && description) {
       console.log('success');
+      dispatch(
+        addPerformance.request({
+          availableDate: '',
+          duration: '',
+          productId: name,
+          session: '',
+          sprice: '',
+          startAt: '',
+          vipPrice: '',
+        }),
+      );
     } else {
       if (name === '') {
         validation += '공연명 ';
@@ -59,10 +91,38 @@ export default function IndexLayout() {
     }
   };
 
-  const deletePerformance = () => {
+  const removePerformance = () => {
     console.log(deleteNum);
+    if (!deleteNum) {
+      message.warning('ID를 입력하세요.');
+    } else {
+      dispatch(
+        deletePerformance.request({
+          performanceId: deleteNum,
+        }),
+      );
+      message.success('삭제에 성공하였습니다.');
+    }
   };
 
+  const makeTraffic = () => {
+    dispatch(
+      getTraffic.request({
+        performanceId: trafficNum,
+      }),
+    );
+  };
+
+  store.subscribe(() => {
+    //console.log("실행!!", store.getState());
+    var result = {
+      data: store.getState().admin.traffic.data,
+      error: '',
+    };
+    console.log(result);
+    //setTrafficLabel(result);
+    //setTrafficData(result);
+  });
   return (
     <>
       <S.Container>
@@ -119,13 +179,17 @@ export default function IndexLayout() {
             />
           </S.InfoContentsJob>
 
-          <S.InfoLayout style={{ marginTop: 30 }}>
-            <S.InfoEdit
-              style={{ marginLeft: '80%', height: 35 }}
-              onClick={addPerformance}
+          <S.InfoLayout style={{ marginTop: 10 }}>
+            <Popconfirm
+              title="추가하시겠습니까?"
+              onConfirm={enrollPerformance}
+              okText="네"
+              cancelText="아니요"
             >
-              저장
-            </S.InfoEdit>
+              <S.InfoEdit style={{ marginLeft: '80%', height: 35 }}>
+                저장
+              </S.InfoEdit>
+            </Popconfirm>
           </S.InfoLayout>
         </S.InfoItemWrap>
 
@@ -143,14 +207,56 @@ export default function IndexLayout() {
             />
           </S.InfoContentsJob>
 
-          <S.InfoLayout style={{ marginTop: 30 }}>
-            <S.InfoEdit
-              style={{ marginLeft: '80%', height: 35 }}
-              onClick={deletePerformance}
+          <S.InfoLayout style={{ marginTop: 10 }}>
+            <Popconfirm
+              title="삭제하시겠습니까?"
+              onConfirm={removePerformance}
+              okText="네"
+              cancelText="아니요"
             >
-              저장
-            </S.InfoEdit>
+              <S.InfoEdit style={{ marginLeft: '80%', height: 35 }}>
+                삭제
+              </S.InfoEdit>
+            </Popconfirm>
           </S.InfoLayout>
+        </S.InfoItemWrap>
+
+        <S.InfoItemWrap>
+          <S.InfoTitle>공연 대시보드</S.InfoTitle>
+
+          <S.InfoContentsTitle>공연ID</S.InfoContentsTitle>
+
+          <S.InfoContentsJob>
+            <CustomInput
+              type="number"
+              onChange={(e: any) => {
+                setTrafficNum(e.target.value);
+              }}
+            />
+          </S.InfoContentsJob>
+
+          <S.InfoLayout style={{ marginTop: 10 }}>
+            <Popconfirm
+              title="검색하시겠습니까?"
+              onConfirm={makeTraffic}
+              okText="네"
+              cancelText="아니요"
+            >
+              <S.InfoEdit style={{ marginLeft: '80%', height: 35 }}>
+                검색
+              </S.InfoEdit>
+            </Popconfirm>
+          </S.InfoLayout>
+
+          <S.GraphLayout>
+            <S.GraphLayoutCompo>
+              <Graph labels={[]} data={[]} />
+            </S.GraphLayoutCompo>
+
+            <S.GraphLayoutCompo>
+              <Graph labels={[]} data={[]} />
+            </S.GraphLayoutCompo>
+          </S.GraphLayout>
         </S.InfoItemWrap>
       </S.Container>
     </>
@@ -202,4 +308,13 @@ S.InfoLayout = styled.div`
 
 S.InfoEdit = styled(Button)`
   flex: 1;
+`;
+
+S.GraphLayout = styled.div`
+  display: flex;
+`;
+
+S.GraphLayoutCompo = styled.div`
+  flex: 1;
+  padding: 1rem;
 `;

@@ -6,7 +6,7 @@ import palette from '../../lib/style/palette';
 import { RootState } from '../../models';
 import { getPlace } from '../../models/saga/reducers/place';
 import PlaceCard from './PlaceCard';
-import PlaceSeat from './PlaceSeat';
+//import PlaceSeat from './PlaceSeat';
 
 export default function PlaceLayout() {
   const dispatch = useDispatch();

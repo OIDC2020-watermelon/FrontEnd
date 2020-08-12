@@ -7,7 +7,7 @@ const { Option } = Select;
 
 const Performance = ({ performances }: { performances: any }) => {
   const [arraySlice, setArraySlice] = useState<number>(0);
-  const [category, setCategory] = useState<string>('');
+  //const [category, setCategory] = useState<string>('');
   const [performancesList, setPerformanceList] = useState<any>({
     data: [],
     error: null,
@@ -181,7 +181,7 @@ const Performance = ({ performances }: { performances: any }) => {
                     <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="image"
+                          alt="thumbnailImgUrl"
                           src={list.thumbnailImgUrl}
                           width={100}
                           height={100}
@@ -230,7 +230,7 @@ const Performance = ({ performances }: { performances: any }) => {
                     <S.TitleContent style={{ flex: 4, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="image"
+                          alt="thumbnailImgUrl"
                           src={list.thumbnailImgUrl}
                           width={100}
                           height={100}

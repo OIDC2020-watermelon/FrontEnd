@@ -125,23 +125,24 @@ export default function BookList() {
   };
 
   const statusButton = (type: string) => {
+    var filter;
     if (type === 'cancel') {
-      var filter = {
+      filter = {
         data: manage.data.filter(function (el: any, idx: number) {
           if (el.canceled) {
             return el;
           } else {
-            return;
+            return 1;
           }
         }),
         error: '',
       };
       setFilterManage(filter);
     } else if (type === 'reservation') {
-      var filter = {
+      filter = {
         data: manage.data.filter(function (el: any, idx: number) {
           if (el.canceled) {
-            return;
+            return 1;
           } else {
             return el;
           }

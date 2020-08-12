@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import BookingHeader from './BookingHeader';
-
-import { Moment } from 'moment';
-
 const Index = () => {
   return (
     <>

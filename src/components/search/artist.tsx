@@ -58,7 +58,7 @@ const Artist = ({ ArtistList }: { ArtistList: any }) => {
                     <S.TitleContent style={{ flex: 3, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="image"
+                          alt="thumbnailImgUrl"
                           src={list.thumbnailImgUrl}
                           width={100}
                           height={100}
@@ -115,7 +115,7 @@ const Artist = ({ ArtistList }: { ArtistList: any }) => {
                     <S.TitleContent style={{ flex: 3, textAlign: 'left' }}>
                       <S.TitleContentLeft>
                         <img
-                          alt="image"
+                          alt="thumbnailImgUrl"
                           src={list.thumbnailImgUrl}
                           width={100}
                           height={100}
