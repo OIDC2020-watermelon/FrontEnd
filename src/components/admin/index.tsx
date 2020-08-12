@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/style/palette';
 import CustomInput from '../common/input/CustomInput';
@@ -7,14 +7,15 @@ import {
   addPerformance,
   deletePerformance,
   getTraffic,
+  getTrafficTwo,
 } from '../../models/saga/reducers/admin';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../models/hook/providers/auth/AuthProvider';
 import messageCustom from '../../lib/utils/message';
-import store from '../../models/configure';
 import Graph from './graph';
-
+import moment from 'moment';
+import { RootState } from '../../models';
 export default function IndexLayout() {
   const [{ data: user }] = useAuth();
   const [name, setName] = useState<string>('');
@@ -26,12 +27,14 @@ export default function IndexLayout() {
   const [trafficNum, setTrafficNum] = useState<number>(0);
   const [trafficLabel, setTrafficLabel] = useState<any>('');
   const [trafficData, setTrafficData] = useState<any>('');
+  const [trafficTwoLabel, setTrafficTwoLabel] = useState<any>('');
+  const [trafficTwoData, setTrafficTwoData] = useState<any>('');
   const dispatch = useDispatch();
   const history = useHistory();
-  /*if (!user) {
-    messageCustom('로그인 후 이용해주세요.');
-    history.push('/');
-  }*/
+  // if (!user) {
+  //   messageCustom('로그인 후 이용해주세요.');
+  //   history.push('/');
+  // }
 
   const enrollPerformance = () => {
     let validation = '';
@@ -106,23 +109,54 @@ export default function IndexLayout() {
   };
 
   const makeTraffic = () => {
+    setTrafficLabel([]);
+    setTrafficData([]);
+
+    setTrafficTwoLabel([]);
+    setTrafficTwoData([]);
+
     dispatch(
       getTraffic.request({
         performanceId: trafficNum,
       }),
     );
+
+    dispatch(
+      getTrafficTwo.request({
+        performanceId: trafficNum,
+      }),
+    );
   };
 
-  store.subscribe(() => {
-    //console.log("실행!!", store.getState());
-    var result = {
-      data: store.getState().admin.traffic.data,
-      error: '',
-    };
-    console.log(result);
-    //setTrafficLabel(result);
-    //setTrafficData(result);
-  });
+  const allData = useSelector((state: RootState) => state.admin.traffic.data);
+  const allDataTwo = useSelector(
+    (state: RootState) => state.admin.trafficTwo.data,
+  );
+  //console.log(allData);
+
+  useEffect(() => {
+    let data = [];
+    let labels = [];
+    let dataTwo = [];
+    let labelsTwo = [];
+    for (let i = 0; i < allData.length; i++) {
+      data.push(allData[i].docCount);
+      labels.push(moment(allData[i].from).format('YYYY-MM-DD HH:mm:ss'));
+    }
+
+    for (let i = 0; i < allDataTwo.length; i++) {
+      dataTwo.push(allDataTwo[i].docCount);
+      labelsTwo.push(moment(allDataTwo[i].from).format('YYYY-MM-DD HH:mm:ss'));
+    }
+
+    setTrafficLabel(labels);
+    setTrafficData(data);
+
+    setTrafficTwoLabel(labels);
+    setTrafficTwoData(data);
+  }, [allData, allDataTwo]);
+
+  //console.log(trafficLabel, trafficData)
   return (
     <>
       <S.Container>
@@ -132,7 +166,7 @@ export default function IndexLayout() {
           <S.InfoContentsTitle>공연명</S.InfoContentsTitle>
 
           <S.InfoContentsJob>
-            <CustomInput
+            <S.CustomInputOver
               onChange={(e: any) => {
                 setName(e.target.value);
               }}
@@ -142,7 +176,7 @@ export default function IndexLayout() {
           <S.InfoContentsTitle>공연날짜</S.InfoContentsTitle>
 
           <S.InfoContentsJob>
-            <CustomInput
+            <S.CustomInputOver
               onChange={(e: any) => {
                 setDate(e.target.value);
               }}
@@ -152,7 +186,7 @@ export default function IndexLayout() {
           <S.InfoContentsTitle>공연장소</S.InfoContentsTitle>
 
           <S.InfoContentsJob>
-            <CustomInput
+            <S.CustomInputOver
               onChange={(e: any) => {
                 setPlace(e.target.value);
               }}
@@ -162,7 +196,7 @@ export default function IndexLayout() {
           <S.InfoContentsTitle>출연진</S.InfoContentsTitle>
 
           <S.InfoContentsJob>
-            <CustomInput
+            <S.CustomInputOver
               onChange={(e: any) => {
                 setArtist(e.target.value);
               }}
@@ -172,7 +206,7 @@ export default function IndexLayout() {
           <S.InfoContentsTitle>공연설명</S.InfoContentsTitle>
 
           <S.InfoContentsJob>
-            <CustomInput
+            <S.CustomInputOver
               onChange={(e: any) => {
                 setDescription(e.target.value);
               }}
@@ -199,7 +233,7 @@ export default function IndexLayout() {
           <S.InfoContentsTitle>공연식별번호</S.InfoContentsTitle>
 
           <S.InfoContentsJob>
-            <CustomInput
+            <S.CustomInputOver
               type="number"
               onChange={(e: any) => {
                 setDeleteNum(e.target.value);
@@ -227,7 +261,7 @@ export default function IndexLayout() {
           <S.InfoContentsTitle>공연ID</S.InfoContentsTitle>
 
           <S.InfoContentsJob>
-            <CustomInput
+            <S.CustomInputOver
               type="number"
               onChange={(e: any) => {
                 setTrafficNum(e.target.value);
@@ -250,11 +284,15 @@ export default function IndexLayout() {
 
           <S.GraphLayout>
             <S.GraphLayoutCompo>
-              <Graph labels={[]} data={[]} />
+              <Graph labels={trafficLabel} data={trafficData} type={'left'} />
             </S.GraphLayoutCompo>
 
             <S.GraphLayoutCompo>
-              <Graph labels={[]} data={[]} />
+              <Graph
+                labels={trafficTwoLabel}
+                data={trafficTwoData}
+                type={'right'}
+              />
             </S.GraphLayoutCompo>
           </S.GraphLayout>
         </S.InfoItemWrap>
@@ -298,6 +336,7 @@ S.InfoContentsJob = styled.div`
   width: 50%;
   display: inline-block;
   margin-bottom: 1rem;
+  text-align: right;
 `;
 
 S.InfoLayout = styled.div`
@@ -317,4 +356,8 @@ S.GraphLayout = styled.div`
 S.GraphLayoutCompo = styled.div`
   flex: 1;
   padding: 1rem;
+`;
+
+S.CustomInputOver = styled(CustomInput)`
+  width: 70%;
 `;
