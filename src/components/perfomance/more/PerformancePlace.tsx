@@ -2,11 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../../lib/style/palette';
 import PlaceLayout from '../../place/PlaceLayout';
+import { RootState } from '../../../models';
+import { useSelector } from 'react-redux';
+
 export default function PerformancePlace() {
+  const product = useSelector(
+    (state: RootState) => state.performance.product.data,
+  );
   return (
     <>
       <S.InfoContainer className="scroll">
-        <PlaceLayout />
+        <PlaceLayout placeId={product?.place.id} />
       </S.InfoContainer>
     </>
   );

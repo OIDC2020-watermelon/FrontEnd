@@ -35,10 +35,8 @@ export default function IndexLayout() {
     messageCustom('로그인 후 이용해주세요.');
     history.push('/');
   }
-
   const enrollPerformance = () => {
     let validation = '';
-
     if (name && date && place && artist && description) {
       console.log('success');
       dispatch(
@@ -56,7 +54,6 @@ export default function IndexLayout() {
       if (name === '') {
         validation += '공연명 ';
       }
-
       if (date === '') {
         if (validation === '') {
           validation += '공연날짜 ';
@@ -64,7 +61,6 @@ export default function IndexLayout() {
           validation += ', 공연날짜 ';
         }
       }
-
       if (place === '') {
         if (validation === '') {
           validation += '공연장소 ';
@@ -72,7 +68,6 @@ export default function IndexLayout() {
           validation += ', 공연장소 ';
         }
       }
-
       if (artist === '') {
         if (validation === '') {
           validation += '출연진 ';
@@ -80,7 +75,6 @@ export default function IndexLayout() {
           validation += ', 출연진 ';
         }
       }
-
       if (description === '') {
         if (validation === '') {
           validation += '공연설명 ';
@@ -89,11 +83,9 @@ export default function IndexLayout() {
         }
       }
       validation += '을 채워주세요.';
-
       message.warning(validation);
     }
   };
-
   const removePerformance = () => {
     console.log(deleteNum);
     if (!deleteNum) {
@@ -107,33 +99,27 @@ export default function IndexLayout() {
       message.success('삭제에 성공하였습니다.');
     }
   };
-
   const makeTraffic = () => {
     setTrafficLabel([]);
     setTrafficData([]);
-
     setTrafficTwoLabel([]);
     setTrafficTwoData([]);
-
     dispatch(
       getTraffic.request({
         performanceId: trafficNum,
       }),
     );
-
     dispatch(
       getTrafficTwo.request({
         performanceId: trafficNum,
       }),
     );
   };
-
   const allData = useSelector((state: RootState) => state.admin.traffic.data);
   const allDataTwo = useSelector(
     (state: RootState) => state.admin.trafficTwo.data,
   );
   //console.log(allData);
-
   useEffect(() => {
     let data = [];
     let labels = [];
@@ -143,12 +129,10 @@ export default function IndexLayout() {
       data.push(allData[i].docCount);
       labels.push(moment(allData[i].from).format('YYYY-MM-DD HH:mm:ss'));
     }
-
     for (let i = 0; i < allDataTwo.length; i++) {
       dataTwo.push(allDataTwo[i].docCount);
       labelsTwo.push(moment(allDataTwo[i].from).format('YYYY-MM-DD HH:mm:ss'));
     }
-
     setTrafficLabel(labels);
     setTrafficData(data);
 
@@ -162,9 +146,7 @@ export default function IndexLayout() {
       <S.Container>
         <S.InfoItemWrap>
           <S.InfoTitle>공연 추가</S.InfoTitle>
-
           <S.InfoContentsTitle>공연명</S.InfoContentsTitle>
-
           <S.InfoContentsJob>
             <S.CustomInputOver
               onChange={(e: any) => {
@@ -172,9 +154,7 @@ export default function IndexLayout() {
               }}
             />
           </S.InfoContentsJob>
-
           <S.InfoContentsTitle>공연날짜</S.InfoContentsTitle>
-
           <S.InfoContentsJob>
             <S.CustomInputOver
               onChange={(e: any) => {
@@ -182,9 +162,7 @@ export default function IndexLayout() {
               }}
             />
           </S.InfoContentsJob>
-
           <S.InfoContentsTitle>공연장소</S.InfoContentsTitle>
-
           <S.InfoContentsJob>
             <S.CustomInputOver
               onChange={(e: any) => {
@@ -192,9 +170,7 @@ export default function IndexLayout() {
               }}
             />
           </S.InfoContentsJob>
-
           <S.InfoContentsTitle>출연진</S.InfoContentsTitle>
-
           <S.InfoContentsJob>
             <S.CustomInputOver
               onChange={(e: any) => {
@@ -202,9 +178,7 @@ export default function IndexLayout() {
               }}
             />
           </S.InfoContentsJob>
-
           <S.InfoContentsTitle>공연설명</S.InfoContentsTitle>
-
           <S.InfoContentsJob>
             <S.CustomInputOver
               onChange={(e: any) => {
@@ -212,7 +186,6 @@ export default function IndexLayout() {
               }}
             />
           </S.InfoContentsJob>
-
           <S.InfoLayout style={{ marginTop: 10 }}>
             <Popconfirm
               title="추가하시겠습니까?"
@@ -226,12 +199,9 @@ export default function IndexLayout() {
             </Popconfirm>
           </S.InfoLayout>
         </S.InfoItemWrap>
-
         <S.InfoItemWrap>
           <S.InfoTitle>공연 제거</S.InfoTitle>
-
           <S.InfoContentsTitle>공연식별번호</S.InfoContentsTitle>
-
           <S.InfoContentsJob>
             <S.CustomInputOver
               type="number"
@@ -240,7 +210,6 @@ export default function IndexLayout() {
               }}
             />
           </S.InfoContentsJob>
-
           <S.InfoLayout style={{ marginTop: 10 }}>
             <Popconfirm
               title="삭제하시겠습니까?"
@@ -254,12 +223,9 @@ export default function IndexLayout() {
             </Popconfirm>
           </S.InfoLayout>
         </S.InfoItemWrap>
-
         <S.InfoItemWrap>
           <S.InfoTitle>공연 대시보드</S.InfoTitle>
-
           <S.InfoContentsTitle>공연ID</S.InfoContentsTitle>
-
           <S.InfoContentsJob>
             <S.CustomInputOver
               type="number"
@@ -268,7 +234,6 @@ export default function IndexLayout() {
               }}
             />
           </S.InfoContentsJob>
-
           <S.InfoLayout style={{ marginTop: 10 }}>
             <Popconfirm
               title="검색하시겠습니까?"
@@ -281,12 +246,10 @@ export default function IndexLayout() {
               </S.InfoEdit>
             </Popconfirm>
           </S.InfoLayout>
-
           <S.GraphLayout>
             <S.GraphLayoutCompo>
               <Graph labels={trafficLabel} data={trafficData} type={'left'} />
             </S.GraphLayoutCompo>
-
             <S.GraphLayoutCompo>
               <Graph
                 labels={trafficTwoLabel}
@@ -300,7 +263,6 @@ export default function IndexLayout() {
     </>
   );
 }
-
 const S: any = {};
 S.Container = styled.div`
   max-width: 1130px;
@@ -318,46 +280,38 @@ S.InfoTitle = styled.div`
   margin-bottom: 1rem;
   padding: 0.5rem 0;
 `;
-
 S.InfoContents = styled.div`
   width: 100%;
   font-weight: bold;
   padding: 1rem 0;
 `;
-
 S.InfoContentsTitle = styled.div`
   width: 50%;
   padding-left: 10%;
   display: inline-block;
   margin-bottom: 1rem;
 `;
-
 S.InfoContentsJob = styled.div`
   width: 50%;
   display: inline-block;
   margin-bottom: 1rem;
   text-align: right;
 `;
-
 S.InfoLayout = styled.div`
   display: flex;
   height: 50px;
   text-align: left;
 `;
-
 S.InfoEdit = styled(Button)`
   flex: 1;
 `;
-
 S.GraphLayout = styled.div`
   display: flex;
 `;
-
 S.GraphLayoutCompo = styled.div`
   flex: 1;
   padding: 1rem;
 `;
-
 S.CustomInputOver = styled(CustomInput)`
   width: 70%;
 `;

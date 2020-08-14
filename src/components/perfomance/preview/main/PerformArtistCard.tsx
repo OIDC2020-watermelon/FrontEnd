@@ -14,19 +14,21 @@ export default function PerformArtistCard({ artist }: PerformArtistCardProps) {
     <>
       <S.ArtistCardContainer>
         <S.ArtistImage
-          artistImage="https://source.unsplash.com/random"
+          artistImage={
+            artist?.thumbnailImgUrl || 'https://source.unsplash.com/random'
+          }
           span={11}
         ></S.ArtistImage>
         <S.ArtistTextContainer span={13}>
           <Row justify="space-between">
             <Col className="artist_name" span={14}>
-              {artist.name}
+              {artist?.name}
             </Col>
             <Col span={10}>
-              <S.StyledLink to="/artist/1">자세히</S.StyledLink>
+              <S.StyledLink to={`/artist/${artist?.id}`}>자세히</S.StyledLink>
             </Col>
           </Row>
-          <Row className="artist_role">강남역</Row>
+          <Row className="artist_role">{artist?.occupation}</Row>
         </S.ArtistTextContainer>
       </S.ArtistCardContainer>
     </>
