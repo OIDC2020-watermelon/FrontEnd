@@ -12,7 +12,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../models/hook/providers/auth/AuthProvider';
-import messageCustom from '../../lib/utils/message';
 import Graph from './graph';
 import moment from 'moment';
 import { RootState } from '../../models';
@@ -31,10 +30,6 @@ export default function IndexLayout() {
   const [trafficTwoData, setTrafficTwoData] = useState<any>('');
   const dispatch = useDispatch();
   const history = useHistory();
-  if (!user) {
-    messageCustom('로그인 후 이용해주세요.');
-    history.push('/');
-  }
 
   const enrollPerformance = () => {
     let validation = '';

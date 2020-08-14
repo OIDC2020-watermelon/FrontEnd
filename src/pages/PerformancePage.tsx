@@ -4,13 +4,15 @@ import TicketingLayout from '../components/perfomance/TicketingLayout';
 import PreviewLayout from '../components/perfomance/PreviewLayout';
 import PerformanceMoreLayout from '../components/perfomance/PerformanceMoreLayout';
 import { useDispatch } from 'react-redux';
-import { getPerformance } from '../models/saga/reducers/performance';
+import { getProduct } from '../models/saga/reducers/performance';
+import { useRouteMatch } from 'react-router-dom';
 
 export default function PerformancePage() {
+  const { id } = useRouteMatch().params as any;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPerformance.request({}));
+    dispatch(getProduct.request({ productId: id }));
   }, [dispatch]);
 
   return (

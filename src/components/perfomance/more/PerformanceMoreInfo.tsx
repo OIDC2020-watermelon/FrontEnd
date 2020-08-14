@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../../../lib/style/palette';
-import { ArtistInfo, CostInfo, PerformanceInfo } from '../preview/main';
+import {
+  ArtistInfo,
+  CostInfo,
+  MainInfo,
+  PerformanceInfo,
+} from '../preview/main';
 
 export default function PerformanceMoreInfo() {
   return (
@@ -9,12 +14,8 @@ export default function PerformanceMoreInfo() {
       <S.InfoContainer className="scroll">
         <S.InfoItemWrap>
           <S.InfoTitle>기본정보</S.InfoTitle>
-          <S.InfoContents>더미데이터</S.InfoContents>
-        </S.InfoItemWrap>
-        <S.InfoItemWrap>
-          <S.InfoTitle>가격정보</S.InfoTitle>
           <S.InfoContents>
-            <CostInfo />
+            <MainInfo more />
           </S.InfoContents>
         </S.InfoItemWrap>
         <S.InfoItemWrap>

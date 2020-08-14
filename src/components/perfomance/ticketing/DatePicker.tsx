@@ -18,9 +18,14 @@ export default function DatePicker({
   function onPanelChange(date: Moment) {
     setSelectedDate(date);
   }
+
   function disabledDate(date: Moment) {
-    let start = ableStartDate || '2020-07-10';
-    let end = ableEndDate || '2020-07-20';
+    let start =
+      // ableStartDate ||
+      '2020-07-10';
+    let end =
+      // ableEndDate ||
+      '2021-07-20';
     if (date < moment(start)) {
       return true;
     } else if (date > moment(end)) {

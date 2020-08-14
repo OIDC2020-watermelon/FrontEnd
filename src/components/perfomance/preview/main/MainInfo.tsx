@@ -8,20 +8,25 @@ import { performanceCost } from '../../../../assets/dummy/dummyData';
 import font from '../../../../lib/style/font';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../models';
+interface MainInfoProps {
+  more?: boolean;
+}
 
-export default function MainInfo() {
-  const { data } = useSelector(
-    (state: RootState) => state.performance.performance,
-  );
+export default function MainInfo({ more }: MainInfoProps) {
+  const { data } = useSelector((state: RootState) => state.performance.product);
   if (!data) return null;
   return (
     <>
       <S.MainInfoContainer>
         <Row>
-          <Col xs={0} sm={0} md={0} xl={12}>
-            <S.CoverImage coverImg="https://source.unsplash.com/random" />
+          <Col xs={0} sm={0} md={0} xl={!more ? 12 : 0}>
+            {!more && (
+              <S.CoverImage
+                coverImg={data?.imgUrl || 'https://source.unsplash.com/random'}
+              />
+            )}
           </Col>
-          <S.MainInfoTextWrap xs={24} sm={24} md={24} xl={12}>
+          <S.MainInfoTextWrap xs={24} sm={24} md={24} xl={!more ? 12 : 24}>
             <Row className="main_info">
               <Col span={5} className="main_info_title">
                 장소
@@ -38,7 +43,6 @@ export default function MainInfo() {
                 {`${moment(data.releaseStartTime).format(
                   'YYYY-MM-DD',
                 )} ~ ${moment(data.releaseEndTime).format('YYYY-MM-DD')}`}
-                &nbsp;&nbsp;<S.StyledLink to="/">관람시간보기</S.StyledLink>
               </Col>
             </Row>
             <Row className="main_info">
@@ -47,7 +51,7 @@ export default function MainInfo() {
               </Col>
               <Col span={19} className="main_info_content">
                 {data.artists.map((artist: any) => `${artist.name} `)}
-                &nbsp;&nbsp;<S.StyledLink to="/">더보기</S.StyledLink>
+                &nbsp;&nbsp;
               </Col>
             </Row>
             <Divider />

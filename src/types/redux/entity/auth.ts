@@ -1,4 +1,5 @@
 export interface IUser {
+  id?: string;
   dateOfBirth?: string;
   gender?: string;
   name?: string;
