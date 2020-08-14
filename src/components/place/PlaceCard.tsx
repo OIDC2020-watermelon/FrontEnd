@@ -10,7 +10,7 @@ export default function PlaceCard({ data }: any) {
           <S.TitleContentLeft>
             <img
               alt="example"
-              src="https://source.unsplash.com/random"
+              src={data?.imgUrl || 'https://source.unsplash.com/random'}
               width={100}
               height={100}
             />

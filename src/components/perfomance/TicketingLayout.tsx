@@ -7,7 +7,7 @@ import SelectSeatModal from './book/BookModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../models';
 import { Moment } from 'moment';
-import { getPerformanceTicket } from '../../models/saga/reducers/performance';
+import { getPerformance } from '../../models/saga/reducers/performance';
 import { useRouteMatch } from 'react-router-dom';
 
 export default function TicketingLayout() {
@@ -16,10 +16,10 @@ export default function TicketingLayout() {
   const dispatch = useDispatch();
   const { id } = useRouteMatch().params as any;
   const data = useSelector(
-    (state: RootState) => state.performance.performance.data,
+    (state: RootState) => state.performance.product.data,
   );
   useEffect(() => {
-    dispatch(getPerformanceTicket.request({ performanceId: id }));
+    dispatch(getPerformance.request({ productId: id }));
   }, [id, dispatch]);
   return (
     <>
@@ -37,7 +37,7 @@ export default function TicketingLayout() {
         <Col span={14}>
           <S.DateOpsContainer>
             <Col span={11}>
-              <SelectAbleTime />
+              <SelectAbleTime selectedDate={selectedDate} />
             </Col>
             <Col span={11}>
               <SelectAbleSeat />

@@ -4,17 +4,22 @@ import styled from 'styled-components';
 import SelectFilter from './preview/SelectFilter';
 import useInput from '../../lib/utils/hooks';
 import { TFilter } from '../../types/common/commonType';
+import moment from 'moment';
 import {
   MainInfo,
   CostInfo,
   ArtistInfo,
   PerformanceInfo,
 } from './preview/main';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../models';
 
 const { Title } = Typography;
 
 export default function PreviewLayout() {
   const [filter, changeFilter] = useInput<TFilter>('main');
+  const now = Date.now();
+  const { data } = useSelector((state: RootState) => state.performance.product);
 
   const ShowSelectedPreview = useCallback((filter: TFilter) => {
     switch (filter) {
@@ -36,14 +41,17 @@ export default function PreviewLayout() {
 
       <S.HeadInfoContainer>
         <S.HeadMainInfoWrap>
-          <S.AntdTitle level={3}>메인 카테고리 &lt;공연명&gt;</S.AntdTitle>
+          <S.AntdTitle level={3}>{data?.title || `공연명`}</S.AntdTitle>
           <S.AntdDisalbeButton disabled={true} type="ghost">
-            예매중
+            {moment(now) < moment(data?.releaseEndTime) &&
+            moment(now) > moment(data?.releaseStartTime)
+              ? '예매중'
+              : '판매중지'}
           </S.AntdDisalbeButton>
         </S.HeadMainInfoWrap>
 
         <S.HeadSubInfoWrap>
-          <span>서브카테고리 | 상영시간 | 관람제한</span>
+          <span>{`${data?.category} | ${data?.runningTime} | ${data?.rrated}세 미만 이용불가`}</span>
           <SelectFilter filter={filter} changeFilter={changeFilter} />
         </S.HeadSubInfoWrap>
       </S.HeadInfoContainer>

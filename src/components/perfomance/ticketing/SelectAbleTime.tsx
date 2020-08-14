@@ -3,6 +3,7 @@ import { List, Typography } from 'antd';
 import styled from 'styled-components';
 import { RootState } from '../../../models';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const data = [
   '13시 00분',
@@ -13,8 +14,41 @@ const data = [
   '17시 00분',
 ];
 
-export default function SelectAbleTime() {
-  const tickets = useSelector((state: RootState) => state.performance.ticket);
+function* filterDate(performance: any, selectedDate: any) {
+  let index = 0;
+  if (performance instanceof Array) {
+    while (performance[index]) {
+      if (
+        moment(performance[index].availableDate).format('YYYY-MM-DD') ===
+        moment(selectedDate).format('YYYY-MM-DD')
+      ) {
+        yield performance[index];
+      }
+      index++;
+    }
+  }
+}
+
+interface SelectAbleTimeProps {
+  selectedDate: any;
+}
+
+export default function SelectAbleTime({ selectedDate }: SelectAbleTimeProps) {
+  const performance = useSelector(
+    (state: RootState) => state.performance.performance.data,
+  );
+
+  const items: any = [];
+  const item: any = new Set();
+  const ableDate: any = [];
+
+  // 1. 해당 날짜의 공연만 뽑아온다.
+  const iterator = filterDate(performance, selectedDate) as any;
+
+  for (const date of iterator) {
+    items.push(date);
+  }
+  console.log('performance', performance);
   return (
     <>
       <S.AntdList
