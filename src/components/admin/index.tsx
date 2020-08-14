@@ -152,8 +152,8 @@ export default function IndexLayout() {
     setTrafficLabel(labels);
     setTrafficData(data);
 
-    setTrafficTwoLabel(labels);
-    setTrafficTwoData(data);
+    setTrafficTwoLabel(labelsTwo);
+    setTrafficTwoData(dataTwo);
   }, [allData, allDataTwo]);
 
   //console.log(trafficLabel, trafficData)

@@ -31,10 +31,10 @@ export const addPerformanceApi = ({
 
 export const getTrafficApi = ({ performanceId }: any): any =>
   client.get(
-    `${REACT_APP_SHOW_SERVER_URL}/show/products/${performanceId}/traffic`,
+    `${REACT_APP_SHOW_SERVER_URL}/show/products/${performanceId}/traffic?trafficType=RESERVATION`,
   );
 
 export const getTrafficTwoApi = ({ performanceId }: any): any =>
   client.get(
-    `${REACT_APP_SHOW_SERVER_URL}/show/products/${performanceId}/traffic`,
+    `${REACT_APP_SHOW_SERVER_URL}/show/products/${performanceId}/traffic?trafficType=ACCESS`,
   );
