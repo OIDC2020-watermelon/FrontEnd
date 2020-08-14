@@ -7,10 +7,10 @@ import { useAuth } from '../models/hook/providers/auth/AuthProvider';
 export default function AdminPage() {
   const [{ data: user }] = useAuth();
   const history = useHistory();
-  if (!user) {
-    messageCustom('로그인 후 이용해주세요.');
-    history.push('/');
-  }
+  // if (!user) {
+  //   messageCustom('로그인 후 이용해주세요.');
+  //   history.push('/');
+  // }
   return (
     <>
       <Index />

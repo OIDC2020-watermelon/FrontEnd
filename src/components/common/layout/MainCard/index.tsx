@@ -58,7 +58,7 @@ const index = ({ types, data }: { types: string; data: any }) => {
                             cover={
                               <img
                                 alt="example"
-                                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                                src={list.thumbnailImgUrl}
                                 width="100%"
                                 height="170px"
                               />
