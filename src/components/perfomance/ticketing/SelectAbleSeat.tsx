@@ -4,19 +4,26 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../models';
 
-function* seatArray(data: any) {
+function* seatArray(ticket: any) {
   let index = 0;
-  if (data instanceof Array)
-    while (data[index]) {
-      if (!data[index].sold) yield data[index].grade;
+  if (ticket instanceof Array)
+    while (ticket[index]) {
+      if (!ticket[index].sold) yield ticket[index].grade;
       index++;
     }
 }
+interface SelectAbleSeatProps {
+  visible: any;
+  setSelectedSession: any;
+}
 
-export default function SelectAbleSeat() {
-  const data = useSelector((state: RootState) => state.performance.ticket);
+export default function SelectAbleSeat({
+  visible,
+  setSelectedSession,
+}: SelectAbleSeatProps) {
+  const ticket = useSelector((state: RootState) => state.performance.ticket);
 
-  const iterator = seatArray(data) as any;
+  const iterator = seatArray(ticket) as any;
   const items: any = [];
   const item: any = {};
   for (const grade of iterator) {
@@ -36,12 +43,15 @@ export default function SelectAbleSeat() {
         dataSource={items}
         className="scroll"
         renderItem={(item: any) =>
-          Object.keys(item).map((key) => (
-            <S.AntdListItem>
-              <Typography.Text mark>{`[${key}좌석]`}</Typography.Text>
-              &nbsp;{`${item[key]}석`}
-            </S.AntdListItem>
-          ))
+          Object.keys(item).map(
+            (key) =>
+              visible && (
+                <S.AntdListItem>
+                  <Typography.Text mark>{`[${key}좌석]`}</Typography.Text>
+                  &nbsp;{`${item[key]}석`}
+                </S.AntdListItem>
+              ),
+          )
         }
       />
     </>

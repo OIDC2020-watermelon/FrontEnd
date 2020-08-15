@@ -8,14 +8,20 @@ interface DatePickerProps {
   ableEndDate?: Moment | number;
   selectedDate: any;
   setSelectedDate: any;
+  setVisible: any;
+  setSelectedSession: any;
 }
 export default function DatePicker({
   ableStartDate,
   ableEndDate,
   selectedDate,
   setSelectedDate,
+  setSelectedSession,
+  setVisible,
 }: DatePickerProps) {
   function onPanelChange(date: Moment) {
+    setVisible(false);
+    setSelectedSession(null);
     setSelectedDate(date);
   }
 

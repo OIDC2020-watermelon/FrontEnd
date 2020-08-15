@@ -3,12 +3,17 @@ import { Comment, Form, Button, Input, Typography } from 'antd';
 import styled from 'styled-components';
 import palette from '../../../lib/style/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../models';
 import { useAuth } from '../../../models/hook/providers/auth/AuthProvider';
+import {
+  addPerformanceComment,
+  deletePerformanceComment,
+} from '../../../models/saga/reducers/performance';
+import { useRouteMatch } from 'react-router-dom';
 
 const { Item } = Form;
-const CommentList = ({ comments }: any) => {
+const CommentList = ({ onDelete, comments, userId }: any) => {
   return (
     <>
       <Typography style={{ marginBottom: '1.5rem' }}>{`${
@@ -17,11 +22,26 @@ const CommentList = ({ comments }: any) => {
         comments && comments.length > 1 ? '개의 답변' : '개의 답변'
       }`}</Typography>
       {comments.map((comment: any) => (
-        <Comment
-          author={comment.userId}
-          content={<p style={{ marginBottom: '1.5rem' }}>{comment.content}</p>}
-          datetime={comment.createdDateTime}
-        />
+        <S.CommentWrap>
+          <Comment
+            author={comment.userId}
+            content={
+              <p style={{ marginBottom: '1.5rem' }}>{comment.content}</p>
+            }
+            datetime={comment.createdDateTime}
+          />
+          {userId === comment.userId ? (
+            <S.ButtonWrap>
+              <Button
+                htmlType="submit"
+                type="primary"
+                onClick={() => onDelete(comment.id)}
+              >
+                삭제
+              </Button>
+            </S.ButtonWrap>
+          ) : null}
+        </S.CommentWrap>
       ))}
     </>
   );
@@ -53,23 +73,36 @@ const Editor = ({ onChangeContents, onSubmit, submitting, content }: any) => (
   </>
 );
 
-export default function PerformanceQna() {
+export default function PerformanceQNA() {
   const [submitting, setSubmitting] = useState(false);
   const [content, setContents] = useState('');
   const [{ data: user }] = useAuth();
-
+  const dispatch = useDispatch();
   const { comments } = useSelector((state: RootState) => ({
     comments: state.performance.comments,
   }));
+  const { id } = useRouteMatch().params as any;
 
+  // 댓글 삭제 버튼 클릭시
+  const handleDelete = (commentId: string) => {
+    dispatch(deletePerformanceComment.request({ commentId }));
+  };
+
+  // 댓글 작성 버튼 클릭시
   const handleSubmit = () => {
-    if (!content) {
+    if (!content && submitting) {
       return;
     }
-    setSubmitting(true);
-
     setTimeout(() => {
       setSubmitting(true);
+      dispatch(
+        addPerformanceComment.request({
+          performanceId: id,
+          type: 'QNA',
+          content,
+        }),
+      );
+
       setContents('');
       setSubmitting(false);
     }, 1000);
@@ -113,7 +146,13 @@ export default function PerformanceQna() {
               />
             </S.CommentInputContainer>
             {comments
-              ? comments.length > 0 && <CommentList comments={comments} />
+              ? comments.length > 0 && (
+                  <CommentList
+                    comments={comments}
+                    userId={user?.id}
+                    onDelete={handleDelete}
+                  />
+                )
               : null}
           </>
         )}
@@ -173,4 +212,14 @@ S.AntdTextArea = styled(Input)`
 
 S.AntdButton = styled(Button)`
   float: right;
+`;
+
+S.CommentWrap = styled.div`
+  position: relative;
+`;
+
+S.ButtonWrap = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
