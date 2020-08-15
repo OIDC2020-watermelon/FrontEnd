@@ -11,13 +11,6 @@ const index = () => {
 
         <div>
           <NaverLoginCallback />
-
-          <LoginModalButtonLayout>
-            <button style={GoogleButtonStyled}>
-              <ImageStyled src={google} />
-              구글 계정으로 로그인
-            </button>
-          </LoginModalButtonLayout>
         </div>
       </LoginLayout>
     </>

@@ -7,18 +7,22 @@ import axios from 'axios';
 import { useAuth } from '../../../models/hook/providers/auth/AuthProvider';
 import message from '../../../lib/utils/message';
 import { useHistory } from 'react-router-dom';
-
-export default function BookModal() {
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../models';
+interface BookModalProps {
+  selectedSession: any;
+}
+export default function BookModal({ selectedSession }: BookModalProps) {
   const [visible, setVisible] = useState(false);
   const [selectModal, setSelectModal] = useState('1');
   const [selectedSeat, setSelectedSeat] = useState<Array<any>>([]);
   const [{ data: user }] = useAuth();
+  const ticket = useSelector((state: RootState) => state.performance.ticket);
   const history = useHistory();
 
   function onClickPayment() {
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
-    console.log(process.env.REACT_APP_IMP_ID);
     IMP.init(process.env.REACT_APP_IMP_ID);
 
     /* 2. 결제 데이터 정의하기 */
@@ -61,7 +65,7 @@ export default function BookModal() {
   }
 
   const showModalOne = () => {
-    if (!user) {
+    /* if (!user) {
       message('로그인 후 이용해주세요');
       return;
     } else if (
@@ -69,6 +73,14 @@ export default function BookModal() {
     ) {
       message('추가 정보를 입력해주세요.');
       history.push('/mypage');
+    }*/
+    if (!selectedSession) {
+      message('세션을 골라주세요');
+      return;
+    }
+    if (!ticket || ticket.length < 1) {
+      message('티켓이 없습니다.');
+      return;
     }
 
     setVisible(true);

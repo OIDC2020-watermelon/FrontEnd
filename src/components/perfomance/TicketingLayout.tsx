@@ -7,12 +7,17 @@ import SelectSeatModal from './book/BookModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../models';
 import { Moment } from 'moment';
-import { getPerformance } from '../../models/saga/reducers/performance';
+import {
+  getPerformance,
+  getPerformanceTicket,
+} from '../../models/saga/reducers/performance';
 import { useRouteMatch } from 'react-router-dom';
 
 export default function TicketingLayout() {
   const [selectedDate, setSelectedDate] = useState<Moment>(moment(Date.now()));
-  console.log(selectedDate, 'selectedDate');
+  const [selectedSession, setSelectedSession] = useState<any>();
+  const [visible, setVisible] = useState(false);
+
   const dispatch = useDispatch();
   const { id } = useRouteMatch().params as any;
   const data = useSelector(
@@ -21,6 +26,14 @@ export default function TicketingLayout() {
   useEffect(() => {
     dispatch(getPerformance.request({ productId: id }));
   }, [id, dispatch]);
+  useEffect(() => {
+    if (selectedSession) {
+      dispatch(
+        getPerformanceTicket.request({ performanceId: selectedSession?.id }),
+      );
+    }
+  }, [dispatch, selectedSession?.id]);
+
   return (
     <>
       <Divider orientation="center">예매하기</Divider>
@@ -31,22 +44,32 @@ export default function TicketingLayout() {
             setSelectedDate={setSelectedDate}
             ableStartDate={data?.releaseStartTime}
             ableEndDate={data?.releaseEndTime}
+            setVisible={setVisible}
+            setSelectedSession={setSelectedSession}
           />
         </S.DatePickerWrap>
 
         <Col span={14}>
           <S.DateOpsContainer>
             <Col span={11}>
-              <SelectAbleTime selectedDate={selectedDate} />
+              <SelectAbleTime
+                selectedDate={selectedDate}
+                setSelectedSession={setSelectedSession}
+                selectedSession={selectedSession}
+                setVisible={setVisible}
+              />
             </Col>
             <Col span={11}>
-              <SelectAbleSeat />
+              <SelectAbleSeat
+                setSelectedSession={setSelectedSession}
+                visible={visible}
+              />
             </Col>
           </S.DateOpsContainer>
 
           <Row>
             <Col span={24}>
-              <SelectSeatModal />
+              <SelectSeatModal selectedSession={selectedSession} />
             </Col>
           </Row>
         </Col>
