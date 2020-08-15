@@ -8,14 +8,18 @@ import { getPlace } from '../../models/saga/reducers/place';
 import PlaceCard from './PlaceCard';
 //import PlaceSeat from './PlaceSeat';
 
-export default function PlaceLayout() {
+interface PlaceLayoutProps {
+  placeId?: string;
+}
+
+export default function PlaceLayout({ placeId }: PlaceLayoutProps) {
   const dispatch = useDispatch();
-  const { id: placeId } = useRouteMatch().params as any;
+  const { id } = useRouteMatch().params as any;
   const data = useSelector((state: RootState) => state.place.place.data);
 
   console.log(data);
   useEffect(() => {
-    dispatch(getPlace.request({ placeId }));
+    dispatch(getPlace.request({ placeId: placeId || id }));
   }, [dispatch]);
   return (
     <>
@@ -28,7 +32,9 @@ export default function PlaceLayout() {
         </S.InfoItemWrap>
         <S.InfoItemWrap>
           <S.InfoTitle>공연장 설명</S.InfoTitle>
-          <S.InfoContents>{data?.description}</S.InfoContents>
+          <S.InfoContents
+            dangerouslySetInnerHTML={{ __html: data?.description }}
+          ></S.InfoContents>
         </S.InfoItemWrap>
       </S.Container>
     </>

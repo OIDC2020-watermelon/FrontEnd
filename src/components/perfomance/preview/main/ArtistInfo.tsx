@@ -8,9 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../models';
 
 export default function ArtistInfo() {
-  const { data } = useSelector(
-    (state: RootState) => state.performance.performance,
-  );
+  const { data } = useSelector((state: RootState) => state.performance.product);
   return (
     <>
       <S.ArtistInfoContainer className="scroll">

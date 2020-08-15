@@ -9,7 +9,7 @@ export const addReservationApi = ({
   startAt,
   userId,
 }: any): any =>
-  client.post(`${SERVER_URL}/reservation`, {
+  client.post(`${SERVER_URL}`, {
     availableDate,
     name,
     pay,
@@ -18,7 +18,7 @@ export const addReservationApi = ({
   });
 
 export const getReservationsApi = ({ userId }: any): any =>
-  client.get(`${SERVER_URL}/reservation/user/${userId}`);
+  client.get(`${SERVER_URL}/user/${userId}`);
 
 export const deleteReservationApi = ({ reservationId }: any): any =>
-  client.delete(`${SERVER_URL}/reservation/${reservationId}`);
+  client.delete(`${SERVER_URL}/${reservationId}`);
