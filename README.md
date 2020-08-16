@@ -23,11 +23,11 @@
 #### 150여개의 **commit** 40여개의 **pr**이 있었어요!
 
 <div align="center" style="display:flex;">
-	<img src="./readmeImg/commit.png" width="70%"/>
+	<img src="./readmeImg/commit.PNG" width="70%"/>
 </div>
 
 <div align="center" style="display:flex;">
-	<img src="./readmeImg/branchissue.png" width="70%"/>
+	<img src="./readmeImg/branchissue.PNG" width="70%"/>
 </div>
 
 \
@@ -119,5 +119,5 @@
 😁 git push (master branch) -> jenkins_server ( CI ) -> slack notification -> front_server ( CD )
 😎 git push -> jenkins_server ( CI ) -> slack notification -> front_server ( CD ) :fire::fire::fire:
 
-* Link: [Chrome][http://101.101.211.48/]
+* Link: [Chrome][http://101.101.218.225/]
 ---
