@@ -7,6 +7,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const enhancer = compose(
   applyMiddleware(sagaMiddleware),
+
   // isDev &&
   //   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
   //   (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
