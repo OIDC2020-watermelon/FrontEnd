@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../../../lib/style/palette';
-import {
-  ArtistInfo,
-  CostInfo,
-  MainInfo,
-  PerformanceInfo,
-} from '../preview/main';
+import { ArtistInfo, MainInfo, PerformanceInfo } from '../preview/main';
 
 export default function PerformanceMoreInfo() {
   return (

@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRouteMatch } from 'react-router-dom';
 
 export default function BreadScrum({ path }: any) {
   console.log('path', path);
@@ -27,7 +26,7 @@ export default function BreadScrum({ path }: any) {
       default:
         return;
     }
-  }, [path]);
+  }, [mainPath]);
   const subPathTwo = useCallback(() => {
     switch (mainPath[2]) {
       case 'performance':
@@ -39,7 +38,7 @@ export default function BreadScrum({ path }: any) {
       default:
         return;
     }
-  }, [path]);
+  }, [mainPath]);
 
   return (
     <>

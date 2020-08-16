@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import MainCategory from './MainCategory';
 import MainCard from './MainCard';
 import { Carousel } from 'antd';
 // import { useTheme } from '../../../models/hook/providers/theme/ThemeProvider';

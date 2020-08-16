@@ -16,12 +16,10 @@ export default function PlaceLayout() {
   console.log(data, '---------------');
   useEffect(() => {
     dispatch(getArtist.request({ artistId }));
-  }, [dispatch]);
+  }, [dispatch, artistId]);
   const addFlagClick = () => {
     setAddFlag(true);
   };
-
-  const jobLength = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 11개 Length
 
   return (
     <>

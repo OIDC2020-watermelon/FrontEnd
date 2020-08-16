@@ -6,12 +6,10 @@ import HeaderLinkList from './header/HeaderLinkList';
 import NavBar from './header/NavBar';
 import LogoComponent from './header/LogoComponent';
 import AdComponent from './header/AdComponent';
-import { useRouteMatch } from 'react-router-dom';
 
 interface AppFooterProps {}
 
 const AppHeader = () => {
-  const path = useRouteMatch().path as string;
   return (
     <>
       <S.HeaderContainer>
