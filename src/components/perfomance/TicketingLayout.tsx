@@ -32,7 +32,7 @@ export default function TicketingLayout() {
         getPerformanceTicket.request({ performanceId: selectedSession?.id }),
       );
     }
-  }, [dispatch, selectedSession?.id]);
+  }, [dispatch, selectedSession]);
 
   return (
     <>

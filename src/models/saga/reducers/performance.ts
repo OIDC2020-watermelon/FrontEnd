@@ -17,7 +17,6 @@ import createAsyncSaga, {
   asyncAction,
 } from '../../../lib/utils/reduxUtils';
 import message from '../../../lib/utils/message';
-import { useHistory } from 'react-router-dom';
 
 //1. 각 모듈별 함수 구분을 위한 prefix 각 모듈 파일명 + '/' 의 조합으로 구성합니다.
 const prefix: string = 'performance/';
@@ -124,6 +123,7 @@ export default createReducer<TPerformanceState>(initialState, {
   ) =>
     produce(state, (draft) => {
       message('존재하지 않는 상품입니다.');
+      window.location.replace('/');
       draft.product.error = null;
     }),
   [GET_PERFORMANCE.SUCCESS]: (
@@ -167,7 +167,7 @@ export default createReducer<TPerformanceState>(initialState, {
     action: ActionType<typeof getPerformance.success>,
   ) =>
     produce(state, (draft) => {
-      // draft.comments = action.payload.data;
+      draft.comments.filter((item: any) => item.id !== action.payload.data.id);
     }),
   [DELETE_PERFORMANCE_COMMENT.FAILURE]: (
     state,
@@ -178,7 +178,7 @@ export default createReducer<TPerformanceState>(initialState, {
     action: ActionType<typeof getPerformance.success>,
   ) =>
     produce(state, (draft) => {
-      // draft.comments = action.payload.data;
+      draft.comments?.unshift(action.payload.data);
     }),
   [ADD_PERFORMANCE_COMMENT.FAILURE]: (
     state,
