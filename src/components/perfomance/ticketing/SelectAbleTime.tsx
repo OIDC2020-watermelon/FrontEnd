@@ -39,7 +39,7 @@ export default function SelectAbleTime({
       setSelectedSession(item);
       setVisible(true);
     },
-    [setSelectedSession, selectedSession],
+    [setSelectedSession, selectedSession, setVisible],
   );
   const performance = useSelector(
     (state: RootState) => state.performance.performance.data,

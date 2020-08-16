@@ -13,7 +13,7 @@ export default function PerformancePage() {
 
   useEffect(() => {
     dispatch(getProduct.request({ productId: id }));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <>

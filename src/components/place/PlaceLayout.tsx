@@ -20,7 +20,7 @@ export default function PlaceLayout({ placeId }: PlaceLayoutProps) {
   console.log(data);
   useEffect(() => {
     dispatch(getPlace.request({ placeId: placeId || id }));
-  }, [dispatch]);
+  }, [dispatch, placeId, id]);
   return (
     <>
       <S.Container>

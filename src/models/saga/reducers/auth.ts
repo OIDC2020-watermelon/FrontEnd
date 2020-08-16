@@ -15,6 +15,7 @@ import {
   deleteUserApi,
 } from '../api/auth';
 import { saveTokenInCookies } from '../../hook/providers/auth/helper';
+import message from '../../../lib/utils/message';
 
 //1. 각 모듈별 함수 구분을 위한 prefix 각 모듈 파일명 + '/' 의 조합으로 구성합니다.
 const prefix: string = 'auth/';
@@ -51,6 +52,7 @@ export const deleteUser = asyncAction<
 //4. saga 비동기 관련 함수가 필요할 경우 작성 합니다. (optional) saga함수들의 모음은 최하단에 나열합니다.
 const loginSaga = createAsyncSaga(login, loginApi);
 const updateUserSaga = createAsyncSaga(updateUser, updateUserApi);
+
 const deleteUserSaga = createAsyncSaga(deleteUser, deleteUserApi);
 const getCurrentUserSaga = createAsyncSaga(getCurrentUser, getCurrentUserApi);
 
@@ -101,6 +103,7 @@ export default createReducer<TAuthState>(initialState, {
   ) =>
     produce(state, (draft) => {
       draft.auth.data = action.payload.data.data;
+      message('유저 정보가 수정되었습니다.');
     }),
   [UPDATEE_USER.FAILURE]: (
     state,

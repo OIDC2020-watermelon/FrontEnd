@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import palette from '../../../lib/style/palette';
 import { useAuth } from '../../../models/hook/providers/auth/AuthProvider';
 
-export default function TicketPayment({ selectedSeat }: any) {
+export default function TicketPayment({ selectedSeat, selectedSession }: any) {
   const [{ data: user }] = useAuth();
   const alignStyle = useMemo(
     () => ({ display: 'flex', justifyContent: 'space-between' }),
     [],
   );
-
+  console.log('selectedSession', selectedSession);
   return (
     <>
       <S.Container>

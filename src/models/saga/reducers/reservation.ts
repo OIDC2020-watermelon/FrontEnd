@@ -12,6 +12,7 @@ import createAsyncSaga, {
   asyncActionCreator,
   asyncAction,
 } from '../../../lib/utils/reduxUtils';
+import message from '../../../lib/utils/message';
 
 //1. 각 모듈별 함수 구분을 위한 prefix 각 모듈 파일명 + '/' 의 조합으로 구성합니다.
 const prefix: string = 'reservation/';
@@ -62,6 +63,8 @@ export default createReducer<TReservationState>(initialState, {
     produce(state, (draft) => {
       console.log(action.payload);
       draft.reservation.data = action.payload.data;
+      window.location.reload();
+      message('예매에 성공했습니다.');
     }),
   [ADD_RESERVATION.FAILURE]: (
     state,
