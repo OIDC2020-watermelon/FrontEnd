@@ -27,7 +27,7 @@ export default function IndexLayout() {
   const [category, setCategory] = useState<string>('CONCERT');
 
   const [date, setDate] = useState<string>('');
-  const [deleteNum, setDeleteNum] = useState<number>(0);
+  const [deleteNum, setDeleteNum] = useState<string>('');
   const [trafficNum, setTrafficNum] = useState<number>(0);
   const [trafficLabel, setTrafficLabel] = useState<any>('');
   const [trafficData, setTrafficData] = useState<any>('');
