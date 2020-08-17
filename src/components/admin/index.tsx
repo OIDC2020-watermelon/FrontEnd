@@ -64,6 +64,14 @@ export default function IndexLayout() {
 
   const enrollPerformance = () => {
     let validation = '';
+    console.log(
+      title,
+      releaseStartTime,
+      releaseEndTime,
+      placeId,
+      category,
+      availableDates,
+    );
     if (
       title &&
       releaseStartTime &&

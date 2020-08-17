@@ -4,7 +4,8 @@ import { getToken } from '../utils/authUtils';
 // axios setting
 const client = axios.create();
 // client.defaults.withCredentials = true;
-client.defaults.headers.common['X-AUTH-TOKEN'] = getToken();
+client.defaults.headers.common['X-AUTH-TOKEN'] = getToken('qid');
+
 // intercepter setting
 axios.interceptors.response.use(
   (response) => {

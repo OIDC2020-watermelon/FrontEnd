@@ -15,6 +15,8 @@ export default function BreadScrum({ path }: any) {
         return '예매관리';
       case 'search':
         return '검색';
+      case 'admin':
+        return '관리자';
       case 'performance':
         return '상세보기 > 공연';
       case 'artist':

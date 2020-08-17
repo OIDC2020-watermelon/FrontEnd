@@ -14,6 +14,7 @@ const saveTokenInCookies = (token: string) => {
 
 export const removeTokenFromCookies = () => {
   Cookies.remove('qid');
+  Cookies.remove('aid');
 };
 
 /**

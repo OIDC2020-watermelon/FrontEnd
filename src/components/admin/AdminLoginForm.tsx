@@ -34,6 +34,7 @@ export default function AdminLoginForm() {
           <CustomInput
             value={password}
             placeholder="password..."
+            type="password"
             name="password"
             onChange={changePassword}
           />

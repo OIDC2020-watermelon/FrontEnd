@@ -15,8 +15,8 @@ export const removeTokenFromCookies = () => {
   Cookies.remove('qid');
 };
 
-export const getToken = () => {
-  return Cookies.get('qid');
+export const getToken = (id: string) => {
+  return Cookies.get(id);
 };
 
 /**
