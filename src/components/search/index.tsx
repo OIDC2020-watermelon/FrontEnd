@@ -87,7 +87,7 @@ const Index = () => {
     dispatch(getPerformances.request({ keyword: params }));
     dispatch(getPlaces.request({ keyword: params }));
     dispatch(getArtists.request({ keyword: params }));
-  }, [dispatch]);
+  }, [dispatch, params]);
 
   // console.log('performance : ', performances);
   // console.log('places : ', places);

@@ -58,9 +58,9 @@ export default function BookList() {
     setFilterManage(filter);
   };
 
-  const onClickInit = () => {
-    setFilterManage(manage);
-  };
+  // const onClickInit = () => {
+  //   setFilterManage(manage);
+  // };
 
   const timeButton = (type: string) => {
     setFilterManage(manage);
@@ -160,7 +160,7 @@ export default function BookList() {
     <>
       <BookManagerFilter
         onOkPicker={onOkPicker}
-        onClickInit={onClickInit}
+        // onClickInit={onClickInit}
         timeButton={timeButton}
       />
       <BookListHeader

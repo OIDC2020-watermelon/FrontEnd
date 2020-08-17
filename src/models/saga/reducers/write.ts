@@ -21,25 +21,25 @@ export const writeReducer = (state = initialWriteState, action: any) => {
     }
     case 'ChangeName': {
       return produce(state, (draft) => {
-        console.log('data', action.data);
+        //console.log('data', action.data);
         draft.name = action.data;
       });
     }
     case 'ChangePhoneNo': {
       return produce(state, (draft) => {
-        console.log('data', action.data);
+        //console.log('data', action.data);
         draft.phoneNo = action.data;
       });
     }
     case 'ChangeDateOfBirth': {
       return produce(state, (draft) => {
-        console.log('data', action.data);
+        //console.log('data', action.data);
         draft.dateOfBirth = action.data;
       });
     }
     case 'ChangeGender': {
       return produce(state, (draft) => {
-        console.log('data', action.data);
+        //console.log('data', action.data);
         draft.gender = action.data;
       });
     }

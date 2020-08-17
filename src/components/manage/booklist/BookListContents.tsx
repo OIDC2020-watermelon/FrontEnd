@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Divider, message, Popconfirm } from 'antd';
+import React from 'react';
+import { Divider, Popconfirm } from 'antd';
 import { Table, Space, Button } from 'antd';
 
 export default function BookListContents({

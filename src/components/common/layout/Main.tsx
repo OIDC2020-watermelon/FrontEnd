@@ -11,6 +11,7 @@ import {
   getPromotion,
 } from '../../../models/saga/reducers/theme';
 import store from '../../../models/configure';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
   const [hotIssue, setHotIssue] = useState<object>({ data: [], error: '' });
@@ -47,10 +48,14 @@ const Main = () => {
       <MainLayout>
         <OverCarousel autoplay>
           {promotion.data.map((data: any, idx: number) => {
-            // console.log('data : ', data.promotionImgUrl);
             return (
               <div key={idx}>
-                <CarouselImg url={data.promotionImgUrl} key={data.productId} />
+                <Link to={`/performance/${data.productId}`}>
+                  <CarouselImg
+                    url={data.promotionImgUrl}
+                    key={data.productId}
+                  />
+                </Link>
               </div>
             );
           })}

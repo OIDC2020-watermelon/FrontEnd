@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import CustomInput from '../common/input/CustomInput';
-import { Button, message, Popconfirm } from 'antd';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+
 import { Bar } from 'react-chartjs-2';
 
 export default function GraphLayout({
@@ -109,5 +106,3 @@ export default function GraphLayout({
     </>
   );
 }
-
-const S: any = {};

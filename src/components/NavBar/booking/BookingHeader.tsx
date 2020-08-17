@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import { Input, Button, Select, message } from 'antd';
@@ -9,14 +9,14 @@ import store from '../../../models/configure';
 
 const { Option } = Select;
 
-const Header = ({}: {}) => {
+const Header = () => {
   const dispatch = useDispatch();
 
   const [keyword, setKeyword] = useState<string>('');
   const [category, setCategory] = useState<string>('CONCERT');
   const [arraySlice, setArraySlice] = useState<number>(0);
   const [bookingList, setBookingList] = useState<any>({ data: [], error: '' });
-  const [page, setPage] = useState<number>(0);
+  const [page] = useState<number>(0);
   const SelectChange = (e: any) => {
     console.log(e);
     setCategory(e);
