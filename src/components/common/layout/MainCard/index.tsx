@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import palette from '../../../../lib/style/palette';
+// import palette from '../../../../lib/style/palette';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -12,8 +12,6 @@ const index = ({ types, data }: { types: string; data: any }) => {
       <CardLayout>
         <ShowLayout>
           <ShowTitle>{types}</ShowTitle>
-
-          <ShowMore>더보기</ShowMore>
         </ShowLayout>
         <CardContainer style={{}}>
           {data !== undefined ? (
@@ -109,11 +107,11 @@ const ShowTitle = styled.div`
   font-size: 1rem;
   font-weight: bold;
 `;
-const ShowMore = styled.div`
-  float: right;
-  cursor: pointer;
-  color: ${palette.blue5};
-`;
+// const ShowMore = styled.div`
+//   float: right;
+//   cursor: pointer;
+//   color: ${palette.blue5};
+// `;
 const OverCard = styled(Card)`
   text-align: left;
   .ant-card-body {

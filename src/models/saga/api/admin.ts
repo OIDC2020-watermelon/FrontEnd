@@ -28,12 +28,12 @@ export const addPerformanceApi = ({
 
 export const getTrafficApi = ({ performanceId }: any): any =>
   client.get(
-    `${REACT_APP_SHOW_SERVER_URL}/products/${performanceId}/traffic?trafficType=RESERVATION`,
+    `${REACT_APP_SHOW_SERVER_URL}/products/${performanceId}/traffic?trafficType=ACCESS`,
   );
 
 export const getTrafficTwoApi = ({ performanceId }: any): any =>
   client.get(
-    `${REACT_APP_SHOW_SERVER_URL}/products/${performanceId}/traffic?trafficType=ACCESS`,
+    `${REACT_APP_SHOW_SERVER_URL}/products/${performanceId}/traffic?trafficType=RESERVATION`,
   );
 
 export const adminLoginApi = ({ id, password }: any): any =>

@@ -30,7 +30,7 @@ const Footer = () => {
               </IconStyle>
             </a>
             <a
-              href="https://github.com/"
+              href="https://github.com/OIDC2020-watermelon"
               target="_blank"
               rel="noopener noreferrer"
             >

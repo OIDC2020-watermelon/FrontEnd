@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Row, Col } from 'antd';
+import { Row, Col } from 'antd';
 import { DatePicker } from 'antd';
 import styled from 'styled-components';
 import palette from '../../lib/style/palette';
@@ -8,11 +8,11 @@ const { RangePicker } = DatePicker;
 
 export default function BookManagerFilter({
   onOkPicker,
-  onClickInit,
+  // onClickInit,
   timeButton,
 }: {
   onOkPicker: any;
-  onClickInit: any;
+  // onClickInit: any;
   timeButton: any;
 }) {
   return (
