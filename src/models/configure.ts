@@ -2,7 +2,7 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './index';
 
-//const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development';
 const sagaMiddleware = createSagaMiddleware();
 
 const enhancer = compose(
