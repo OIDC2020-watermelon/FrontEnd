@@ -26,8 +26,12 @@ export default function DatePicker({
   }
 
   function disabledDate(date: Moment) {
-    let start = ableStartDate || '2020-07-10';
-    let end = ableEndDate || '2021-07-20';
+    let start =
+      // ableStartDate ||
+      '2020-07-10';
+    let end =
+      // ableEndDate||
+      '2021-07-20';
     const now = moment(Date.now()).subtract(1, 'days');
     if (now > date) return true;
     if (date < moment(start)) {
