@@ -12,7 +12,7 @@ const REACT_APP_USER_SERVER_URL = process.env.REACT_APP_USER_SERVER_URL;
 export const getPerformanceApi = ({ productId }: any): any =>
   client.get(`${SERVER_URL}/performance/${productId}`);
 export const deletePerformanceApi = ({ performanceId }: any): any =>
-  admin.delete(`${REACT_APP_ADMIN_SERVER_URL}/performance/${performanceId}`);
+  admin.delete(`${REACT_APP_ADMIN_SERVER_URL}/products/${performanceId}`);
 export const addPerformanceApi = ({
   availableDates,
   category,

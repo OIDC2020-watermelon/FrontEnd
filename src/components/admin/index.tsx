@@ -64,14 +64,6 @@ export default function IndexLayout() {
 
   const enrollPerformance = () => {
     let validation = '';
-    console.log(
-      title,
-      releaseStartTime,
-      releaseEndTime,
-      placeId,
-      category,
-      availableDates,
-    );
     if (
       title &&
       releaseStartTime &&
@@ -283,7 +275,7 @@ export default function IndexLayout() {
           <S.InfoContentsTitle>공연식별번호</S.InfoContentsTitle>
           <S.InfoContentsJob>
             <S.CustomInputOver
-              type="number"
+              type="text"
               onChange={(e: any) => {
                 setDeleteNum(e.target.value);
               }}

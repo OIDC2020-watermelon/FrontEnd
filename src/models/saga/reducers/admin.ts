@@ -117,6 +117,7 @@ export default createReducer<TPerformanceState>(initialState, {
       Cookies.set('aid', action.payload.data.data, {
         expires: addMonths(new Date(), 1), // Save for 1 month
       });
+      window.location.reload();
     }),
   [ADMIN_LOGIN.FAILURE]: (
     state,
