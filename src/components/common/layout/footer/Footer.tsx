@@ -49,7 +49,7 @@ const Footer = () => {
             <span>정진리</span>
             <span>조혜형</span>
           </ContactMe>
-          <Link to="/">
+          <Link to="/admin">
             <AdminLogin>Administrator login</AdminLogin>
           </Link>
         </FooterContent>

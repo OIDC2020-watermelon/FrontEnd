@@ -1,19 +1,12 @@
 import React from 'react';
 import Index from '../components/admin';
 import messageCustom from '../lib/utils/message';
-import { useHistory } from 'react-router-dom';
-import { useAuth } from '../models/hook/providers/auth/AuthProvider';
+import { useSelector } from 'react-redux';
+import { RootState } from '../models';
+import AdminLoginForm from '../components/admin/AdminLoginForm';
 
 export default function AdminPage() {
-  const [{ data: user }] = useAuth();
-  const history = useHistory();
-  // if (!user) {
-  //   messageCustom('로그인 후 이용해주세요.');
-  //   history.push('/');
-  // }
-  return (
-    <>
-      <Index />
-    </>
-  );
+  const admin = useSelector((state: RootState) => state.admin.admin.data);
+
+  return <>{admin ? <Index /> : <AdminLoginForm />}</>;
 }

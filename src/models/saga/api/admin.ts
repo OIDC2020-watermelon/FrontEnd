@@ -1,6 +1,7 @@
 import client from '../../../lib/config/axios';
 const SERVER_URL = process.env.REACT_APP_RESERVATION_SERVER_URL;
 const REACT_APP_SHOW_SERVER_URL = process.env.REACT_APP_SHOW_SERVER_URL;
+const REACT_APP_USER_SERVER_URL = process.env.REACT_APP_USER_SERVER_URL;
 export const getPerformanceApi = ({ productId }: any): any =>
   client.get(`${SERVER_URL}/performance/${productId}`);
 export const deletePerformanceApi = ({ performanceId }: any): any =>
@@ -34,3 +35,6 @@ export const getTrafficTwoApi = ({ performanceId }: any): any =>
   client.get(
     `${REACT_APP_SHOW_SERVER_URL}/products/${performanceId}/traffic?trafficType=ACCESS`,
   );
+
+export const adminLoginApi = ({ id, password }: any): any =>
+  client.post(`${REACT_APP_USER_SERVER_URL}/login`, { id, password });

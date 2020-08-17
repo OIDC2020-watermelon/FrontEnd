@@ -34,6 +34,7 @@ const initLoginButton = function (props: any) {
   }
   const clientId = process.env.REACT_APP_NAVER_CLIENT_ID,
     callbackUrl = process.env.REACT_APP_NAVER_CALLBACK_URL;
+  console.log('clientId', clientId, callbackUrl);
   const onSuccess = props.onSuccess;
   const onFailure = props.onFailure;
   const location = window.location;
