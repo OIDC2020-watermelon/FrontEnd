@@ -84,7 +84,7 @@ const OverCarousel = styled(Carousel)`
 `;
 
 const CarouselImg = styled.div`
-  height: 24rem;
+  height: 305px;
   border-radius: 5px;
   background: url(${({ url }: { url: string }) => url});
   background-position: 50% 50%;
