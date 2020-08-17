@@ -167,7 +167,10 @@ export default createReducer<TPerformanceState>(initialState, {
     action: ActionType<typeof getPerformance.success>,
   ) =>
     produce(state, (draft) => {
-      draft.comments.filter((item: any) => item.id !== action.payload.data.id);
+      draft.comments = draft.comments.filter(
+        (item: any) =>
+          parseInt(item.id, 10) !== parseInt(action.payload.data.id, 10),
+      );
     }),
   [DELETE_PERFORMANCE_COMMENT.FAILURE]: (
     state,

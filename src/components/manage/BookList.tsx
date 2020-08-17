@@ -10,8 +10,18 @@ import store from '../../models/configure';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { Spin } from 'antd';
+import message from '../../lib/utils/message';
+import { useAuth } from '../../models/hook/providers/auth/AuthProvider';
+import { useHistory } from 'react-router-dom';
 
 export default function BookList() {
+  const [{ data: user }] = useAuth();
+  const history = useHistory();
+
+  if (!user) {
+    message('로그인 후 이용해주세요.');
+    history.push('/');
+  }
   const [manage, setManage] = useState<any>({ data: [], error: '' });
   const [filterManage, setFilterManage] = useState<any>({
     data: [],

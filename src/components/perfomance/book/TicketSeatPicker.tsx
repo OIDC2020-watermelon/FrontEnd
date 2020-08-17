@@ -22,6 +22,7 @@ export default function TicketSeatPicker({
   data?.forEach((seat: any, index: number) => {
     const format: any = {};
     format['id'] = seat.id;
+    format['price'] = seat.price;
     format['number'] = (index % 10) + 1;
     if (seat.sold) {
       format['isReserved'] = seat.sold;
@@ -57,7 +58,6 @@ export default function TicketSeatPicker({
   const removeSeat = useCallback(
     ({ row, number, id }: any, removeCb: any) => {
       setLoading(true);
-      console.log(`Removed seat ${number}, row ${row}, id ${id}`);
       const newTooltip = ['A', 'B', 'C'].includes(row) ? null : '';
       setSelectedSeat(selectedSeat.filter((seat: any) => seat.id !== id));
       removeCb(row, number, newTooltip);

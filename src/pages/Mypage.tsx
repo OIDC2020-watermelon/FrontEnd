@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import Mypage from '../components/NavBar/mypage/Mypage';
+import AppLayout from '../containers/common/AppLayout';
 
 export default function MyPages() {
   return (
     <>
-      <S.PageContainer>
-        <Mypage />
-      </S.PageContainer>
+      <AppLayout>
+        <S.PageContainer>
+          <Mypage />
+        </S.PageContainer>
+      </AppLayout>
     </>
   );
 }

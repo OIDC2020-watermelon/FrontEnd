@@ -24,7 +24,7 @@ const CommentList = ({ onDelete, comments, userId }: any) => {
       {comments.map((comment: any) => (
         <S.CommentWrap>
           <Comment
-            author={comment.userId}
+            author={comment.userName || comment.userId}
             content={
               <p style={{ marginBottom: '1.5rem' }}>{comment.content}</p>
             }
@@ -73,7 +73,7 @@ const Editor = ({ onChangeContents, onSubmit, submitting, content }: any) => (
   </>
 );
 
-export default function PerformanceQNA() {
+export default function PerformanceQna() {
   const [submitting, setSubmitting] = useState(false);
   const [content, setContents] = useState('');
   const [{ data: user }] = useAuth();
@@ -90,7 +90,7 @@ export default function PerformanceQNA() {
 
   // 댓글 작성 버튼 클릭시
   const handleSubmit = () => {
-    if (!content && submitting) {
+    if (!content || submitting) {
       return;
     }
     setTimeout(() => {

@@ -8,28 +8,28 @@ import { adminLogin } from '../../models/saga/reducers/admin';
 import CustomInput from '../common/input/CustomInput';
 
 export default function AdminLoginForm() {
-  const [id, changeId, setId] = useInput<string>('');
+  const [email, changeEmail, setEmail] = useInput<string>('');
   const [password, changePassword, setPassword] = useInput<string>('');
   const dispatch = useDispatch();
 
   const onClickAdminLogin = useCallback(() => {
-    if (![id, password].every(Boolean)) {
+    if (![email, password].every(Boolean)) {
       message('로그인 정보를 입력해주세요');
       return;
     }
-    setId('');
+    setEmail('');
     setPassword('');
-    dispatch(adminLogin.request({ id, password }));
-  }, [id, password, setId, setPassword]);
+    dispatch(adminLogin.request({ email, password }));
+  }, [email, password, setEmail, setPassword, dispatch]);
   return (
     <>
       <S.Container>
         <S.Form>
           <CustomInput
-            value={id}
-            placeholder="id..."
-            name="id"
-            onChange={changeId}
+            value={email}
+            placeholder="email..."
+            name="email"
+            onChange={changeEmail}
           />
           <CustomInput
             value={password}

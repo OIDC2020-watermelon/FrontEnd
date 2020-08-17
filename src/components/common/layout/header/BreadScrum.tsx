@@ -1,11 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function BreadScrum({ path }: any) {
-  console.log('path', path);
-  const mainPath = path.split('/');
-
-  console.log('mainPath', mainPath);
+  const [location, setLocation] = useState('');
+  const mainPath = location.split('/');
   const subPathOne = useCallback(() => {
     console.log('pathOne', mainPath[1]);
     switch (mainPath[1]) {
@@ -40,6 +38,9 @@ export default function BreadScrum({ path }: any) {
     }
   }, [mainPath]);
 
+  useEffect(() => {
+    setLocation(path);
+  }, [setLocation, path]);
   return (
     <>
       <div>

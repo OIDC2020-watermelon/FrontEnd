@@ -7,8 +7,6 @@ import NavBar from './header/NavBar';
 import LogoComponent from './header/LogoComponent';
 import AdComponent from './header/AdComponent';
 
-interface AppFooterProps {}
-
 const AppHeader = () => {
   return (
     <>

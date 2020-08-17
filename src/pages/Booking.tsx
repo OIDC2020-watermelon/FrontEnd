@@ -1,13 +1,16 @@
 import React from 'react';
 import Booking from '../components/NavBar/booking';
 import styled from 'styled-components';
+import AppLayout from '../containers/common/AppLayout';
 
 export default function BookingPages() {
   return (
     <>
-      <S.PageContainer>
-        <Booking />
-      </S.PageContainer>
+      <AppLayout>
+        <S.PageContainer>
+          <Booking />
+        </S.PageContainer>
+      </AppLayout>
     </>
   );
 }

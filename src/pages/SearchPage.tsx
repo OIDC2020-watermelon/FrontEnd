@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import Index from '../components/search';
+import AppLayout from '../containers/common/AppLayout';
 
 export default function searchPage() {
   return (
     <>
-      <S.PageContainer>
-        <Index />
-      </S.PageContainer>
+      <AppLayout>
+        <S.PageContainer>
+          <Index />
+        </S.PageContainer>
+      </AppLayout>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import AppLayout from '../containers/common/AppLayout';
 
 export default function LoginPage() {
   const GetProfile = () => {
@@ -27,8 +28,10 @@ export default function LoginPage() {
   }, []);
   return (
     <>
-      <div>콜백 요청 대기중</div>
-      <button type="submit">클릭</button>
+      <AppLayout>
+        <div>콜백 요청 대기중</div>
+        <button type="submit">클릭</button>
+      </AppLayout>
     </>
   );
 }

@@ -13,16 +13,10 @@ interface AuthProviderProps {
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const { data, error } = useSelector((state: RootState) => ({
+  const { data } = useSelector((state: RootState) => ({
     data: state.auth.auth.data,
     error: state.auth.auth.error,
   }));
-
-  console.log('auth data', data);
-  // JWT token expired or any API-level errors, you can use redirects here
-  if (error) {
-    console.log('session error');
-  }
 
   return (
     <AuthContext.Provider value={[{ data }, logout]}>

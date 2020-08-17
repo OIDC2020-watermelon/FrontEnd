@@ -6,6 +6,7 @@ import PerformanceMoreLayout from '../components/perfomance/PerformanceMoreLayou
 import { useDispatch } from 'react-redux';
 import { getProduct } from '../models/saga/reducers/performance';
 import { useRouteMatch } from 'react-router-dom';
+import AppLayout from '../containers/common/AppLayout';
 
 export default function PerformancePage() {
   const { id } = useRouteMatch().params as any;
@@ -17,11 +18,13 @@ export default function PerformancePage() {
 
   return (
     <>
-      <S.PageContainer>
-        <PreviewLayout />
-        <TicketingLayout />
-        <PerformanceMoreLayout />
-      </S.PageContainer>
+      <AppLayout>
+        <S.PageContainer>
+          <PreviewLayout />
+          <TicketingLayout />
+          <PerformanceMoreLayout />
+        </S.PageContainer>
+      </AppLayout>
     </>
   );
 }

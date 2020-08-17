@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import Leave from '../components/NavBar/mypage/Leave';
+import AppLayout from '../containers/common/AppLayout';
 
 export default function LeavePages() {
   return (
     <>
-      <S.PageContainer>
-        <Leave />
-      </S.PageContainer>
+      <AppLayout>
+        <S.PageContainer>
+          <Leave />
+        </S.PageContainer>
+      </AppLayout>
     </>
   );
 }

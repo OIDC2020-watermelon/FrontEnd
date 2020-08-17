@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import PlaceLayout from '../components/place/PlaceLayout';
+import AppLayout from '../containers/common/AppLayout';
 import palette from '../lib/style/palette';
 
 export default function PlacePage() {
   return (
     <>
-      <PlaceLayout />
+      <AppLayout>
+        <PlaceLayout />
+      </AppLayout>
     </>
   );
 }

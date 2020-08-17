@@ -24,7 +24,7 @@ const CommentList = ({ onDelete, comments, userId }: any) => {
       {comments.map((comment: any) => (
         <S.CommentWrap>
           <Comment
-            author={comment.userId}
+            author={comment.userName || comment.userId}
             content={
               <p style={{ marginBottom: '1.5rem' }}>{comment.content}</p>
             }
@@ -90,7 +90,7 @@ export default function PerformanceExpectation() {
 
   // 댓글 작성 버튼 클릭시
   const handleSubmit = () => {
-    if (!content && submitting) {
+    if (!content || submitting) {
       return;
     }
     setTimeout(() => {

@@ -1,11 +1,12 @@
 import client from '../../../lib/config/axios';
 const SERVER_URL = process.env.REACT_APP_RESERVATION_SERVER_URL;
-const REACT_APP_SHOW_SERVER_URL = process.env.REACT_APP_SHOW_SERVER_URL;
+const REACT_APP_ADMIN_SERVER_URL = process.env.REACT_APP_ADMIN_SERVER_URL;
 const REACT_APP_USER_SERVER_URL = process.env.REACT_APP_USER_SERVER_URL;
+
 export const getPerformanceApi = ({ productId }: any): any =>
   client.get(`${SERVER_URL}/performance/${productId}`);
 export const deletePerformanceApi = ({ performanceId }: any): any =>
-  client.delete(`${SERVER_URL}/performance/${performanceId}`);
+  client.delete(`${REACT_APP_ADMIN_SERVER_URL}/performance/${performanceId}`);
 export const addPerformanceApi = ({
   availableDates,
   category,
@@ -15,7 +16,7 @@ export const addPerformanceApi = ({
   title,
   artistIds,
 }: any): any =>
-  client.post(`${REACT_APP_SHOW_SERVER_URL}/products/`, {
+  client.post(`${REACT_APP_ADMIN_SERVER_URL}/products/`, {
     availableDates,
     category,
     placeId,
@@ -28,13 +29,15 @@ export const addPerformanceApi = ({
 
 export const getTrafficApi = ({ performanceId }: any): any =>
   client.get(
-    `${REACT_APP_SHOW_SERVER_URL}/products/${performanceId}/traffic?trafficType=ACCESS`,
+    `${REACT_APP_ADMIN_SERVER_URL}/products/${performanceId}/traffic?trafficType=ACCESS`,
   );
 
 export const getTrafficTwoApi = ({ performanceId }: any): any =>
   client.get(
-    `${REACT_APP_SHOW_SERVER_URL}/products/${performanceId}/traffic?trafficType=RESERVATION`,
+    `${REACT_APP_ADMIN_SERVER_URL}/products/${performanceId}/traffic?trafficType=RESERVATION`,
   );
 
-export const adminLoginApi = ({ id, password }: any): any =>
-  client.post(`${REACT_APP_USER_SERVER_URL}/login`, { id, password });
+export const adminLoginApi = ({ email, password }: any): any =>
+  client.post(
+    `${REACT_APP_USER_SERVER_URL}/signin?email=${email}&password=${password}`,
+  );

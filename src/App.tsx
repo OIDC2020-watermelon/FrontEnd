@@ -5,7 +5,6 @@ import 'antd/dist/antd.css';
 
 import MainPage from './pages';
 import NotFoundPage from './pages/NotFoundPage';
-import AppLayout from './containers/common/AppLayout';
 import PerformancePage from './pages/PerformancePage';
 import ManagePage from './pages/Manage';
 
@@ -36,27 +35,25 @@ function App() {
         ></link>
       </Helmet>
       <BrowserRouter>
-        <AppLayout>
-          <Switch>
-            <Route exact path="/" component={MainPage} />
+        <Switch>
+          <Route exact path="/" component={MainPage} />
 
-            <Route exact path="/login" component={LoginPage} />
-            <Route path="/booking" component={Booking} />
-            <Route path="/mypage" component={Mypage} />
-            <Route path="/leave" component={Leave} />
-            <Route path="/search/:type?" component={Search} />
-            <Route path="/book_manage" component={Mypage} />
-            <Route path="/manage" component={ManagePage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route path="/booking" component={Booking} />
+          <Route path="/mypage" component={Mypage} />
+          <Route path="/leave" component={Leave} />
+          <Route path="/search/:type?" component={Search} />
+          <Route path="/book_manage" component={Mypage} />
+          <Route path="/manage" component={ManagePage} />
 
-            <Route path="/performance/:id" component={PerformancePage} />
-            <Route path="/place/:id" component={PlacePage} />
-            <Route path="/artist/:id" component={ArtistPage} />
+          <Route path="/performance/:id" component={PerformancePage} />
+          <Route path="/place/:id" component={PlacePage} />
+          <Route path="/artist/:id" component={ArtistPage} />
 
-            <Route path="/admin" component={AdminPage} />
+          <Route path="/admin" component={AdminPage} />
 
-            <Route component={NotFoundPage} />
-          </Switch>
-        </AppLayout>
+          <Route component={NotFoundPage} />
+        </Switch>
       </BrowserRouter>
     </>
   );

@@ -149,9 +149,11 @@ const Performance = ({ performances }: { performances: any }) => {
 
             <S.TitleContentName>장소</S.TitleContentName>
 
-            <S.TitleContentName style={{ textAlign: 'center' }}>
-              예매
-            </S.TitleContentName>
+            <Link to={`/performace/${performancesList.data.id}`}>
+              <S.TitleContentName style={{ textAlign: 'center' }}>
+                예매
+              </S.TitleContentName>
+            </Link>
           </S.TitleContainer>
         ) : (
           <S.TitleContainer style={{ padding: 20 }}>
