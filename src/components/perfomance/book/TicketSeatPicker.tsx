@@ -23,6 +23,7 @@ export default function TicketSeatPicker({
     const format: any = {};
     format['id'] = seat.id;
     format['price'] = seat.price;
+    format['grade'] = seat.grade;
     format['number'] = (index % 10) + 1;
     if (seat.sold) {
       format['isReserved'] = seat.sold;
@@ -40,6 +41,10 @@ export default function TicketSeatPicker({
     async ({ row, number, id }: any, addCb: any) => {
       setLoading(true);
       const newTooltip = `tooltip for id-${id} added by callback`;
+      console.log(
+        'seatData[row - 1][number - 1].grade',
+        seatData[row - 1][number - 1].grade,
+      );
 
       setSelectedSeat([
         ...selectedSeat,
@@ -47,12 +52,14 @@ export default function TicketSeatPicker({
           row,
           number,
           id,
+          grade: seatData[row - 1][number - 1].grade,
+          price: seatData[row - 1][number - 1].price,
         },
       ]);
       addCb(row, number, id, newTooltip);
       setLoading(false);
     },
-    [selectedSeat, setSelectedSeat],
+    [selectedSeat, setSelectedSeat, seatData],
   );
 
   const removeSeat = useCallback(
@@ -75,7 +82,6 @@ export default function TicketSeatPicker({
           removeSeatCallback={removeSeat}
           rows={seatData}
           maxReservableSeats={3}
-          alpha
           visible
           selectedByDefault
           loading={loading}

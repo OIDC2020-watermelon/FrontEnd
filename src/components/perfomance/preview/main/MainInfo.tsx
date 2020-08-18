@@ -66,8 +66,12 @@ export default function MainInfo({ more }: MainInfoProps) {
             <S.CostInfoBodyWrap>
               {performanceCost.map((cost) => (
                 <>
-                  <Col span={5}>{cost.type}석</Col>
-                  <Col span={19}>{cost.cost}원</Col>
+                  <Col span={5} key={cost.type}>
+                    {cost.type}석
+                  </Col>
+                  <Col span={19} key={cost.cost}>
+                    {cost.cost}원
+                  </Col>
                 </>
               ))}
             </S.CostInfoBodyWrap>

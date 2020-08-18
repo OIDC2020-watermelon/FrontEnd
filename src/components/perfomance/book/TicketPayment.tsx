@@ -24,16 +24,20 @@ export default function TicketPayment({ selectedSeat, selectedSession }: any) {
           <S.ContentBodyWrap>
             <div>
               {selectedSeat.map((seat: any) => (
-                <li style={alignStyle}>
+                <li style={alignStyle} key={seat.row}>
                   <span>{`${seat.row}-${seat.number}`}</span>
                   <span>{`${seat.grade}`}</span>
-                  <span>{`${seat.cost}`}</span>
+                  <span>{`${seat.price}`}</span>
                 </li>
               ))}
             </div>
             <div style={alignStyle}>
               <span>{`총 가격 : `}</span>
-              <span>{`${selectedSeat[0].cost * selectedSeat.length}원`}</span>
+              <span>{`${selectedSeat.reduce((curr: any, val: any) => {
+                console.log('curr, val', curr, val);
+                if (curr.price) return Number(curr.price) + Number(val.price);
+                else return curr + Number(val.price);
+              })}원`}</span>
             </div>
           </S.ContentBodyWrap>
         </S.PaymentContainer>
