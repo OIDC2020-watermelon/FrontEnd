@@ -2,7 +2,6 @@ import React from 'react';
 import logo from '../../../../assets/images/logo.png';
 import styled from 'styled-components';
 import font from '../../../../lib/style/font';
-import oidc from '../../../../assets/images/OIDC.png';
 
 export default function LogoComponent() {
   return (
@@ -12,7 +11,7 @@ export default function LogoComponent() {
           window.location.assign('/');
         }}
       >
-        <img src={oidc} alt="logo_image" width="60px" height="40px" />
+        <img src={logo} alt="logo_image" width="60px" height="40px" />
         <S.LogoTextWrap>
           <S.LogoText>Water</S.LogoText>
           <S.LogoText>Melon</S.LogoText>
