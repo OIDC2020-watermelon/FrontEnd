@@ -45,11 +45,7 @@
 
 - Front-End: [React.js](https://ko.reactjs.org/), [Redux](https://redux.js.org/), [Styled-components](https://styled-components.com/)
 
-- Back-End: [Swagger](https://swagger.io/)
-
 - Infra: [Docker](https://www.docker.com/), [NCloud](https://www.ncloud.com/)
-
-- Analysis: [Kafka](https://kafka.apache.org/), [Elasticsearch](https://www.elastic.co/kr/elasticsearch)
 
 ---
 
