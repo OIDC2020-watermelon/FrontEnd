@@ -15,10 +15,10 @@
 
 ## 🔖우리 조는 한 달 동안...
 
-#### 150여개의 **commit** 40여개의 **pr**이 있었어요!
+#### 180여개의 **commit** 40여개의 **pr**이 있었어요!
 
 <div align="center" style="display:flex;">
-	<img src="./readmeImg/commit.PNG" width="70%"/>
+	<img src="./readmeImg/commits.PNG" width="70%"/>
 </div>
 
 <div align="center" style="display:flex;">
