@@ -39,12 +39,8 @@ export default function TicketSeatPicker({
 
   const addSeat = useCallback(
     async ({ row, number, id }: any, addCb: any) => {
+      console.log('row, number, id', row, number, id);
       setLoading(true);
-      const newTooltip = `tooltip for id-${id} added by callback`;
-      console.log(
-        'seatData[row - 1][number - 1].grade',
-        seatData[row - 1][number - 1].grade,
-      );
 
       setSelectedSeat([
         ...selectedSeat,
@@ -56,7 +52,7 @@ export default function TicketSeatPicker({
           price: seatData[row - 1][number - 1].price,
         },
       ]);
-      addCb(row, number, id, newTooltip);
+      addCb(row, number, id);
       setLoading(false);
     },
     [selectedSeat, setSelectedSeat, seatData],
@@ -64,10 +60,10 @@ export default function TicketSeatPicker({
 
   const removeSeat = useCallback(
     ({ row, number, id }: any, removeCb: any) => {
+      console.log('row, number, id', row, number, id);
       setLoading(true);
-      const newTooltip = ['A', 'B', 'C'].includes(row) ? null : '';
       setSelectedSeat(selectedSeat.filter((seat: any) => seat.id !== id));
-      removeCb(row, number, newTooltip);
+      removeCb(row, number);
       setLoading(false);
     },
     [selectedSeat, setSelectedSeat],
