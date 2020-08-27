@@ -18,7 +18,7 @@
 #### 180여개의 **commit** 40여개의 **pr**이 있었어요!
 
 <div align="center" style="display:flex;">
-	<img src="./readmeImg/commits.PNG" width="70%"/>
+	<img src="./readmeImg/commits.png" width="70%"/>
 </div>
 
 <div align="center" style="display:flex;">
